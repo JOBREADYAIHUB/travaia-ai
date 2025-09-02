@@ -20,7 +20,7 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to the backend server
       "/api": {
-        target: "http://127.0.0.1:8000", // Default backend address
+        target: "https://travaia-ai-976191766214.us-central1.run.app/", // Default backend address
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),

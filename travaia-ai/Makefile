@@ -1,15 +1,15 @@
 install:
 	@command -v uv >/dev/null 2>&1 || { echo "uv is not installed. Installing uv..."; curl -LsSf https://astral.sh/uv/0.6.12/install.sh | sh; source $HOME/.local/bin/env; }
-	uv sync && npm --prefix frontend install
+	uv sync && npm --prefix demoUI install
 
 dev:
 	make dev-backend & make dev-frontend
 
 dev-backend:
-	uv run adk api_server app --allow_origins="*"
+	uv run adk api_server backend/ai-service --allow_origins="*"
 
 dev-frontend:
-	npm --prefix frontend run dev
+	npm --prefix demoUI run dev
 
 playground:
 	uv run adk web --port 8501
@@ -23,14 +23,16 @@ lint:
 
 # --- Commands from Agent Starter Pack ---
 
+.PHONY: backend
+
 backend:
 	PROJECT_ID=$$(gcloud config get-value project) && \
 	gcloud beta run deploy travaia-ai \
-		--source . \
+		--source backend/ai-service \
 		--memory "4Gi" \
 		--project $$PROJECT_ID \
 		--region "us-central1" \
-		--no-allow-unauthenticated \
+		--allow-unauthenticated \
 		--no-cpu-throttling \
 		--labels "created-by=adk" \
 		--set-env-vars \
@@ -43,8 +45,7 @@ local-backend:
 
 setup-dev-env:
 	PROJECT_ID=$$(gcloud config get-value project) && \
-	(cd deployment/terraform/dev && terraform init && terraform apply --var-file vars/env.tfvars --var dev_project_id=$$PROJECT_ID --auto-approve)
+	(cd backend/ai-service/deployment/terraform/dev && terraform init && terraform apply --var-file vars/env.tfvars --var dev_project_id=$$PROJECT_ID --auto-approve)
 
 test:
 	uv run pytest tests/unit && uv run pytest tests/integration
-

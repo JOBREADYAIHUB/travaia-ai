@@ -1,13 +1,10 @@
 [project]
-name = "gemini-fullstack"
+name = "travaia-ai"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Amit Dutta", email = "amitdutta@google.com"},
-    {name = "Deepak Moonat", email = "dmoonat@google.com"},
-    {name = "Elia Secchi", email = "eliasecchi@google.com"},
-    {name = "Erwin Huizenga", email = "erwinh@google.com"},
-    {name = "Lavi Nigam", email = "lavinigam@google.com"},
+    {name = "Rud kla", email = "rudy.kla@google.com"},
+ 
 ]
 dependencies = [
     "google-adk>=1.8.0",
