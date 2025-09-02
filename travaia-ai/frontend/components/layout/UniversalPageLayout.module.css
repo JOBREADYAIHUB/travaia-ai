@@ -1,0 +1,216 @@
+/* Universal Page Layout System - Based on Dashboard Reference */
+
+.pageContainer {
+  min-height: 100vh;
+  padding: var(--page-padding-mobile);
+  background: var(--bg-primary);
+  overflow-x: hidden;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.fullHeight {
+  min-height: 100vh;
+}
+
+/* Responsive padding */
+@media (min-width: 768px) {
+  .pageContainer {
+    padding: var(--page-padding-desktop);
+  }
+}
+
+/* Main Content Container */
+.mainContent {
+  position: relative;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  z-index: var(--z-content);
+}
+
+/* Page Navbar */
+.pageNavbar {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  z-index: var(--z-content);
+  position: relative;
+}
+
+/* Page Variants */
+
+/* Dashboard Variant - Reference Standard */
+.variantDashboard {
+  /* Uses default background from theme variables */
+}
+
+/* Auth Variant - Login/Signup Pages */
+.variantAuth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.variantAuth .mainContent {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  max-width: 28rem; /* Narrower for auth forms */
+}
+
+/* Profile Variant - User Profile Pages */
+.variantProfile {
+  /* Uses default background but with different content layout */
+}
+
+.variantProfile .mainContent {
+  max-width: 90%; /* Wider for profile content */
+}
+
+@media (min-width: 1024px) {
+  .variantProfile .mainContent {
+    max-width: 1400px; /* Even wider on large screens */
+  }
+}
+
+/* Default Variant */
+.variantDefault {
+  /* Standard layout for most pages */
+}
+
+/* Content Sections */
+.contentSection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: var(--glass-bg);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.sectionContent {
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+/* Header Styles */
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Accessibility Improvements */
+.pageContainer:focus-within {
+  /* Ensure focus is visible when navigating with keyboard */
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .pageContainer {
+    /* Remove any potential motion effects */
+  }
+  
+  .pageNavbar,
+  .contentSection {
+    /* Disable backdrop blur for better performance */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .pageNavbar,
+  .contentSection {
+    background: var(--glass-bg-strong);
+    border: 2px solid var(--glass-border-strong);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .pageContainer {
+    background: white;
+    color: black;
+    min-height: auto;
+  }
+  
+  .pageNavbar,
+  .contentSection {
+    background: white;
+    border: 1px solid #ccc;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Dark Mode Specific Adjustments */
+.dark .pageContainer {
+  /* Any dark mode specific overrides */
+}
+
+.dark .pageNavbar,
+.dark .contentSection {
+  /* Ensure glassmorphism works well in dark mode */
+  box-shadow: var(--shadow-lg);
+}

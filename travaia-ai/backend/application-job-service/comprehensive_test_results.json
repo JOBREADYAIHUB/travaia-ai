@@ -1,0 +1,117 @@
+{
+  "timestamp": "2025-08-18T16:42:45.670017",
+  "service_url": "https://travaia-application-job-service-976191766214.us-central1.run.app",
+  "total_tests": 18,
+  "passed_tests": 9,
+  "success_rate": 50.0,
+  "results": [
+    {
+      "test": "Health Endpoint",
+      "success": true,
+      "details": "Service is healthy",
+      "timestamp": "2025-08-18T16:42:16.852297"
+    },
+    {
+      "test": "Root Endpoint",
+      "success": true,
+      "details": "Service info retrieved",
+      "timestamp": "2025-08-18T16:42:17.527644"
+    },
+    {
+      "test": "GET /api/applications (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:42:18.004992"
+    },
+    {
+      "test": "POST /api/applications (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:42:18.471911"
+    },
+    {
+      "test": "GET /api/applications/test-id (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:42:18.971751"
+    },
+    {
+      "test": "PUT /api/applications/test-id (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:42:19.450113"
+    },
+    {
+      "test": "DELETE /api/applications/test-id (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:42:19.950309"
+    },
+    {
+      "test": "Invalid Endpoint /api/invalid",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:42:20.417286"
+    },
+    {
+      "test": "Invalid Endpoint /api/applications/invalid/action",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:42:20.975429"
+    },
+    {
+      "test": "Invalid Endpoint /nonexistent",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:42:21.618993"
+    },
+    {
+      "test": "Invalid Endpoint /api/applications/test-id/invalid",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:42:22.252705"
+    },
+    {
+      "test": "PATCH Method Not Allowed",
+      "success": true,
+      "details": "Correctly rejected PATCH",
+      "timestamp": "2025-08-18T16:42:22.833433"
+    },
+    {
+      "test": "Invalid JSON Handling",
+      "success": true,
+      "details": "Correctly rejected invalid JSON (422)",
+      "timestamp": "2025-08-18T16:42:23.316056"
+    },
+    {
+      "test": "Empty Request Body",
+      "success": false,
+      "details": "Unexpected status: 403",
+      "timestamp": "2025-08-18T16:42:23.825165"
+    },
+    {
+      "test": "Rate Limiting",
+      "success": false,
+      "details": "Not triggered after 35 requests",
+      "timestamp": "2025-08-18T16:42:44.214624"
+    },
+    {
+      "test": "CORS Headers",
+      "success": false,
+      "details": "CORS headers missing",
+      "timestamp": "2025-08-18T16:42:44.677724"
+    },
+    {
+      "test": "Health Response Format",
+      "success": true,
+      "details": "Valid JSON format",
+      "timestamp": "2025-08-18T16:42:45.177377"
+    },
+    {
+      "test": "Error Response Format",
+      "success": false,
+      "details": "Unexpected response",
+      "timestamp": "2025-08-18T16:42:45.662423"
+    }
+  ]
+}

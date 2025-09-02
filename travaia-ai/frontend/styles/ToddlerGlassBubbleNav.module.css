@@ -1,0 +1,213 @@
+/* ToddlerGlassBubbleNav.module.css */
+/* Base container styles */
+.container {
+  display: flex;
+  padding: 1rem;
+  /* Dynamic positioning will be applied via CSS variables */
+}
+
+/* Container position variants */
+.topPosition {
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+}
+
+.bottomPosition {
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+}
+
+.leftPosition {
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+
+.rightPosition {
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+
+.centerPosition {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  z-index: 40;
+}
+
+/* Background container with glassmorphism effect */
+.backgroundContainer {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.backgroundContainerHorizontal {
+  border-radius: 50px;
+}
+
+.backgroundContainerVertical {
+  border-radius: 30px;
+}
+
+/* Link item styling */
+.navLink {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 1;
+  transition: transform 0.3s var(--toddler-bounce);
+}
+
+/* Bubble container */
+.bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition: all 0.3s var(--toddler-bounce);
+}
+
+.bubbleActive {
+  border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.bubbleInactive {
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.bubbleHovered {
+  transform: scale(1.15);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Bubble sizes */
+.bubbleSm {
+  width: 50px;
+  height: 50px;
+}
+
+.bubbleMd {
+  width: 65px;
+  height: 65px;
+}
+
+.bubbleLg {
+  width: 80px;
+  height: 80px;
+}
+
+/* Icon styling */
+.icon {
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.iconSm {
+  font-size: 1.5rem;
+}
+
+.iconMd {
+  font-size: 2rem;
+}
+
+.iconLg {
+  font-size: 2.5rem;
+}
+
+/* Decorative inner circle */
+.innerCircle {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  top: 15%;
+  right: 15%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: opacity 0.3s var(--toddler-bounce);
+}
+
+.innerCircleActive {
+  opacity: 0.9;
+}
+
+.innerCircleInactive {
+  opacity: 0.5;
+}
+
+/* Label styling */
+.label {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s var(--toddler-bounce);
+}
+
+.labelSm {
+  font-size: 0.75rem;
+}
+
+.labelMd {
+  font-size: 0.875rem;
+}
+
+.labelLg {
+  font-size: 1rem;
+}
+
+.labelActive, .labelHovered {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.labelInactive {
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+/* Active indicator */
+.activeIndicator {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}

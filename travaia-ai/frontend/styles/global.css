@@ -1,0 +1,31 @@
+/* Global styles to ensure full viewport height and proper layout */
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Ensure app container takes full height */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Override any conflicting styles that might limit height */
+.h-screen {
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+/* Fix for mobile viewport height issues */
+@media (max-width: 768px) {
+  .h-screen {
+    min-height: -webkit-fill-available;
+  }
+}

@@ -1,0 +1,61 @@
+.progressContainer {
+  --progress-width: 0%;
+}
+
+.progressFill {
+  width: var(--progress-width);
+}
+
+/* Animation variants */
+.animated {
+  transition: width 300ms ease-out;
+}
+
+/* Size variants */
+.small {
+  height: 4px;
+}
+
+.medium {
+  height: 8px;
+}
+
+.large {
+  height: 12px;
+}
+
+/* Color variants */
+.default {
+  background-color: rgb(59 130 246); /* blue-600 */
+}
+
+.interview {
+  background-color: rgb(59 130 246); /* blue-600 */
+}
+
+.upload {
+  background-color: rgb(59 130 246); /* blue-600 */
+}
+
+.gamification {
+  background: linear-gradient(to right, rgb(168 85 247), rgb(59 130 246)); /* purple-500 to blue-500 */
+}
+
+.achievement {
+  background-color: currentColor;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .default {
+    background-color: rgb(59 130 246); /* blue-500 */
+  }
+  
+  .interview {
+    background-color: rgb(59 130 246); /* blue-500 */
+  }
+  
+  .upload {
+    background-color: rgb(96 165 250); /* blue-400 */
+  }
+}

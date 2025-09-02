@@ -1,0 +1,805 @@
+/* Premium Job Table View Styles */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tableContainer {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+/* Table Controls */
+.tableControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+}
+
+:global(.dark) .tableControls {
+  background-color: rgba(17, 24, 39, 0.6);
+  border-color: rgba(55, 65, 81, 0.3);
+}
+
+.leftControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.viewModeToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background-color: rgba(243, 244, 246, 0.5);
+  border-radius: 0.5rem;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+:global(.dark) .viewModeToggle {
+  background-color: rgba(31, 41, 55, 0.5);
+  border-color: rgba(55, 65, 81, 0.5);
+}
+
+.viewModeButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.bulkActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-left: 1rem;
+  border-left: 1px solid #e5e7eb;
+}
+
+:global(.dark) .bulkActions {
+  border-color: #374151;
+}
+
+.selectedCount {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+:global(.dark) .selectedCount {
+  color: #d1d5db;
+}
+
+.bulkActionButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Table Card */
+.tableCard {
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.3);
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.5);
+}
+
+/* Table */
+.table {
+  width: 100%;
+  min-width: 800px;
+}
+
+.compactTable {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.compactTable .tableRow {
+  height: 3rem;
+}
+
+.compactTable .companyLogo,
+.compactTable .companyLogoPlaceholder {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Table Header */
+.tableHeader {
+  background-color: rgba(249, 250, 251, 0.8);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+:global(.dark) .tableHeader {
+  background-color: rgba(31, 41, 55, 0.8);
+  border-color: rgba(55, 65, 81, 0.5);
+}
+
+.checkboxHeader,
+.actionsHeader {
+  width: 3rem;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.tableHeaderCell {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+:global(.dark) .tableHeaderCell {
+  color: #d1d5db;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.sortButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  margin: -0.25rem;
+}
+
+.sortButton:hover {
+  color: #111827;
+}
+
+:global(.dark) .sortButton:hover {
+  color: #ffffff;
+}
+
+.sortButton:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #4f46e5;
+}
+
+.sortIcons {
+  display: flex;
+  flex-direction: column;
+}
+
+.sortIcon {
+  width: 0.75rem;
+  height: 0.75rem;
+  color: #9ca3af;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+:global(.dark) .sortIcon {
+  color: #6b7280;
+}
+
+.activeSortIcon {
+  color: #4f46e5;
+}
+
+:global(.dark) .activeSortIcon {
+  color: #818cf8;
+}
+
+/* Table Body */
+.tableBody {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+:global(.dark) .tableBody {
+  background-color: rgba(17, 24, 39, 0.4);
+}
+
+.tableRow {
+  height: 4rem;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.3);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.tableRow:hover {
+  background-color: rgba(249, 250, 251, 0.5);
+}
+
+:global(.dark) .tableRow:hover {
+  background-color: rgba(31, 41, 55, 0.5);
+}
+
+.selectedRow {
+  background-color: rgba(238, 242, 255, 0.7);
+  border-color: rgba(199, 210, 254, 0.5);
+}
+
+:global(.dark) .selectedRow {
+  background-color: rgba(67, 56, 202, 0.2);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.checkboxCell {
+  padding: 0.75rem 1rem;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.25rem;
+  border-color: #d1d5db;
+  color: #4f46e5;
+  background-color: #ffffff;
+}
+
+:global(.dark) .checkbox {
+  border-color: #4b5563;
+  color: #818cf8;
+  background-color: #1f2937;
+}
+
+.checkbox:focus {
+  box-shadow: 0 0 0 2px #4f46e5;
+}
+
+:global(.dark) .checkbox:focus {
+  box-shadow: 0 0 0 2px #818cf8;
+}
+
+/* Company Cell */
+.companyCell {
+  padding: 1rem 1.5rem;
+}
+
+.companyInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.companyLogo {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+:global(.dark) .companyLogo {
+  border-color: rgba(55, 65, 81, 0.5);
+}
+
+.companyLogoPlaceholder {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  background-color: #f3f4f6;
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+
+:global(.dark) .companyLogoPlaceholder {
+  background-color: #1f2937;
+  border-color: rgba(55, 65, 81, 0.5);
+  color: #6b7280;
+}
+
+.companyDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.companyName {
+  font-weight: 500;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 150px;
+}
+
+:global(.dark) .companyName {
+  color: #ffffff;
+}
+
+.companyWebsite {
+  color: #9ca3af;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.companyWebsite:hover {
+  color: #4b5563;
+  background-color: #f3f4f6;
+}
+
+:global(.dark) .companyWebsite {
+  color: #6b7280;
+}
+
+:global(.dark) .companyWebsite:hover {
+  color: #d1d5db;
+  background-color: #1f2937;
+}
+
+/* Role Cell */
+.roleCell {
+  padding: 1rem 1.5rem;
+}
+
+.roleInfo {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+
+.roleTitle {
+  font-weight: 500;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+:global(.dark) .roleTitle {
+  color: #ffffff;
+}
+
+.roleDepartment {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #6b7280;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+:global(.dark) .roleDepartment {
+  color: #9ca3af;
+}
+
+/* Status Cell */
+.statusCell {
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Date Cell */
+.dateCell {
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #4b5563;
+}
+
+:global(.dark) .dateCell {
+  color: #d1d5db;
+}
+
+/* Salary Cell */
+.salaryCell {
+  padding: 1rem 1.5rem;
+  text-align: right;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+:global(.dark) .salaryCell {
+  color: #ffffff;
+}
+
+/* Location Cell */
+.locationCell {
+  padding: 1rem 1.5rem;
+}
+
+.locationInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #4b5563;
+}
+
+:global(.dark) .locationInfo {
+  color: #d1d5db;
+}
+
+.remoteBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid rgba(134, 239, 172, 0.5);
+}
+
+:global(.dark) .remoteBadge {
+  background-color: rgba(34, 197, 94, 0.3);
+  color: #a7f3d0;
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
+/* Actions Cell */
+.actionsCell {
+  padding: 1rem 1.5rem;
+}
+
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.actionButton {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.actionButton:hover {
+  background-color: #f3f4f6;
+}
+
+:global(.dark) .actionButton:hover {
+  background-color: #1f2937;
+}
+
+.deleteButton:hover {
+  background-color: #fee2e2;
+  color: #ef4444;
+}
+
+:global(.dark) .deleteButton:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+/* Loading State */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  gap: 1rem;
+}
+
+.loadingSpinner {
+  width: 2rem;
+  height: 2rem;
+  border-width: 2px;
+  border-color: #d1d5db;
+  border-top-color: #4f46e5;
+  border-radius: 9999px;
+  animation: spin 1s linear infinite;
+}
+
+:global(.dark) .loadingSpinner {
+  border-color: #4b5563;
+  border-top-color: #818cf8;
+}
+
+.loadingText {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+:global(.dark) .loadingText {
+  color: #d1d5db;
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.emptyStateIcon {
+  width: 4rem;
+  height: 4rem;
+  color: #d1d5db;
+}
+
+:global(.dark) .emptyStateIcon {
+  color: #4b5563;
+}
+
+.emptyStateTitle {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+:global(.dark) .emptyStateTitle {
+  color: #ffffff;
+}
+
+.emptyStateMessage {
+  color: #4b5563;
+  max-width: 28rem;
+}
+
+:global(.dark) .emptyStateMessage {
+  color: #d1d5db;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .tableControls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .leftControls,
+  .rightControls {
+    justify-content: space-between;
+  }
+  
+  .bulkActions {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  :global(.dark) .bulkActions {
+    border-color: #374151;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    min-width: 600px;
+  }
+  
+  .companyName,
+  .roleTitle {
+    max-width: 100px;
+  }
+  
+  .tableHeaderCell {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  
+  .companyCell,
+  .roleCell,
+  .statusCell,
+  .dateCell,
+  .salaryCell,
+  .locationCell,
+  .actionsCell {
+    padding: 0.75rem 1rem;
+  }
+  
+  .viewModeToggle {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .tableControls {
+    padding: 0.75rem;
+  }
+  
+  .bulkActions {
+    flex-wrap: wrap;
+  }
+  
+  .selectedCount {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .actionButtons {
+    flex-direction: column;
+  }
+  
+  .actionButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .tableWrapper::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.4);
+  }
+  
+  .checkbox {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .companyInfo,
+[dir="rtl"] .roleInfo,
+[dir="rtl"] .locationInfo,
+[dir="rtl"] .actionButtons {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .sortButton {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .bulkActions {
+  padding-right: 1rem;
+  padding-left: 0;
+  border-right: 1px solid #e5e7eb;
+  border-left: 0;
+}
+
+[dir="rtl"] .tableHeaderCell {
+  text-align: right;
+}
+
+[dir="rtl"] .alignLeft {
+  text-align: right;
+}
+
+[dir="rtl"] .alignRight {
+  text-align: left;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .tableRow,
+  .selectedRow,
+  .statusBadge,
+  .remoteBadge {
+    border-width: 2px;
+  }
+  
+  .actionButton:focus,
+  .sortButton:focus,
+  .checkbox:focus {
+    outline-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .tableRow,
+  .actionButton,
+  .sortButton,
+  .companyWebsite,
+  .sortIcon {
+    transition: none;
+  }
+  
+  .loadingSpinner {
+    animation: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .tableControls,
+  .actionButtons {
+    display: none;
+  }
+  
+  .table {
+    min-width: 100%;
+  }
+  
+  .tableRow {
+    border-bottom: 1px solid #d1d5db;
+  }
+  
+  .statusBadge {
+    border: 1px solid #6b7280;
+  }
+}

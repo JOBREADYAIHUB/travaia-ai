@@ -1,0 +1,75 @@
+.compact-language-dropdown {
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  min-width: 120px;
+  max-width: 150px;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid rgba(255, 165, 0, 0.8) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 165, 0, 0.2) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+:root.dark .compact-language-dropdown {
+  background-color: rgba(30, 30, 30, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+@media (max-width: 767px) {
+  :root.dark .compact-language-dropdown {
+    background-color: rgba(30, 30, 30, 0.2) !important;
+  }
+}
+
+.compact-language-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  background: transparent;
+  border: none;
+  color: #333333;
+  font-weight: 500;
+}
+
+.compact-language-button:hover {
+  background: rgba(255, 165, 0, 0.1);
+  color: #ff6600;
+}
+
+.compact-language-button-item {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Language selector main button */
+.language-selector-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.language-selector-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.language-selector-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Ensure dropdown options are visible */
+.compact-language-dropdown option {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-size: 0.75rem;
+  padding: 0.25rem;
+}

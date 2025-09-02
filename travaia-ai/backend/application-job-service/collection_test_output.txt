@@ -1,0 +1,55 @@
+
+===== DIRECT FIRESTORE COLLECTION TEST =====
+
+Initializing Firestore client...
+Connected to project: travaia-e1310
+
+Accessing user document for ID: wRj3wH7vR0eUdH6Ckf6ZjFnLjyg1
+User document exists: True
+
+User collections:
+Found collections: ['aiReports', 'contexts', 'documents', 'favoriteJobs', 'interviewQuestions', 'interviews', 'jobApplications', 'profile', 'projects', 'prompts']
+
+=== jobApplications collection ===
+Fetching all documents...
+Total documents: 65
+
+Document IDs:
+1. 0KzrZh2MszQNI8Bu6KDp
+2. 3QmyTYzJb7BSpepaKgg0
+3. 3golt4V2ferFPXHgaPay
+4. 543qlG94Rbbd1TZDlNi6
+5. 6GensVfGCQw9MkPg6lM4
+6. 8VV0p6sNvAoYaQc3JSXq
+7. 8Y7BqFNKUoWyRe5Nrrkz
+8. 9K0eJTqAccVjNmMwNRkl
+9. BJ7heuX6Dxfffz75diRc
+10. Bzq561ASFAorSXfJxwWO
+
+First document fields:
+{
+  "id": "0KzrZh2MszQNI8Bu6KDp",
+  "fields": [
+    "company",
+    "id",
+    "userId",
+    "progressTasks",
+    "role",
+    "createdAt",
+    "status",
+    "updatedAt"
+  ],
+  "data": {
+    "company": "{'name': 'Test Company'}",
+    "id": "0KzrZh2MszQNI8Bu6KDp",
+    "userId": "wRj3wH7vR0eUdH6Ckf6ZjFnLjyg1",
+    "progressTasks": "[{'title': 'Research Company Background', 'type': 'research_company', 'completed': False, 'id': 'task-1755200290159', 'description': 'Investigate company culture, recent news, and industry position', 'createdAt': '2025-08-14T19:38:10.159Z'}, {'title': 'Prepare for Interview', 'type': 'prepare_interview', 'completed': False, 'id': 'task-1755200298959', 'description': 'Practice common questions and prepare thoughtful questions to ask', 'createdAt': '2025-08-14T19:38:18.959Z'}, {'title': 'Prepare for Interview', 'type': 'prepare_interview', 'completed': False, 'id': 'task-1755200303767', 'description': 'Practice common questions and prepare thoughtful questions to ask', 'createdAt': '2025-08-14T19:38:23.767Z'}, {'title': 'Prepare for Interview', 'type': 'prepare_interview', 'completed': False, 'id': 'task-1755200305544', 'description': 'Practice common questions and prepare thoughtful questions to ask', 'createdAt': '2025-08-14T19:38:25.544Z'}, {'title': 'Research Company Background', 'type': 'research_company', 'completed': False, 'id': 'task-1755200332688', 'description': 'Investigate company culture, recent news, and industry position', 'createdAt': '2025-08-14T19:38:52.688Z'}]",
+    "role": "{'title': 'Test Role'}",
+    "createdAt": "2025-08-06 06:52:57.452000+00:00",
+    "status": "Applied",
+    "updatedAt": "2025-08-14 19:38:52.753000+00:00"
+  }
+}
+
+=== Root applications collection check ===
+Documents in root 'applications' collection: 0

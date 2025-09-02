@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  livekit:
+    image: livekit/livekit-server:latest
+    container_name: travaia-livekit-server
+    ports:
+      - "7880:7880"
+      - "7881:7881"
+      - "50000-60000:50000-60000/udp"
+      - "3478:3478/udp"
+      - "5349:5349"
+    volumes:
+      - ./livekit-config.yaml:/etc/livekit.yaml
+      - ./certs:/etc/certs
+    environment:
+      - LIVEKIT_CONFIG_FILE=/etc/livekit.yaml
+      - LIVEKIT_API_KEY=${LIVEKIT_API_KEY}
+      - LIVEKIT_API_SECRET=${LIVEKIT_API_SECRET}
+      - LIVEKIT_WEBHOOK_KEY=${LIVEKIT_WEBHOOK_KEY}
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - travaia-voice-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: travaia-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - travaia-voice-network
+
+  coturn:
+    image: coturn/coturn:latest
+    container_name: travaia-coturn
+    ports:
+      - "3478:3478/udp"
+      - "3478:3478/tcp"
+      - "5349:5349/tcp"
+      - "49152-65535:49152-65535/udp"
+    volumes:
+      - ./coturn.conf:/etc/coturn/turnserver.conf
+      - ./certs:/etc/certs
+    environment:
+      - TURN_USERNAME=${TURN_USERNAME:-travaia}
+      - TURN_PASSWORD=${TURN_PASSWORD}
+    restart: unless-stopped
+    networks:
+      - travaia-voice-network
+
+volumes:
+  redis_data:
+
+networks:
+  travaia-voice-network:
+    driver: bridge

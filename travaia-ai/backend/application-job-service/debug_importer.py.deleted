@@ -1,0 +1,58 @@
+import sys
+import os
+import traceback
+import asyncio
+
+print("--- Starting Debug Importer ---")
+print(f"Python Executable: {sys.executable}")
+print(f"Python Version: {sys.version}")
+print(f"Initial sys.path: {sys.path}")
+
+# Correctly add the 'backend' directory to the Python path
+backend_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if backend_path not in sys.path:
+    sys.path.insert(0, backend_path)
+print(f"Modified sys.path: {sys.path}")
+
+async def simple_task():
+    print("Async task started.")
+    await asyncio.sleep(0.1)
+    print("Async task finished.")
+
+try:
+    print("\n--- Testing Imports ---")
+    print("Importing os...")
+    import os
+    print("Importing sys...")
+    import sys
+    
+    print("\n--- Testing Asyncio Event Loop ---")
+    print("Attempting to run a simple asyncio task...")
+    asyncio.run(simple_task())
+    print("Asyncio task completed successfully.")
+
+    print("\n--- Testing Application Imports ---")
+    print("Importing FastAPI...")
+    from fastapi import FastAPI
+    print("Importing dotenv...")
+    from dotenv import load_dotenv
+    load_dotenv()
+    print("Importing shared.auth_middleware...")
+    from shared.auth_middleware import get_current_user, initialize_firebase
+    print("Importing models...")
+    import models
+    print("Importing services.application_service...")
+    from services.application_service import ApplicationService
+    print("Importing services.job_service...")
+    from services.job_service import JobService
+    print("All application imports were successful.")
+
+except Exception as e:
+    print("\n!!! An exception occurred during import or execution !!!")
+    print(f"Exception type: {type(e).__name__}")
+    print(f"Exception details: {e}")
+    print("\n--- Traceback ---")
+    traceback.print_exc()
+
+finally:
+    print("\n--- Debug Importer Finished ---")

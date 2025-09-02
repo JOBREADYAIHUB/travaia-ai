@@ -1,0 +1,378 @@
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
+import logoImage from '/travaia_logo.png';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  GoogleIcon,
+  AppleIcon,
+  LinkedInIcon,
+  LockIcon,
+  MailIcon,
+} from '../icons/Icons';
+import { CircularProgressIndicator } from '../common/CircularProgressIndicator';
+import styles from './LoginPage.module.css';
+
+/**
+ * Modern Login Page Component
+ * Designed to match the provided UI mockup with Travaia brand colors
+ */
+const LoginPage: React.FC = () => {
+  // Get auth context
+  const {
+    currentUser,
+    checkEmailExists,
+    signUpWithEmail,
+    signInWithEmail,
+    signInWithGoogle,
+    signInWithApple,
+    signInWithLinkedIn,
+    updateUserProfileData,
+    loading,
+    error: authError,
+    clearError,
+  } = useAuth();
+
+  // Define UI states as a string literal union type for better type safety
+  type UIStateType = 'email' | 'login' | 'register' | 'role';
+  
+  // Define UI states as constants
+  const UI_STATE = {
+    EMAIL: 'email' as UIStateType,
+    LOGIN: 'login' as UIStateType,
+    REGISTER: 'register' as UIStateType,
+    ROLE: 'role' as UIStateType
+  };
+
+  // Start with login UI state for the modern design
+  const [uiState, setUiState] = useState<UIStateType>(UI_STATE.LOGIN);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  // Get translation function
+  const { t } = useTranslation();
+
+  // Handle redirects at app level instead
+  useEffect(() => {
+    if (currentUser && typeof currentUser.recruiter === 'boolean') {
+      console.log('LoginPage: User authenticated, App.tsx will handle navigation');
+    }
+  }, [currentUser]);
+
+  // Hide navbar header on login page
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `header#main-navbar { display: none !important; }`;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  // Handle auth errors
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
+
+  // Handle email check
+  const handleEmailCheck = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    clearError();
+
+    if (!email) {
+      setError(t('pleaseEnterEmail'));
+      return;
+    }
+
+    try {
+      const exists = await checkEmailExists(email);
+      if (exists) {
+        setUiState(UI_STATE.LOGIN);
+      } else {
+        setUiState(UI_STATE.REGISTER);
+      }
+    } catch (err) {
+      setError(t('errorCheckingEmail'));
+    }
+  };
+
+  // Handle registration
+  const handleRegistration = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    clearError();
+
+    if (!email || !password) {
+      setError(t('pleaseEnterEmailAndPassword'));
+      return;
+    }
+
+    try {
+      await signUpWithEmail(email, password);
+    } catch (err) {
+      setError(t('errorCreatingAccount'));
+    }
+  };
+
+  // Handle login
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password.length < 6) {
+      setError(t('passwordTooShortSimple'));
+      return;
+    }
+    clearError();
+    setError(null);
+    await signInWithEmail(email, password);
+  };
+
+  // Define animation variants
+  const formVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 20,
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.4, 
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number],
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -20,
+      transition: {
+        duration: 0.2,
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number],
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.3, 
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number] 
+      } 
+    },
+  };
+  
+  const logoVariant = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { 
+        duration: 0.5, 
+        ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number], 
+        delay: 0.1 
+      }
+    }
+  };
+
+  // Render form with email and password fields
+  const renderEmailPasswordForm = (onSubmit: (e: React.FormEvent) => void) => (
+    <motion.form
+      key={uiState}
+      variants={formVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(e);
+      }}
+      className={styles.formContainer}
+    >
+      {error ? (
+        <motion.div 
+          className={styles.errorMessage}
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {error}
+        </motion.div>
+      ) : null}
+
+      <motion.div className={styles.inputWrapper} variants={itemVariants}>
+        <div className={styles.inputIconWrapper}>
+          <MailIcon className={styles.inputIcon} />
+        </div>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t('emailAddress')}
+          required
+          className={styles.input}
+          data-testid="email-input"
+          aria-label={t('emailAddress')}
+          aria-invalid={error ? 'true' : undefined}
+        />
+      </motion.div>
+      
+      {(uiState === 'login' || uiState === 'register') && (
+        <motion.div className={styles.inputWrapper} variants={itemVariants}>
+          <div className={styles.inputIconWrapper}>
+            <LockIcon className={styles.inputIcon} />
+          </div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={t('password')}
+            required
+            className={styles.input}
+            data-testid="password-input"
+            aria-label={t('password')}
+            aria-invalid={error ? 'true' : undefined}
+          />
+        </motion.div>
+      )}
+      
+      <motion.button
+        type="submit"
+        disabled={loading}
+        className={styles.primaryButton}
+        aria-busy={loading ? 'true' : undefined}
+        data-testid="login-submit-button"
+        variants={itemVariants}
+      >
+        {loading ? (
+          <>
+            <CircularProgressIndicator value={75} size={20} className={styles.spinnerIcon} />
+            {uiState === 'email'
+              ? t('checking')
+              : uiState === 'login'
+              ? t('loggingIn')
+              : t('registering')}
+          </>
+        ) : uiState === 'email' ? (
+          t('continueAction')
+        ) : uiState === 'login' ? (
+          t('logIn')
+        ) : uiState === 'register' ? (
+          t('register')
+        ) : (
+          ''
+        )}
+      </motion.button>
+      
+      {(uiState === 'login' || uiState === 'register') && (
+        <motion.div 
+          className={styles.socialLoginContainer}
+          variants={itemVariants}
+        >
+          <div className={styles.divider}>
+            <span>{t('orContinueWith')}</span>
+          </div>
+          
+          <div className={styles.socialButtons}>
+            <button 
+              type="button" 
+              className={styles.socialButton} 
+              onClick={() => signInWithGoogle()}
+              aria-label="Sign in with Google"
+            >
+              <GoogleIcon className={styles.socialIcon} />
+              <span>Google</span>
+            </button>
+            
+            <button 
+              type="button" 
+              className={styles.socialButton} 
+              onClick={() => signInWithApple()}
+              aria-label="Sign in with Apple"
+            >
+              <AppleIcon className={styles.socialIcon} />
+              <span>Apple</span>
+            </button>
+            
+            <button 
+              type="button" 
+              className={styles.socialButton} 
+              onClick={() => signInWithLinkedIn()}
+              aria-label="Sign in with LinkedIn"
+            >
+              <LinkedInIcon className={styles.socialIcon} />
+              <span>LinkedIn</span>
+            </button>
+          </div>
+        </motion.div>
+      )}
+    </motion.form>
+  );
+
+  // Main render
+  return (
+    <div className={styles.loginContainer}>
+      <div className={styles.loginCard}>
+        {/* Welcome section with logo and decorative elements */}
+        <div className={styles.welcomeSection}>
+          <motion.img 
+            src={logoImage} 
+            alt="Travaia" 
+            className={styles.logo}
+            initial="hidden"
+            animate="visible"
+            variants={logoVariant}
+          />
+          <motion.h1 
+            className={styles.welcomeTitle}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          >
+            {t('welcomeToTravaia')}
+          </motion.h1>
+          <motion.p 
+            className={styles.welcomeText}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            {t('loginWelcomeMessage')}
+          </motion.p>
+          
+          {/* Decorative circles */}
+          <div className={`${styles.decorativeCircle} ${styles.circle1}`}></div>
+          <div className={`${styles.decorativeCircle} ${styles.circle2}`}></div>
+          <div className={`${styles.decorativeCircle} ${styles.circle3}`}></div>
+        </div>
+        
+        {/* Login form section */}
+        <div className={styles.loginForm}>
+          <motion.h2 
+            className={styles.formTitle}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {uiState === UI_STATE.LOGIN ? t('signIn') : 
+             uiState === UI_STATE.REGISTER ? t('createAccount') : 
+             t('getStarted')}
+          </motion.h2>
+          
+          <AnimatePresence mode="wait">
+            {uiState === UI_STATE.EMAIL && renderEmailPasswordForm(handleEmailCheck)}
+            {uiState === UI_STATE.LOGIN && renderEmailPasswordForm(handleLogin)}
+            {uiState === UI_STATE.REGISTER && renderEmailPasswordForm(handleRegistration)}
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoginPage;

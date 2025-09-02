@@ -1,0 +1,12 @@
+steps:
+# Step 1: Copy the shared directory into the service directory
+- name: 'ubuntu'
+  args: ['cp', '-r', 'shared', 'application-job-service/shared']
+  dir: 'backend' # Run this from the backend directory
+
+# Step 2: Build the Docker image from within the service directory
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/travaia-application-job-service:$COMMIT_SHA', '.']
+  dir: 'backend/application-job-service' # Set the build context to the service directory
+images:
+- 'gcr.io/$PROJECT_ID/travaia-application-job-service:$COMMIT_SHA'

@@ -1,0 +1,162 @@
+/* Universal Theme Variables - Phase 1 Theming Centralization */
+
+:root {
+  /* Base Colors - Light Theme */
+  --universal-bg-primary: color-mix(in srgb, #9599e2 12%, #d8c64f 8%);
+  --universal-bg-secondary: rgba(255, 255, 255, 0.1);
+  --universal-bg-tertiary: rgba(255, 255, 255, 0.05);
+  
+  /* Text Colors */
+  --universal-text-primary: #01011c;
+  --universal-text-secondary: rgba(1, 1, 28, 0.7);
+  --universal-text-muted: rgba(1, 1, 28, 0.5);
+  
+  /* Background Circles */
+  --universal-circle-blue: rgba(59, 130, 246, 0.15);
+  --universal-circle-purple: rgba(147, 51, 234, 0.15);
+  --universal-circle-pink: rgba(255, 105, 180, 0.15);
+  --universal-circle-yellow: rgba(251, 191, 36, 0.15);
+  --universal-circle-green: rgba(34, 197, 94, 0.15);
+  
+  /* Glassmorphism Effects */
+  --universal-glass-bg: rgba(255, 255, 255, 0.1);
+  --universal-glass-border: rgba(255, 255, 255, 0.2);
+  --universal-glass-shadow: rgba(0, 0, 0, 0.1);
+  
+  /* Spacing and Layout */
+  --universal-container-padding: 1.5rem;
+  --universal-container-max-width: 1280px;
+  --universal-border-radius: 0.75rem;
+  --universal-border-radius-lg: 1rem;
+  
+  /* Animation Durations */
+  --universal-transition-fast: 0.15s;
+  --universal-transition-normal: 0.3s;
+  --universal-transition-slow: 0.5s;
+  
+  /* Z-Index Layers */
+  --universal-z-background: 0;
+  --universal-z-content: 10;
+  --universal-z-modal: 50;
+  --universal-z-tooltip: 100;
+}
+
+/* Dark Theme Overrides */
+:global(.dark) {
+  --universal-bg-primary: color-mix(in srgb, #1e1b4b 60%, #374151 40%);
+  --universal-bg-secondary: rgba(0, 0, 0, 0.2);
+  --universal-bg-tertiary: rgba(0, 0, 0, 0.1);
+  
+  --universal-text-primary: white;
+  --universal-text-secondary: rgba(255, 255, 255, 0.8);
+  --universal-text-muted: rgba(255, 255, 255, 0.6);
+  
+  /* Darker circle variants for dark theme */
+  --universal-circle-blue: rgba(59, 130, 246, 0.2);
+  --universal-circle-purple: rgba(147, 51, 234, 0.2);
+  --universal-circle-pink: rgba(255, 105, 180, 0.2);
+  --universal-circle-yellow: rgba(251, 191, 36, 0.2);
+  --universal-circle-green: rgba(34, 197, 94, 0.2);
+  
+  --universal-glass-bg: rgba(0, 0, 0, 0.2);
+  --universal-glass-border: rgba(255, 255, 255, 0.1);
+  --universal-glass-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* Toddler Theme Variants */
+:global(.toddler-blue) {
+  --universal-bg-primary: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
+  --universal-circle-blue: rgba(33, 150, 243, 0.25);
+  --universal-circle-purple: rgba(103, 58, 183, 0.2);
+}
+
+:global(.toddler-yellow) {
+  --universal-bg-primary: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  --universal-circle-yellow: rgba(255, 193, 7, 0.25);
+  --universal-circle-blue: rgba(33, 150, 243, 0.2);
+}
+
+:global(.toddler-pink) {
+  --universal-bg-primary: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+  --universal-circle-pink: rgba(233, 30, 99, 0.25);
+  --universal-circle-purple: rgba(156, 39, 176, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  :root {
+    --universal-container-padding: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --universal-container-padding: 2.5rem;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes universal-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) scale(1.02);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-15px) scale(1.02);
+  }
+}
+
+@keyframes universal-pulse {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes universal-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Utility Classes */
+.universal-container {
+  max-width: var(--universal-container-max-width);
+  margin: 0 auto;
+  padding: var(--universal-container-padding);
+}
+
+.universal-glass {
+  background: var(--universal-glass-bg);
+  border: 1px solid var(--universal-glass-border);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px var(--universal-glass-shadow);
+  border-radius: var(--universal-border-radius);
+}
+
+.universal-transition {
+  transition: all var(--universal-transition-normal) ease-in-out;
+}
+
+.universal-text-primary {
+  color: var(--universal-text-primary);
+}
+
+.universal-text-secondary {
+  color: var(--universal-text-secondary);
+}
+
+.universal-text-muted {
+  color: var(--universal-text-muted);
+}

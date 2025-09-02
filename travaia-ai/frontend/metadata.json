@@ -1,0 +1,6 @@
+{
+  "name": "Travaia",
+  "description": "A React-based job application tracker with multilingual support and AI-powered features using the Gemini API. Tracks job applications, offers AI suggestions for job titles, analyzes job descriptions, and provides tips for improving applications. Includes an AI Mock Interview feature.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "prompt": ""
+}

@@ -1,0 +1,350 @@
+/* TRAVAIA Mobile Responsiveness Improvements */
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  /* Ensure minimum touch target sizes (44px) */
+  button,
+  a,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Improve form inputs for mobile */
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+
+  /* Mobile navigation improvements */
+  .sidebar-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar-mobile.open {
+    transform: translateX(0);
+  }
+
+  /* Mobile header adjustments */
+  .mobile-header {
+    padding: 12px 16px;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  /* Content spacing for mobile */
+  .mobile-content {
+    padding: 16px;
+    margin-top: 60px; /* Account for fixed header */
+  }
+
+  /* Card layouts for mobile */
+  .glass-card {
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  /* Button groups for mobile */
+  .button-group {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  /* Modal adjustments for mobile */
+  .glass-modal {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+    border-radius: 16px;
+  }
+
+  .modal-content {
+    padding: 20px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+
+  /* Table responsiveness */
+  .responsive-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .responsive-table table {
+    min-width: 600px;
+  }
+
+  /* Grid layouts for mobile */
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Typography adjustments */
+  h1 { font-size: 1.875rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  /* Progress bars for mobile */
+  .progress-bar {
+    height: 8px;
+    border-radius: 4px;
+  }
+
+  /* Interview session mobile layout */
+  .interview-mobile {
+    padding: 16px;
+  }
+
+  .interview-question {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .interview-controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  /* Document manager mobile */
+  .document-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .document-card {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  /* Analytics page mobile */
+  .analytics-mobile .chart-container {
+    height: 250px;
+    margin: 16px 0;
+  }
+
+  .analytics-mobile .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* Job tracker mobile */
+  .job-card-mobile {
+    padding: 16px;
+    margin: 8px 0;
+    border-radius: 12px;
+  }
+
+  .job-actions {
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  /* Dashboard mobile layout */
+  .dashboard-mobile .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dashboard-mobile .stat-card {
+    padding: 20px;
+    text-align: center;
+  }
+}
+
+/* Tablet adjustments (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .dashboard-tablet .feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .interview-tablet {
+    padding: 24px;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
+
+  /* Sidebar adjustments for tablet */
+  .sidebar-tablet {
+    width: 240px;
+  }
+}
+
+/* Large screen optimizations (1025px+) */
+@media (min-width: 1025px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .dashboard-desktop .feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .interview-desktop {
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Sidebar full width for desktop */
+  .sidebar-desktop {
+    width: 280px;
+  }
+}
+
+/* Landscape phone adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-header {
+    height: 50px;
+    padding: 8px 16px;
+  }
+
+  .mobile-content {
+    margin-top: 50px;
+    padding: 12px 16px;
+  }
+
+  .interview-controls {
+    padding: 12px 16px;
+  }
+
+  /* Reduce vertical spacing in landscape */
+  .glass-card {
+    margin: 6px 0;
+    padding: 12px;
+  }
+}
+
+/* High DPI / Retina display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .glass-card {
+    border-width: 0.5px;
+  }
+
+  button {
+    border-width: 0.5px;
+  }
+}
+
+/* Print styles for mobile */
+@media print {
+  .mobile-only,
+  .sidebar-mobile,
+  .interview-controls,
+  .floating-action-button {
+    display: none !important;
+  }
+
+  .mobile-content {
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .glass-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Focus improvements for mobile */
+@media (max-width: 768px) {
+  button:focus,
+  a:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: 3px solid #0066cc;
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+
+  /* Larger focus areas for touch */
+  .touch-target {
+    position: relative;
+  }
+
+  .touch-target::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    z-index: -1;
+  }
+}
+
+/* Improved scrolling for mobile */
+@media (max-width: 768px) {
+  .scrollable-content {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Hide scrollbars on mobile for cleaner look */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Safe area adjustments for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .mobile-header {
+    padding-top: calc(12px + env(safe-area-inset-top));
+    height: calc(60px + env(safe-area-inset-top));
+  }
+
+  .mobile-content {
+    margin-top: calc(60px + env(safe-area-inset-top));
+  }
+
+  .interview-controls {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}

@@ -1,0 +1,260 @@
+/* ToddlerGlassmorphismDemo CSS Module */
+
+.demoContainer {
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: color-mix(in srgb, #9599e2 12%, #d8c64f 8%);
+  overflow-x: hidden;
+  color: var(--text-color, #01011c);
+  --text-color: #01011c;
+}
+
+:global(.dark) .demoContainer {
+  --text-color: white;
+}
+
+@media (min-width: 768px) {
+  .demoContainer {
+    padding: 2rem;
+  }
+}
+
+.backgroundCircles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backgroundCircle {
+  position: absolute;
+  border-radius: 9999px;
+  animation: glass-float 15s ease-in-out infinite;
+  z-index: 0;
+}
+
+.backgroundCircle:nth-child(1) {
+  background-color: rgba(255, 105, 180, 0.15);
+}
+.backgroundCircle:nth-child(2) {
+  background-color: rgba(135, 206, 250, 0.15);
+}
+.backgroundCircle:nth-child(3) {
+  background-color: rgba(152, 251, 152, 0.15);
+}
+.backgroundCircle:nth-child(4) {
+  background-color: rgba(255, 215, 0, 0.15);
+}
+.backgroundCircle:nth-child(5) {
+  background-color: rgba(229, 231, 223, 0.15);
+}
+
+.mainContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  opacity: 0.6;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode support for main content */
+:global(.dark) .mainContent {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--text-color, #01011c);
+  filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 800;
+  opacity: 1;
+}
+
+/* Enhanced text visibility for dark mode */
+:global(.dark) .title {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-color, #01011c);
+  opacity: 1;
+  max-width: 42rem;
+  margin: 0 auto;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced subtitle visibility for dark mode */
+:global(.dark) .subtitle {
+  color: #e5e7eb;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.pageTitle {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .pageTitle {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.pageSubtitle {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .pageSubtitle {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.contentContainer {
+  opacity: 0.95;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.componentGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .componentGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .componentGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.codeBlock {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+  color: #f8f8f2;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.codeBlock pre {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.docSection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.docTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color, #01011c);
+  margin-bottom: 1rem;
+}
+
+.docContent {
+  color: var(--text-color, #01011c);
+  line-height: 1.6;
+}
+
+.propsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.propsTable th,
+.propsTable td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.propsTable th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: bold;
+  color: var(--text-color, #01011c);
+}
+
+.propsTable td {
+  color: var(--text-color, #01011c);
+}
+
+.variantShowcase {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.demoSection {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes glass-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-30px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(20px) rotate(-3deg);
+  }
+}

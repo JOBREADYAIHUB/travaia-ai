@@ -1,0 +1,25 @@
+/* CircularProgressIndicator styles */
+
+.container {
+  width: var(--size);
+  height: var(--size);
+}
+
+.progressContainer {
+  width: var(--size, 48px);
+  height: var(--size, 48px);
+}
+
+.progressCircle {
+  fill: none;
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);
+}
+
+/* Classes for different stroke colors */
+.blue { stroke: #3b82f6; }
+.green { stroke: #22c55e; }
+.yellow { stroke: #eab308; }
+.red { stroke: #ef4444; }
+.gray { stroke: #e5e7eb; }
+.darkGray { stroke: #374151; }

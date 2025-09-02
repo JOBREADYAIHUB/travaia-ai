@@ -1,0 +1,685 @@
+/* Premium Job Tracker Navigation Styles */
+
+.navigationContainer {
+  position: relative;
+  animation: slideInFromTop 0.5s ease-out;
+  padding: 0 0.75rem;
+}
+
+/* Top Navigation Bar */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* History Controls */
+.historyControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.historyButton {
+  transition: all 0.2s;
+}
+
+.historyButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.historyButton:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.historyButton:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Container */
+.searchContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 28rem;
+  margin: 0 1rem;
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.searchContainer.focused {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  color: rgb(156 163 175);
+  pointer-events: none;
+  transition: color 0.2s ease;
+}
+
+:global(.dark) .searchIcon {
+  color: rgb(107 114 128);
+}
+
+.searchContainer.focused .searchIcon {
+  color: rgb(99 102 241);
+}
+
+.searchInput {
+  width: 100%;
+  padding-left: 2.5rem;
+  padding-right: 5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(17 24 39);
+  font-size: 14px;
+}
+
+.searchInput::placeholder {
+  color: rgb(107 114 128);
+}
+
+:global(.dark) .searchInput {
+  color: white;
+}
+
+:global(.dark) .searchInput::placeholder {
+  color: rgb(156 163 175);
+}
+
+.searchInput::placeholder {
+  transition: opacity 0.2s ease;
+}
+
+.searchContainer.focused .searchInput::placeholder {
+  opacity: 0.7;
+}
+
+.clearButton {
+  position: absolute;
+  right: 3rem;
+  color: rgb(156 163 175);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.clearButton:hover {
+  color: rgb(75 85 99);
+}
+
+:global(.dark) .clearButton:hover {
+  color: rgb(209 213 219);
+}
+
+.searchShortcut {
+  position: absolute;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: rgb(156 163 175);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(209 213 219);
+  background: rgba(255, 255, 255, 0.1);
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+}
+
+:global(.dark) .searchShortcut {
+  color: rgb(107 114 128);
+  border-color: rgb(75 85 99);
+}
+
+/* Action Buttons */
+.actionButtons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* View Tabs */
+.viewTabs {
+  display: flex;
+  justify-content: space-evenly; /* Equal spacing between items */
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  overflow-x: auto; /* Allow scrolling on small screens */
+  /* Firefox scrollbar styling - fallback for browsers that support it */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+}
+
+.tabContainer {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%; /* Full width of container */
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  color: rgb(75 85 99);
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  background: rgba(255, 255, 255, 0.15); /* Glassmorphic background */
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tab:hover {
+  color: rgb(17 24 39);
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+:global(.dark) .tab {
+  color: rgb(209 213 219);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+:global(.dark) .tab:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.activeTab {
+  background: rgba(99, 102, 241, 0.15) !important;
+  color: rgb(99, 102, 241) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+:global(.dark) .activeTab {
+  background: rgba(99, 102, 241, 0.25) !important;
+  color: rgb(139, 142, 255) !important;
+  border-color: rgba(139, 142, 255, 0.4) !important;
+}
+
+.tabLabel {
+  white-space: nowrap;
+}
+
+.tabBadge {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  background: rgb(99 102 241);
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.premiumBadge {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 9999px;
+  background: linear-gradient(to right, rgb(250 204 21), rgb(249 115 22));
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tab:hover .tabIcon {
+  transform: scale(1.15);
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgb(99 102 241);
+  border-radius: 50%;
+  animation: scaleIn 0.3s ease-out;
+}
+
+/* Loading States */
+.loadingOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+  z-index: 50;
+}
+
+:global(.dark) .loadingOverlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.loadingText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(55 65 81);
+}
+
+:global(.dark) .loadingText {
+  color: rgb(209 213 219);
+}
+
+.suspenseLoader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 0;
+  gap: 1rem;
+  color: rgb(75 85 99);
+}
+
+:global(.dark) .suspenseLoader {
+  color: rgb(156 163 175);
+}
+
+/* Keyboard Shortcuts Help */
+.shortcutsHelp {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: rgb(107 114 128);
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .shortcutsHelp {
+    display: flex;
+  }
+}
+
+:global(.dark) .shortcutsHelp {
+  color: rgb(156 163 175);
+}
+
+.shortcutItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.shortcutItem kbd {
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+  border-radius: 0.25rem;
+  background: rgb(229 231 235);
+  border: 1px solid rgb(209 213 219);
+  color: rgb(55 65 81);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .shortcutItem kbd {
+  background: rgb(55 65 81);
+  border-color: rgb(75 85 99);
+  color: rgb(209 213 219);
+}
+
+/* Animations */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .shortcutsHelp {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .topBar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .historyControls {
+    order: 2;
+  }
+  
+  .searchContainer {
+    order: 1;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.25rem;
+    height: 50px;
+  }
+  
+  .actionButtons {
+    order: 3;
+  }
+  
+  .viewTabs {
+    overflow-x: auto;
+    /* Standard property - Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent;
+    /* For browsers that don't support scrollbar-width */
+    -ms-overflow-style: none;
+  }
+  
+  /* WebKit scrollbar styling */
+  .viewTabs::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  
+  /* WebKit scrollbar track */
+  .viewTabs::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* WebKit scrollbar thumb */
+  .viewTabs::-webkit-scrollbar-thumb {
+    background: rgba(156, 163, 175, 0.3);
+    border-radius: 3px;
+  }
+  
+  /* WebKit scrollbar thumb hover */
+  .viewTabs::-webkit-scrollbar-thumb:hover {
+    background: rgba(156, 163, 175, 0.5);
+  }
+  
+  .tab {
+    flex-shrink: 0;
+    padding: 0.75rem;
+    min-width: 70px;
+    min-height: 70px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .tabLabel {
+    display: none;
+  }
+  
+  .viewTab::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  
+  .viewTab:hover::after {
+    opacity: 1;
+  }
+  
+  @media (min-width: 640px) {
+    .tabLabel {
+      display: block;
+    }
+    
+    .viewTab::after {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .searchShortcut {
+    display: none;
+  }
+  
+  .clearButton {
+    right: 0.75rem;
+  }
+  
+  .searchInput {
+    padding-right: 2.5rem;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .topBar {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .searchContainer {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .searchContainer.focused {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .viewTabs {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .activeTab {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .loadingContent {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .searchIcon {
+  left: auto;
+  right: 0.75rem;
+}
+
+[dir="rtl"] .searchInput {
+  padding-left: 5rem;
+  padding-right: 2.5rem;
+}
+
+[dir="rtl"] .clearButton {
+  right: auto;
+  left: 3rem;
+}
+
+[dir="rtl"] .searchShortcut {
+  right: auto;
+  left: 0.75rem;
+}
+
+[dir="rtl"] .shortcutsHelp {
+  right: auto;
+  left: 1rem;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .topBar,
+  .searchContainer,
+  .viewTabs {
+    border-width: 2px;
+  }
+  
+  .tab,
+  .activeTab {
+    border-width: 2px;
+  }
+  
+  .tabBadge,
+  .premiumBadge {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .navigationContainer,
+  .tab,
+  .historyButton,
+  .searchContainer,
+  .tab:hover .tabIcon {
+  transform: scale(1.15);
+}
+
+.activeIndicator {
+    animation: none;
+    transition: none;
+  }
+  
+  .historyButton:not(:disabled):hover {
+    transform: none;
+  }
+  
+  .tabBadge {
+    animation: none;
+  }
+}
+
+/* Focus styles for accessibility */
+.tab:focus-visible,
+.historyButton:focus-visible,
+.searchInput:focus-visible {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling for all browsers */
+.viewTabs {
+  /* Firefox - though not widely supported in all browsers */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  
+  /* Ensure content doesn't get hidden */
+  overflow-x: auto;
+}
+
+.viewTabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.viewTabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.viewTabs::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5);
+  border-radius: 2px;
+}
+
+.viewTabs::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}

@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travaia</title>
+    <meta
+      name="description"
+      content="A React-based job application tracker with multilingual support and AI-powered features. Track job applications, build resumes, practice interviews with AI, and manage your career documents."
+    />
+    <meta
+      name="keywords"
+      content="job tracker, career management, AI, resume builder, mock interview, job applications, Gemini API, multilingual, Travaia, job seeker, recruiter, livekit"
+    />
+    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <!-- TODO: Replace [YOUR_APP_URL_HERE] with actual URL if deploying -->
+    <meta property="og:url" content="[YOUR_APP_URL_HERE]" />
+    <meta property="og:title" content="Travaia - AI Powered Career Copilot" />
+    <meta
+      property="og:description"
+      content="Track job applications, build resumes, practice interviews with AI, and manage your career path effectively."
+    />
+    <meta property="og:image" content="/og-image-career-ace.png" />
+    <!-- TODO: Create and add this image -->
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <!-- TODO: Replace [YOUR_APP_URL_HERE] with actual URL if deploying -->
+    <meta property="twitter:url" content="[YOUR_APP_URL_HERE]" />
+    <meta
+      property="twitter:title"
+      content="Travaia - AI Powered Career Copilot"
+    />
+    <meta
+      property="twitter:description"
+      content="Track job applications, build resumes, practice interviews with AI, and manage your career path effectively."
+    />
+    <meta property="twitter:image" content="/twitter-image-career-ace.png" />
+    <!-- TODO: Create and add this image -->
+
+    <!-- LiveKit styles will be imported via JS -->
+
+    <style>
+      /* Define color variables for themes */
+      :root {
+        /* Default Theme: Job Seeker */
+        --color-primary-seeker: #3b82f6; /* Tailwind blue-500 */
+        --color-secondary-seeker: #f97316; /* Tailwind orange-500 */
+        --color-accent-seeker: #10b981; /* Tailwind emerald-500 */
+        --color-neutral-seeker: #374151; /* Tailwind gray-700 */
+        --color-base-100-seeker: #ffffff;
+        --color-base-200-seeker: #f3f4f6; /* Tailwind gray-100 */
+        --color-base-300-seeker: #e5e7eb; /* Tailwind gray-200 */
+        --color-sidebar-bg-seeker: #1f2937; /* Dark Blue-Gray (Tailwind slate-800) */
+        --color-dark-bg-seeker: #0f172a; /* Deep Dark Blue-Gray (Tailwind slate-900) */
+        --color-dark-card-bg-seeker: #1e293b; /* Darker Card Background (Tailwind slate-800) */
+        --color-dark-input-bg-seeker: #334155; /* Dark Input Background (Tailwind slate-700) */
+        --color-text-light-seeker: #111827; /* Tailwind gray-900 for light mode text */
+        --color-text-dark-seeker: #e5e7eb; /* Tailwind gray-200 for dark mode text */
+
+        /* Recruiter Theme */
+        --color-primary-recruiter: #4f46e5; /* Tailwind indigo-600 */
+        --color-secondary-recruiter: #64748b; /* Tailwind slate-500 */
+        --color-accent-recruiter: #f59e0b; /* Tailwind amber-500 */
+        --color-neutral-recruiter: #1e293b; /* Tailwind slate-800 */
+        --color-base-100-recruiter: #f8fafc; /* Tailwind slate-50 */
+        --color-base-200-recruiter: #e2e8f0; /* Tailwind slate-200 */
+        --color-base-300-recruiter: #cbd5e1; /* Tailwind slate-300 */
+        --color-sidebar-bg-recruiter: #334155; /* Tailwind slate-700 */
+        --color-dark-bg-recruiter: #1e293b; /* Tailwind slate-800 */
+        --color-dark-card-bg-recruiter: #0f172a; /* Tailwind slate-900 */
+        --color-dark-input-bg-recruiter: #475569; /* Tailwind slate-600 */
+        --color-text-light-recruiter: #020617; /* Tailwind slate-950 for light mode text */
+        --color-text-dark-recruiter: #f1f5f9; /* Tailwind slate-100 for dark mode text */
+
+        /* Apply Job Seeker theme by default */
+        --color-primary: var(--color-primary-seeker);
+        --color-secondary: var(--color-secondary-seeker);
+        --color-accent: var(--color-accent-seeker);
+        --color-neutral: var(--color-neutral-seeker);
+        --color-base-100: var(--color-base-100-seeker);
+        --color-base-200: var(--color-base-200-seeker);
+        --color-base-300: var(--color-base-300-seeker);
+        --color-sidebar-bg: var(--color-sidebar-bg-seeker);
+        --color-dark-bg: var(--color-dark-bg-seeker);
+        --color-dark-card-bg: var(--color-dark-card-bg-seeker);
+        --color-dark-input-bg: var(--color-dark-input-bg-seeker);
+        --color-text-light: var(--color-text-light-seeker);
+        --color-text-dark: var(--color-text-dark-seeker);
+      }
+
+      html.theme-recruiter {
+        --color-primary: var(--color-primary-recruiter);
+        --color-secondary: var(--color-secondary-recruiter);
+        --color-accent: var(--color-accent-recruiter);
+        --color-neutral: var(--color-neutral-recruiter);
+        --color-base-100: var(--color-base-100-recruiter);
+        --color-base-200: var(--color-base-200-recruiter);
+        --color-base-300: var(--color-base-300-recruiter);
+        --color-sidebar-bg: var(--color-sidebar-bg-recruiter);
+        --color-dark-bg: var(--color-dark-bg-recruiter);
+        --color-dark-card-bg: var(--color-dark-card-bg-recruiter);
+        --color-dark-input-bg: var(--color-dark-input-bg-recruiter);
+        --color-text-light: var(--color-text-light-recruiter);
+        --color-text-dark: var(--color-text-dark-recruiter);
+      }
+    </style>
+
+    <style>
+      html,
+      body,
+      #root {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial,
+          'Noto Sans',
+          sans-serif,
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+          'Noto Color Emoji';
+        /* Improved text rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        background-color: var(
+          --color-base-200
+        ); /* Light mode page background - uses CSS var */
+        color: var(--color-text-light); /* Default text color for light mode */
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease; /* Smooth theme transitions */
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+      html.dark body {
+        background-color: var(
+          --color-dark-bg
+        ); /* Dark mode page background - uses CSS var */
+        color: var(--color-text-dark); /* Default text color for dark mode */
+      }
+      html[dir='rtl'] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+        --tw-space-x-reverse: 1;
+      }
+
+      /* CRITICAL: Universal text alignment for RTL */
+      html[dir='rtl'] body {
+        text-align: right !important;
+      }
+
+      /* Staggered animation utility */
+      .stagger-children > * {
+        opacity: 0; /* Initially hidden */
+        animation-name: staggeredItemEntry;
+        animation-duration: 0.6s;
+        animation-timing-function: cubic-bezier(
+          0.25,
+          0.46,
+          0.45,
+          0.94
+        ); /* Smoother ease-out */
+        animation-fill-mode: forwards;
+      }
+      /* Custom scrollbar styling */
+      ::-webkit-scrollbar {
+        width: 10px; /* Slightly wider for easier interaction */
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--color-base-200);
+        border-radius: 10px;
+      }
+      html.dark ::-webkit-scrollbar-track {
+        background: var(--color-dark-input-bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-base-300);
+        border-radius: 10px;
+        border: 2px solid var(--color-base-200); /* Creates a "track" around the thumb */
+      }
+      html.dark ::-webkit-scrollbar-thumb {
+        background: var(--color-neutral);
+        border: 2px solid var(--color-dark-input-bg);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
+      }
+      html.dark ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-secondary);
+      }
+
+      /* Custom scrollbar for Sidebar Navigation */
+      .sidebar-nav-scroll::-webkit-scrollbar {
+        width: 6px;
+      }
+      .sidebar-nav-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .sidebar-nav-scroll::-webkit-scrollbar-thumb {
+        background: var(
+          --color-neutral,
+          #374151
+        ); /* Default to seeker neutral */
+        border-radius: 3px;
+      }
+      html.dark .sidebar-nav-scroll::-webkit-scrollbar-thumb {
+        background: var(
+          --color-base-300,
+          #e5e7eb
+        ); /* Default to seeker base-300 */
+      }
+      .sidebar-nav-scroll::-webkit-scrollbar-thumb:hover {
+        background: var(
+          --color-secondary,
+          #f97316
+        ); /* Default to seeker secondary */
+      }
+
+      /* Forcing box-sizing for better layout predictability, though Tailwind usually handles this */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      /* Keyframes for the animated gradient */
+      @keyframes backgroundGradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Class to apply the animated gradient background */
+      .bg-gradient-animation {
+        background: linear-gradient(135deg, #4f46e5, #8b5cf6, #ffffff, #f97316);
+        background-size: 400% 400%;
+        animation: backgroundGradientAnimation 15s ease infinite;
+      }
+    </style>
+    <link rel="stylesheet" href="/index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@^19.1.0",
+          "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+          "react/": "https://esm.sh/react@^19.1.0/",
+          "firebase/": "https://esm.sh/firebase@^11.8.1/",
+          "jspdf": "https://esm.sh/jspdf@^3.0.1",
+          "zod": "https://esm.sh/zod@^3.25.26",
+          "@google/genai": "https://esm.sh/@google/genai@^1.0.1",
+          "react-colorful": "https://esm.sh/react-colorful@^5.6.1",
+          "react-font-picker": "https://esm.sh/react-font-picker@2.1.2",
+          "react-responsive": "https://esm.sh/react-responsive@^10.0.0",
+          "slate": "https://esm.sh/slate@^0.114.0",
+          "slate-react": "https://esm.sh/slate-react@^0.114.2",
+          "slate-history": "https://esm.sh/slate-history@^0.113.1",
+          "@livekit/components-react": "https://esm.sh/@livekit/components-react@^2.2.1",
+          "@livekit/components-styles": "https://esm.sh/@livekit/components-styles@^1.1.6",
+          "livekit-client": "https://esm.sh/livekit-client@^2.2.0",
+          "axios": "https://esm.sh/axios@^1.7.2",
+          "@livekit/components-styles/": "https://esm.sh/@livekit/components-styles@^1.1.6/",
+          "livekit-server-sdk": "https://esm.sh/livekit-server-sdk@^2.13.0"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-BzzUTjhe.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BmnNhSA6.css">
+  </head>
+  <body class="text-text_light dark:text-text_dark">
+    <div id="root"></div>
+  </body>
+</html>

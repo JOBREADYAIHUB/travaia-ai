@@ -1,0 +1,57 @@
+# LiveKit WebRTC Media Server Configuration for TRAVAIA
+# Enterprise-grade real-time voice communication
+
+rtc:
+  tcp_listener_port: 7880
+  udp_listener_port: 7881
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
+
+redis:
+  address: redis:6379
+  username: ""
+  password: ""
+  db: 0
+
+turn:
+  enabled: true
+  domain: ""
+  cert_file: ""
+  key_file: ""
+  tls_port: 5349
+  udp_port: 3478
+  external_tls: true
+
+api:
+  keys:
+    # Set via environment variables
+    # LIVEKIT_API_KEY and LIVEKIT_API_SECRET
+    - key: ""
+      secret: ""
+
+room:
+  enabled_codecs:
+    - mime: audio/opus
+    - mime: audio/red
+  max_participants: 100
+  empty_timeout: 300s
+  departure_timeout: 20s
+
+ingress:
+  rtmp_base_url: "rtmp://localhost/live"
+  whip_base_url: "http://localhost:7880/whip"
+
+egress:
+  insecure: false
+
+webhook:
+  api_key: ""  # Set via LIVEKIT_WEBHOOK_KEY
+  urls:
+    - "https://api.travaia.com/webhooks/livekit"
+
+logging:
+  level: info
+  json: true
+
+development: false

@@ -1,0 +1,605 @@
+/* Premium Job Tracker Overview Styles */
+
+.overviewContainer {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+  padding: 1.5rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.loadingContainer {
+  padding: 1.5rem;
+}
+
+.loadingSkeleton {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
+.skeletonHeader {
+  height: 4rem;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:global(.dark) .skeletonHeader {
+  background-color: #374151;
+}
+
+.skeletonStats {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .skeletonStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .skeletonStats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.skeletonCard {
+  height: 6rem;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:global(.dark) .skeletonCard {
+  background-color: #374151;
+}
+
+/* Welcome Header */
+.welcomeHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .welcomeHeader {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.welcomeText {
+  flex: 1 1 0%;
+}
+
+.greeting {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+:global(.dark) .greeting {
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: #4b5563;
+}
+
+:global(.dark) .subtitle {
+  color: #d1d5db;
+}
+
+.quickAddButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.quickAddButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.statCard {
+  padding: 1.5rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.statCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.statContent {
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+}
+
+:global(.dark) .statValue {
+  color: #ffffff;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+:global(.dark) .statLabel {
+  color: #d1d5db;
+}
+
+.statChange {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #059669;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 12px;
+}
+
+:global(.dark) .statChange {
+  color: #6ee7b7;
+}
+
+/* Content Grid */
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .contentGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.activityCard {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 1024px) {
+  .activityCard {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.remindersCard,
+.insightsCard {
+  grid-column: span 1 / span 1;
+}
+
+/* Card Headers */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+:global(.dark) .cardHeader {
+  border-color: #374151;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+:global(.dark) .cardTitle {
+  color: #ffffff;
+}
+
+/* Activity List */
+.activityList {
+  padding: 1.5rem;
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.activityItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.activityIcon {
+  flex-shrink: 0;
+}
+
+.activityDot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+}
+
+.activityDot.applied {
+  background-color: #3b82f6;
+}
+
+.activityDot.interview_scheduled {
+  background-color: #8b5cf6;
+}
+
+.activityDot.offer_received {
+  background-color: #22c55e;
+}
+
+.activityDot.status_update {
+  background-color: #f97316;
+}
+
+.activityContent {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.activityDescription {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.dark) .activityDescription {
+  color: #ffffff;
+}
+
+.activityTime {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #6b7280;
+}
+
+:global(.dark) .activityTime {
+  color: #9ca3af;
+}
+
+/* Reminders List */
+.remindersList {
+  padding: 1.5rem;
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.reminderItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.reminderItem:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.reminderContent {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+
+.reminderTitle {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: #111827;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.dark) .reminderTitle {
+  color: #ffffff;
+}
+
+.reminderCompany {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #4b5563;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.dark) .reminderCompany {
+  color: #d1d5db;
+}
+
+.reminderDate {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #ea580c;
+  font-weight: 500;
+}
+
+:global(.dark) .reminderDate {
+  color: #fb923c;
+}
+
+/* Insights Content */
+.insightsContent {
+  padding: 1.5rem;
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.insightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.insightIcon {
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.insightText {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #374151;
+  line-height: 1.625;
+}
+
+:global(.dark) .insightText {
+  color: #d1d5db;
+}
+
+.viewAllButton {
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Empty States */
+.emptyState {
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.emptyState p {
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+:global(.dark) .emptyState p {
+  color: #9ca3af;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .overviewContainer {
+    padding: 1rem;
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+  }
+  
+  .welcomeHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .greeting {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  
+  .contentGrid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  
+  .activityCard,
+  .remindersCard,
+  .insightsCard {
+    grid-column: span 1 / span 1;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .statCard {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .statCard:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .activityItem,
+  .reminderItem,
+  .insightItem {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .activityItem:hover,
+  .reminderItem:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .welcomeHeader {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .cardTitle {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .activityItem {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .reminderItem {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .insightItem {
+  flex-direction: row-reverse;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .statCard,
+  .activityItem,
+  .reminderItem,
+  .insightItem {
+    border-width: 2px;
+  }
+  
+  .greeting {
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: inherit;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .overviewContainer,
+  .statCard,
+  .activityItem,
+  .reminderItem,
+  .quickAddButton {
+    animation: none;
+    transition: none;
+  }
+  
+  .statCard:hover,
+  .quickAddButton:hover {
+    transform: none;
+  }
+}

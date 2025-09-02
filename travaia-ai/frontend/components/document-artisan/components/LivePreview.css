@@ -1,0 +1,5 @@
+.live-preview-content {
+  font-size: var(--preview-font-size, 14px);
+  font-family: var(--preview-font-family, 'Inter', sans-serif);
+  line-height: var(--preview-line-spacing, 1.2);
+}

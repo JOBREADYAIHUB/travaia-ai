@@ -1,0 +1,58 @@
+.toddler-glass-nav-item {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-width: 1px;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+.toddler-glass-nav-item.active {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: scale(1.1);
+}
+
+.toddler-glass-nav-item:not(.active) {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.toddler-glass-nav-item:not(.active):hover {
+  transform: scale(1.05);
+}
+
+.toddler-glass-nav-item:active {
+  transform: scale(0.95);
+}
+
+.toddler-glass-nav-item .icon-container {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.toddler-glass-nav-item.active .icon-container {
+  color: white;
+}
+
+.toddler-glass-nav-item:not(.active) .icon-container {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.toddler-glass-nav-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  opacity: 0.4;
+  pointer-events: none;
+  filter: blur(4px);
+}

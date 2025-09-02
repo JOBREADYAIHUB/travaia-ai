@@ -1,0 +1,5 @@
+# Include everything by default
+!* 
+
+# Specifically include the contents of the shared directory
+!application-job-service/shared/**

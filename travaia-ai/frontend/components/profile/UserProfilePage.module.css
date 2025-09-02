@@ -1,0 +1,51 @@
+/* UserProfilePage Background Circles CSS Module */
+
+.backgroundCircles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.backgroundCircle {
+  position: absolute;
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.backgroundCircle1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 10%;
+  background-color: rgba(255, 255, 255, 0.1);
+  animation-delay: 0s;
+}
+
+.backgroundCircle2 {
+  width: 200px;
+  height: 200px;
+  top: 60%;
+  left: 80%;
+  background-color: rgba(255, 255, 255, 0.05);
+  animation-delay: 2s;
+}
+
+.backgroundCircle3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  left: 70%;
+  background-color: rgba(255, 255, 255, 0.1);
+  animation-delay: 4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}

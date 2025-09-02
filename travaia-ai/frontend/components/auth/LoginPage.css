@@ -1,0 +1,746 @@
+/* Modern Responsive Login Page Styles */
+
+/* Language selector wrapper styling */
+.language-selector-wrapper {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.login-language-selector {
+  width: 100%;
+}
+
+.login-language-selector .language-selector__select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.login-language-selector .language-selector__select:focus {
+  border-color: rgba(138, 43, 226, 0.5);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+}
+.loginContainer {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #8a2be2 50%, #87ceeb 100%);
+  position: relative;
+}
+
+/* Logo container - always visible at top on mobile */
+.logoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  z-index: 1000;
+  position: relative;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Welcome logo inside welcome section */
+.welcomeLogo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.3)) drop-shadow(0 1px 2px rgba(255, 255, 255, 0.2));
+}
+
+/* Interview image - only visible on larger screens */
+.interviewImage {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  object-fit: contain;
+  z-index: 5;
+}
+
+.loginCard {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  background: #fff;
+  border: 1px solid rgba(255, 165, 0, 0.1);
+  margin-top: 1rem;
+}
+
+.loginForm {
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.welcomeSection {
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #8a2be2 0%, #ffd100 50%, #ff9500 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.formTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.formContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputWrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.inputIconWrapper {
+  position: absolute;
+  inset-inline-start: 15px; /* Use logical properties for RTL support */
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3cb043;
+  z-index: 10;
+}
+
+.inputIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(39%) sepia(85%) saturate(1347%) hue-rotate(88deg) brightness(94%) contrast(94%);
+}
+
+.input {
+  width: 100%;
+  padding: 12px 15px 12px 15px;
+  padding-inline-start: 45px;
+  padding-inline-end: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.2s;
+  background-color: white;
+  color: #333333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.input::placeholder {
+  color: #999999;
+  opacity: 1;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 0.85rem;
+  background: #fff;
+  border: none;
+  border-radius: 10px;
+  color: #3cb043;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  margin-bottom: 1.75rem;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.primaryButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.spinnerIcon {
+  margin-right: 0.5rem;
+}
+
+.errorMessage {
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.socialLoginContainer {
+  margin-top: 1rem;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+}
+
+.divider::before, 
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.divider::before {
+  margin-right: 0.5rem;
+}
+
+.divider::after {
+  margin-left: 0.5rem;
+}
+
+.socialButtons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.socialButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  color: #333333;
+  font-weight: 500;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 80px;
+  max-width: 100px;
+  flex: 1;
+  height: 36px;
+}
+
+/* Responsive design for social buttons */
+@media (max-width: 768px) {
+  .socialButtons {
+    gap: 0.75rem;
+    max-width: 320px;
+  }
+  
+  .socialButton {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+    min-width: 120px;
+    max-width: 160px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .socialButtons {
+    flex-direction: row;
+    gap: 8px;
+    max-width: 100%;
+    padding: 0 1rem;
+    justify-content: center;
+  }
+  
+  .socialButton {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    min-width: auto;
+    max-width: none;
+    width: 48%;
+    height: 48px;
+    border-radius: 8px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .socialIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+  }
+  
+  .googleIcon {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+}
+
+.socialButton:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #333333;
+}
+
+.socialIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.5rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Google icon text styling */
+.googleIcon {
+  width: 18px;
+  height: 18px;
+  background: #4285f4;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 12px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.welcomeTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #8a2be2;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6), 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.welcomeText {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 2rem;
+}
+
+.decorativeCircle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  background: linear-gradient(135deg, #ff3366 0%, #ff7a00 100%);
+}
+
+.circle1 {
+  width: 120px;
+  height: 120px;
+  top: 10%;
+  right: 10%;
+}
+
+.circle2 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 10%;
+}
+
+.circle3 {
+  width: 60px;
+  height: 60px;
+  top: 60%;
+  right: 20%;
+}
+
+
+/* Comprehensive Responsive Design */
+@media (max-width: 768px) {
+  .loginContainer {
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .loginCard {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 15px;
+    margin-top: 0;
+  }
+  
+  .welcomeSection {
+    width: 100%;
+    padding: 1.5rem;
+    order: 1;
+  }
+  
+  .welcomeLogo {
+    width: 100px;
+    margin-bottom: 1rem;
+  }
+  
+  .interviewImage {
+    display: none; /* Hide interview image on tablets and smaller */
+  }
+  
+  .loginForm {
+    width: 100%;
+    padding: 1.5rem;
+    order: 2;
+  }
+  
+  .welcomeTitle {
+    font-size: 2rem;
+  }
+  
+  .formTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .logo {
+    height: 50px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginContainer {
+    padding: 1rem 0.5rem;
+    justify-content: center;
+  }
+  
+  .logoContainer {
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+  }
+  
+  .logo {
+    height: 40px;
+  }
+  
+  .loginCard {
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    min-height: unset;
+  }
+  
+  .welcomeSection {
+    padding: 1rem;
+    min-height: unset;
+  }
+  
+  .loginForm {
+    padding: 1rem;
+    min-height: unset;
+  }
+  
+  .welcomeTitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .welcomeText {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  
+  .formTitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .inputWrapper {
+    margin-bottom: 1rem;
+  }
+  
+  .input {
+    padding: 0.75rem;
+    padding-inline-start: 40px;
+    font-size: 1rem;
+  }
+  
+  .primaryButton {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .socialButtons {
+    gap: 0.4rem;
+    max-width: 240px;
+  }
+  
+  .socialButton {
+    padding: 0.3rem 0.4rem;
+    font-size: 0.7rem;
+    min-width: 70px;
+    max-width: 75px;
+    height: 32px;
+  }
+  
+  .socialIcon {
+    margin-right: 0.3rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Language selector positioning */
+.languageSelectorContainer {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 165, 0, 0.9);
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+  border: 2px solid rgba(255, 165, 0, 0.6);
+}
+
+/* Ensure language selector is visible in RTL mode */
+[dir="rtl"] .languageSelectorContainer {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 480px) {
+  .languageSelectorContainer {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 165, 0, 0.9);
+    border-radius: 50%;
+    padding: 0.4rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.3);
+    border: 2px solid rgba(255, 165, 0, 0.6);
+  }
+}
+
+/* Remove duplicate language selector container rule - using the fixed positioning version above */
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .loginCard {
+    flex-direction: column;
+    max-width: 500px;
+  }
+  
+  .loginForm,
+  .welcomeSection {
+    width: 100%;
+    padding: 2rem;
+  }
+  
+  .welcomeSection {
+    order: -1;
+    min-height: 200px;
+  }
+  
+  .decorativeCircle {
+    transform: scale(0.7);
+  }
+  
+  .socialButtons {
+    flex-direction: column;
+  }
+}
+
+/* Blowing bubbles decorative image - only visible on login page */
+.blowingBubblesContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.blowingBubblesImage {
+  width: 450px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.blowingBubblesImage:hover {
+  opacity: 1;
+}
+
+/* Toggle mode container styles */
+.toggleModeContainer {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.toggleText {
+  color: #666666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #3cb043;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.toggleButton:hover {
+  color: #2a8b32;
+}
+
+/* Select dropdown styling to match input fields */
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  padding-right: 40px;
+}
+
+/* Responsive behavior for blowing bubbles - hide on small devices */
+@media (max-width: 768px) {
+  .blowingBubblesContainer {
+    display: none;
+  }
+}
+
+/* Extra small screens - prevent field cutoff */
+@media (max-width: 320px) {
+  .loginContainer {
+    padding: 0.125rem;
+    gap: 0.25rem;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  
+  .logoContainer {
+    padding: 0.25rem 0;
+  }
+  
+  .logo {
+    height: 35px;
+  }
+  
+  .loginCard {
+    margin-top: 0.25rem;
+    border-radius: 8px;
+  }
+  
+  .welcomeSection {
+    padding: 0.75rem;
+  }
+  
+  .loginForm {
+    padding: 0.75rem;
+  }
+  
+  .formTitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .inputWrapper {
+    margin-bottom: 0.75rem;
+  }
+  
+  .input {
+    padding: 0.6rem;
+    padding-inline-start: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .inputIconWrapper {
+    inset-inline-start: 10px;
+  }
+  
+  .inputIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .primaryButton {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+}

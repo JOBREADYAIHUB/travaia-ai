@@ -1,0 +1,293 @@
+/* Enhanced Dashboard CSS Module */
+
+.welcomeHub {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.welcomeGreeting {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.greetingText {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.snapshotCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.featureTiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.featureTile {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.featureTile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.featureTile:hover::before {
+  left: 100%;
+}
+
+.featureTile:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.tileIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.tileTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.tileDescription {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  color: var(--text-color);
+}
+
+.progressSection {
+  margin-bottom: 2rem;
+}
+
+.progressGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.challengeCard {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.challengeHeader {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.challengeTitle {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.challengeProgress {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  color: var(--text-color);
+}
+
+.progressBar {
+  width: 100%;
+  height: 0.75rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.375rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 0.375rem;
+  transition: width 0.3s ease;
+}
+
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.badgeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badgeIcon {
+  font-size: 1.5rem;
+}
+
+.badgeText {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.xpCard {
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.xpLevel {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.xpProgress {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  color: var(--text-color);
+}
+
+.personalizationSection {
+  margin-bottom: 2rem;
+}
+
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.tipCard {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tipCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.tipIcon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.tipText {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .welcomeHub {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .snapshotCards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .featureTiles {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .progressGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tipsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .greetingText {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featureTiles {
+    grid-template-columns: 1fr;
+  }
+
+  .snapshotCards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dark theme adjustments */
+:global(.dark) .snapshotCard,
+:global(.dark) .featureTile,
+:global(.dark) .challengeCard,
+:global(.dark) .badgeItem,
+:global(.dark) .xpCard,
+:global(.dark) .tipCard {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .progressBar {
+  background: rgba(0, 0, 0, 0.3);
+}

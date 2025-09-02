@@ -1,0 +1,17 @@
+steps:
+# Install dependencies
+- name: 'python:3.9-slim'
+  entrypoint: 'pip'
+  args: ['install', '-r', 'api-gateway/requirements.txt', '--user']
+
+# Deploy to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args: [
+    'run', 'deploy', 'travaia-api-gateway',
+    '--source', '.',
+    '--project', 'travaia-e1310',
+    '--region', 'us-central1',
+    '--allow-unauthenticated',
+    '--service-account', 'travaia-e1310@appspot.gserviceaccount.com'
+  ]

@@ -1,0 +1,74 @@
+{
+  "timestamp": "2025-08-18T16:18:45.135118",
+  "service_url": "https://travaia-application-job-service-976191766214.us-central1.run.app",
+  "total_tests": 11,
+  "passed_tests": 5,
+  "results": [
+    {
+      "test": "Service Health Check",
+      "success": true,
+      "details": "Service is healthy (Status: 200)",
+      "timestamp": "2025-08-18T16:18:21.805988"
+    },
+    {
+      "test": "Root Endpoint",
+      "success": true,
+      "details": "Service info retrieved successfully",
+      "timestamp": "2025-08-18T16:18:22.279525"
+    },
+    {
+      "test": "GET Applications (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:18:22.698612"
+    },
+    {
+      "test": "POST Application (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 403",
+      "timestamp": "2025-08-18T16:18:23.144987"
+    },
+    {
+      "test": "GET Application by ID (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 404",
+      "timestamp": "2025-08-18T16:18:23.564474"
+    },
+    {
+      "test": "PUT Application (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 404",
+      "timestamp": "2025-08-18T16:18:23.989563"
+    },
+    {
+      "test": "DELETE Application (No Auth)",
+      "success": false,
+      "details": "Expected 401, got 404",
+      "timestamp": "2025-08-18T16:18:24.407318"
+    },
+    {
+      "test": "Invalid Endpoint /api/invalid",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:18:24.943223"
+    },
+    {
+      "test": "Invalid Endpoint /api/applications/invalid/action",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:18:25.401540"
+    },
+    {
+      "test": "Invalid Endpoint /nonexistent",
+      "success": true,
+      "details": "Correctly returned 404",
+      "timestamp": "2025-08-18T16:18:25.865929"
+    },
+    {
+      "test": "Rate Limiting",
+      "success": false,
+      "details": "Rate limiting not triggered (may need more requests or longer test)",
+      "timestamp": "2025-08-18T16:18:45.132043"
+    }
+  ]
+}

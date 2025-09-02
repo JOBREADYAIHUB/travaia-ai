@@ -1,0 +1,27 @@
+@echo OFF
+ECHO --- Rebuilding Python Environment and Running Service ---
+
+REM Step 1: Check for Python
+python --version >NUL 2>NUL
+IF %ERRORLEVEL% NEQ 0 (
+    ECHO Python is not found in the PATH. Please install Python and try again.
+    GOTO :EOF
+)
+
+REM Step 2: Create a new virtual environment
+IF NOT EXIST .venv (
+    ECHO Creating new virtual environment in .\.venv...
+    python -m venv .venv
+) ELSE (
+    ECHO Virtual environment .\.venv already exists.
+)
+
+REM Step 3: Install dependencies into the virtual environment
+ECHO Installing dependencies from requirements.txt...
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+REM Step 4: Run the application using the virtual environment's Python
+ECHO Starting the application...
+.\.venv\Scripts\uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+ECHO --- Script Finished ---

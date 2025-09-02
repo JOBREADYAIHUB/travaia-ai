@@ -1,0 +1,165 @@
+.chartContainer {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.chartTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+/* Bar Chart Styles */
+.barChart {
+  position: relative;
+  width: 100%;
+}
+
+.barContainer {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.barWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  margin: 0 0.25rem;
+}
+
+.bar {
+  width: 100%;
+  max-width: 40px;
+  height: var(--bar-height);
+  background-color: var(--bar-color);
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.animated .bar {
+  animation: barGrow 0.8s ease-out forwards;
+}
+
+@keyframes barGrow {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--bar-height);
+  }
+}
+
+.barLabel {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+
+.barValue {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  color: var(--text-primary);
+}
+
+/* Pie Chart Styles */
+.pieChart {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.pieSvg {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-90deg);
+}
+
+.pieSlice {
+  transition: stroke-dasharray 0.6s ease-in-out;
+}
+
+.pieLegend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.legendColor {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.legendValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pieChart {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .pieSvg {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .barLabel {
+    font-size: 0.625rem;
+  }
+  
+  .barValue {
+    font-size: 0.625rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .chartContainer {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}

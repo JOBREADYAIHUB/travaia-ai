@@ -1,0 +1,150 @@
+/* Authentication component styles */
+
+/* Development Mode UI */
+.dev-mode-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+  padding: 10px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border: 1px solid #ddd;
+}
+
+.dev-mode-button {
+  padding: 8px 16px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dev-mode-button:hover {
+  background: #4338ca;
+}
+
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-primary, #ffffff);
+}
+
+.auth-separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--text-secondary, #4b5563);
+}
+
+.auth-separator::before,
+.auth-separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+}
+
+.auth-separator::before {
+  margin-right: 10px;
+}
+
+.auth-separator::after {
+  margin-left: 10px;
+}
+
+.auth-social-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background-color: var(--bg-secondary, #f3f4f6);
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-social-button:hover {
+  background-color: var(--hover-bg, #e5e7eb);
+}
+
+.auth-social-button img {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+
+.auth-error {
+  color: var(--error-color, #dc2626);
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background-color: var(--error-bg, #fef2f2);
+  border-radius: 4px;
+  border-left: 4px solid var(--error-color, #dc2626);
+}
+
+.auth-success {
+  color: var(--success-color, #059669);
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background-color: var(--success-bg, #ecfdf5);
+  border-radius: 4px;
+  border-left: 4px solid var(--success-color, #059669);
+}
+
+.auth-form-group {
+  margin-bottom: 16px;
+}
+
+.auth-form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+.auth-form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  background-color: var(--input-bg, #ffffff);
+  font-size: 16px;
+}
+
+.auth-form-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #3b82f6);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 10px 16px;
+  background-color: var(--primary-color, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.auth-button:hover {
+  background-color: var(--primary-hover, #2563eb);
+}
+
+.auth-button:disabled {
+  background-color: var(--disabled-color, #9ca3af);
+  cursor: not-allowed;
+}

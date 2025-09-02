@@ -1,0 +1,7 @@
+/* Universal Theme Variables - Must be imported first */
+@import './core/theme-variables.css';
+
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

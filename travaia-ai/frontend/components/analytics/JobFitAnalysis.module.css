@@ -1,0 +1,14 @@
+/* JobFitAnalysis component styles */
+
+.progressBar {
+  height: 100%;
+  background-color: #3b82f6; /* bg-blue-500 equivalent */
+  border-radius: 9999px; /* rounded-full equivalent */
+  width: var(--progress-width);
+}
+
+.hiddenElement {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+}

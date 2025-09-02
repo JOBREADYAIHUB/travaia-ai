@@ -1,0 +1,254 @@
+{
+  "jobTracker": {
+    "title": "Job Tracker",
+    "description": "Track and manage your job applications",
+    "noApplications": "No job applications yet",
+    "addApplication": "Add New Application",
+    "filterApplications": "Filter Applications",
+    "searchPlaceholder": "Search by title, company, or status...",
+    "sortBy": "Sort by",
+    "status": {
+      "applied": "Applied",
+      "screening": "Screening",
+      "interview": "Interview",
+      "offer": "Offer",
+      "rejected": "Rejected",
+      "withdrawn": "Withdrawn"
+    },
+    "kanban": {
+      "viewApplication": "View application details",
+      "editApplication": "Edit application",
+      "deleteApplication": "Delete application",
+      "noApplicationsInColumn": "No applications in this column yet",
+      "addFirst": "Add your first",
+      "interviewDeadline": "Interview",
+      "assessmentDeadline": "Assessment",
+      "followupDeadline": "Follow-up",
+      "responseDeadline": "Response",
+      "applicationDeadline": "Application"
+    },
+    "overview": {
+      "title": "Job Tracker Overview",
+      "totalApplications": "Total Applications",
+      "activeApplications": "Active Applications",
+      "offerReceived": "Offers Received",
+      "interviewRate": "Interview Rate",
+      "offerRate": "Offer Rate",
+      "applicationsByStatus": "Applications by Status",
+      "applicationsBySource": "Applications by Source",
+      "recentActivity": "Recent Activity",
+      "viewAll": "View All",
+      "mostRecentApplications": "Most Recent Applications",
+      "noRecentApplications": "No recent applications"
+    },
+    "navigation": {
+      "overview": "Overview",
+      "kanban": "Kanban Board",
+      "list": "List View",
+      "calendar": "Calendar",
+      "analytics": "Analytics"
+    },
+    "applicationForm": {
+      "jobTitle": "Job Title",
+      "company": "Company",
+      "location": "Location",
+      "workType": "Work Type",
+      "jobType": "Job Type",
+      "applicationDate": "Application Date",
+      "status": "Status",
+      "source": "Source",
+      "url": "Job URL",
+      "description": "Job Description",
+      "notes": "Notes",
+      "salary": {
+        "label": "Salary Range",
+        "min": "Min",
+        "max": "Max",
+        "currency": "Currency"
+      },
+      "contactInfo": {
+        "label": "Contact Information",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone"
+      },
+      "keyDates": {
+        "label": "Key Dates",
+        "submissionDate": "Submission Date",
+        "interviewDate": "Interview Date",
+        "followUpDate": "Follow-up Date",
+        "decisionDate": "Decision Date"
+      },
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "requiredField": "This field is required",
+      "addNew": "Add New Job Application",
+      "editApplication": "Edit Job Application"
+    },
+    "modal": {
+      "deleteConfirmation": "Delete Confirmation",
+      "deleteWarning": "Are you sure you want to delete this job application? This action cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Yes, Delete"
+    },
+    "filters": {
+      "all": "All",
+      "status": "Status",
+      "company": "Company",
+      "location": "Location",
+      "dateRange": "Date Range",
+      "source": "Source",
+      "clear": "Clear Filters",
+      "apply": "Apply Filters"
+    },
+    "list": {
+      "title": "List View",
+      "jobTitle": "Job Title",
+      "company": "Company",
+      "status": "Status",
+      "dateApplied": "Date Applied",
+      "location": "Location",
+      "actions": "Actions"
+    },
+    "calendar": {
+      "title": "Calendar View",
+      "today": "Today",
+      "month": "Month",
+      "week": "Week",
+      "day": "Day",
+      "noEvents": "No events on this day",
+      "applicationSubmitted": "Application Submitted",
+      "interviewScheduled": "Interview Scheduled",
+      "followUpReminder": "Follow-up Reminder"
+    }
+  },
+  "upcomingActions": {
+    "title": "Upcoming Actions",
+    "noActions": "No upcoming actions",
+    "overdue": "Overdue",
+    "dueToday": "Due Today",
+    "dueTomorrow": "Due Tomorrow",
+    "dueInDays": "Due in {{days}} days",
+    "editAction": "Edit Action",
+    "clearAction": "Clear Action",
+    "actionDescription": "Description",
+    "placeholderDescription": "Enter action description",
+    "actionDate": "Due Date",
+    "addNew": "Add New Action"
+  },
+  "progressTracking": {
+    "title": "Progress Tracking",
+    "completedTasks": "Completed Tasks",
+    "pendingTasks": "Pending Tasks",
+    "addNewTask": "Add New Task",
+    "deleteTask": "Delete Task",
+    "markComplete": "Mark as Complete",
+    "markIncomplete": "Mark as Incomplete",
+    "emptyState": "No tasks added yet",
+    "addTaskModal": {
+      "title": "Add New Task",
+      "editTitle": "Edit Task",
+      "taskName": "Task Name",
+      "taskDescription": "Description (optional)",
+      "dueDate": "Due Date",
+      "priority": "Priority",
+      "save": "Save Task",
+      "cancel": "Cancel",
+      "priorityLow": "Low",
+      "priorityMedium": "Medium",
+      "priorityHigh": "High"
+    }
+  },
+  "jobApplication": {
+    "status": {
+      "draft": "Draft",
+      "applied": "Applied",
+      "interviewscheduled": "Interview Scheduled",
+      "interviewed": "Interviewed",
+      "assessmentpending": "Assessment Pending",
+      "waitingresponse": "Waiting for Response",
+      "offerreceived": "Offer Received",
+      "hired": "Hired",
+      "rejected": "Rejected"
+    },
+    "timeline": {
+      "currentStatus": "Current Status",
+      "nextSteps": "Next Steps",
+      "interviewPrep": "Interview Preparation",
+      "offerReceived": "Congratulations on your offer!",
+      "tips": {
+        "followUp": "Send a follow-up email after one week",
+        "prepareInterview": "Start preparing for potential interviews",
+        "researchCompany": "Research more about the company",
+        "reviewResume": "Review your resume and job description",
+        "prepareQuestions": "Prepare questions to ask interviewers",
+        "practiceAnswers": "Practice common interview questions",
+        "reviewOffer": "Review the offer details carefully",
+        "negotiateSalary": "Consider negotiating compensation",
+        "planTransition": "Plan for your transition to the new job"
+      }
+    }
+  },
+  "aiJobInsights": {
+    "title": "AI Job Insights",
+    "loading": "Analyzing your job applications...",
+    "noInsights": "No insights available yet. Add more job applications for AI analysis.",
+    "applicationTrends": "Application Trends",
+    "improvementSuggestions": "Improvement Suggestions",
+    "viewFullAnalysis": "View Full Analysis",
+    "matchScore": "Match Score",
+    "skills": {
+      "matched": "Matched Skills",
+      "missing": "Skills to Develop"
+    }
+  },
+  "aiInsights": {
+    "title": "AI Insights",
+    "loading": "Generating insights...",
+    "noInsights": "No insights available yet",
+    "viewMore": "View More",
+    "refreshInsights": "Refresh Insights"
+  },
+  "teamCollaboration": {
+    "title": "Team Collaboration",
+    "enterpriseFeature": "Enterprise Feature",
+    "tabs": {
+      "comments": "Comments",
+      "tasks": "Tasks",
+      "team": "Team"
+    },
+    "noComments": "No comments yet",
+    "private": "Private",
+    "addComment": "Add a comment...",
+    "markPrivate": "Mark as private",
+    "submitComment": "Submit",
+    "taskManagement": "Task Management",
+    "taskDescription": "Assign and track tasks with your team",
+    "upgradeEnterprise": "Upgrade to Enterprise for team features",
+    "teamMembers": "Team Members",
+    "featureComingSoon": "This feature is coming soon",
+    "invite": "Invite",
+    "inviteTeamMembers": "Invite Team Members",
+    "inviteDescription": "Collaborate on job applications with your team"
+  },
+  "common": {
+    "you": "you",
+    "unknown": "Unknown",
+    "justNow": "Just now",
+    "hoursAgo": "{{count}} hour ago",
+    "hoursAgo_plural": "{{count}} hours ago",
+    "daysAgo": "{{count}} day ago",
+    "daysAgo_plural": "{{count}} days ago",
+    "title": "Title",
+    "department": "Department",
+    "lastActive": "Last Active",
+    "manage": "Manage"
+  },
+  "permissions": {
+    "canEdit": "Can Edit",
+    "canDelete": "Can Delete",
+    "canInvite": "Can Invite Others",
+    "canAssignTasks": "Can Assign Tasks"
+  }
+}

@@ -1,0 +1,286 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Helper functions for authentication and authorization
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isValidUser() {
+      return isAuthenticated() && 
+             exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    function hasValidTimestamps() {
+      return request.resource.data.keys().hasAll(['created_at', 'updated_at']) &&
+             request.resource.data.created_at is timestamp &&
+             request.resource.data.updated_at is timestamp;
+    }
+    
+    function isValidEmail(email) {
+      return email.matches('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$');
+    }
+    
+    // Users collection
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      
+      allow create: if isAuthenticated() && 
+                       request.auth.uid == userId &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['user_id', 'email', 'status']) &&
+                       request.resource.data.user_id == userId &&
+                       isValidEmail(request.resource.data.email) &&
+                       request.resource.data.status in ['active', 'inactive', 'suspended'];
+      
+      allow update: if isOwner(userId) &&
+                       hasValidTimestamps() &&
+                       request.resource.data.user_id == userId &&
+                       (!('email' in request.resource.data.diff(resource.data).affectedKeys()) ||
+                        isValidEmail(request.resource.data.email));
+      
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+    
+    // Applications collection
+    match /applications/{applicationId} {
+      allow read: if isValidUser() && 
+                     (isOwner(resource.data.user_id) || isAdmin());
+      
+      allow list: if isValidUser() && 
+                     request.auth.uid == resource.data.user_id;
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['application_id', 'user_id', 'company_name', 'position_title', 'status']) &&
+                       request.resource.data.application_id == applicationId &&
+                       isOwner(request.resource.data.user_id) &&
+                       request.resource.data.status in ['applied', 'interview', 'offer', 'rejected', 'withdrawn'] &&
+                       request.resource.data.company_name is string &&
+                       request.resource.data.position_title is string;
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id) &&
+                       request.resource.data.user_id == resource.data.user_id &&
+                       request.resource.data.application_id == applicationId;
+      
+      allow delete: if isOwner(resource.data.user_id) || isAdmin();
+    }
+    
+    // Favorite Jobs collection
+    match /favorite_jobs/{favoriteId} {
+      allow read, list: if isValidUser() && 
+                           isOwner(resource.data.user_id);
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['favorite_id', 'user_id', 'job_title', 'company_name']) &&
+                       request.resource.data.favorite_id == favoriteId &&
+                       isOwner(request.resource.data.user_id);
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id);
+      
+      allow delete: if isOwner(resource.data.user_id);
+    }
+    
+    // Interviews collection
+    match /interviews/{interviewId} {
+      allow read: if isValidUser() && 
+                     (isOwner(resource.data.user_id) || isAdmin());
+      
+      allow list: if isValidUser() && 
+                     request.auth.uid == resource.data.user_id;
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['interview_id', 'user_id', 'type', 'status']) &&
+                       request.resource.data.interview_id == interviewId &&
+                       isOwner(request.resource.data.user_id) &&
+                       request.resource.data.type in ['custom', 'generic', 'application_based'] &&
+                       request.resource.data.status in ['scheduled', 'in_progress', 'completed', 'cancelled'];
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id);
+      
+      allow delete: if isOwner(resource.data.user_id) || isAdmin();
+      
+      // Interview attempts sub-collection
+      match /attempts/{attemptId} {
+        allow read: if isValidUser() && 
+                       isOwner(get(/databases/$(database)/documents/interviews/$(interviewId)).data.user_id);
+        
+        allow list: if isValidUser() && 
+                       isOwner(get(/databases/$(database)/documents/interviews/$(interviewId)).data.user_id);
+        
+        allow create: if isValidUser() &&
+                         hasValidTimestamps() &&
+                         request.resource.data.keys().hasAll(['attempt_id', 'interview_id']) &&
+                         request.resource.data.attempt_id == attemptId &&
+                         request.resource.data.interview_id == interviewId &&
+                         isOwner(get(/databases/$(database)/documents/interviews/$(interviewId)).data.user_id);
+        
+        allow update: if isValidUser() &&
+                         hasValidTimestamps() &&
+                         isOwner(get(/databases/$(database)/documents/interviews/$(interviewId)).data.user_id);
+        
+        allow delete: if isOwner(get(/databases/$(database)/documents/interviews/$(interviewId)).data.user_id);
+      }
+    }
+    
+    // Interview Questions collection
+    match /interview_questions/{questionId} {
+      // Public questions (no user_id) are readable by all authenticated users
+      allow read: if isValidUser() && 
+                     (resource.data.user_id == null || 
+                      isOwner(resource.data.user_id) || 
+                      isAdmin());
+      
+      allow list: if isValidUser();
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['question_id', 'question_text', 'category']) &&
+                       request.resource.data.question_id == questionId &&
+                       (request.resource.data.user_id == null || 
+                        isOwner(request.resource.data.user_id)) &&
+                       request.resource.data.category in ['behavioral', 'technical', 'situational', 'general'];
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       (resource.data.user_id == null && isAdmin()) ||
+                       isOwner(resource.data.user_id);
+      
+      allow delete: if (resource.data.user_id == null && isAdmin()) ||
+                       isOwner(resource.data.user_id);
+    }
+    
+    // AI Reports collection
+    match /ai_reports/{reportId} {
+      allow read: if isValidUser() && 
+                     (isOwner(resource.data.user_id) || isAdmin());
+      
+      allow list: if isValidUser() && 
+                     request.auth.uid == resource.data.user_id;
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['report_id', 'user_id', 'report_type']) &&
+                       request.resource.data.report_id == reportId &&
+                       isOwner(request.resource.data.user_id) &&
+                       request.resource.data.report_type in ['job_match_analysis', 'interview_feedback', 'resume_analysis', 'career_guidance'];
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id);
+      
+      allow delete: if isOwner(resource.data.user_id) || isAdmin();
+    }
+    
+    // Documents collection
+    match /documents/{documentId} {
+      allow read: if isValidUser() && 
+                     (isOwner(resource.data.user_id) || 
+                      (resource.data.access_level == 'public') ||
+                      isAdmin());
+      
+      allow list: if isValidUser() && 
+                     request.auth.uid == resource.data.user_id;
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['document_id', 'user_id', 'file_name', 'document_type', 'access_level']) &&
+                       request.resource.data.document_id == documentId &&
+                       isOwner(request.resource.data.user_id) &&
+                       request.resource.data.document_type in ['resume', 'cover_letter', 'portfolio', 'certificate', 'other'] &&
+                       request.resource.data.access_level in ['private', 'shared', 'public'] &&
+                       request.resource.data.file_size_bytes is number &&
+                       request.resource.data.file_size_bytes > 0 &&
+                       request.resource.data.file_size_bytes <= 10485760; // 10MB limit
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id) &&
+                       (!('file_size_bytes' in request.resource.data.diff(resource.data).affectedKeys()) ||
+                        (request.resource.data.file_size_bytes > 0 && 
+                         request.resource.data.file_size_bytes <= 10485760));
+      
+      allow delete: if isOwner(resource.data.user_id) || isAdmin();
+    }
+    
+    // Resume Versions collection
+    match /resume_versions/{versionId} {
+      allow read: if isValidUser() && 
+                     (isOwner(resource.data.user_id) || isAdmin());
+      
+      allow list: if isValidUser() && 
+                     request.auth.uid == resource.data.user_id;
+      
+      allow create: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['version_id', 'user_id', 'version_name']) &&
+                       request.resource.data.version_id == versionId &&
+                       isOwner(request.resource.data.user_id) &&
+                       request.resource.data.version_name is string &&
+                       request.resource.data.version_name.size() > 0;
+      
+      allow update: if isValidUser() &&
+                       hasValidTimestamps() &&
+                       isOwner(resource.data.user_id);
+      
+      allow delete: if isOwner(resource.data.user_id) || isAdmin();
+    }
+    
+    // Resume Templates collection (mostly read-only for users)
+    match /resume_templates/{templateId} {
+      allow read: if isValidUser();
+      allow list: if isValidUser();
+      
+      allow create: if isAdmin() &&
+                       hasValidTimestamps() &&
+                       request.resource.data.keys().hasAll(['template_id', 'name', 'category']) &&
+                       request.resource.data.template_id == templateId;
+      
+      allow update: if isAdmin() &&
+                       hasValidTimestamps();
+      
+      allow delete: if isAdmin();
+    }
+    
+    // System collections (admin only)
+    match /system_logs/{logId} {
+      allow read, list: if isAdmin();
+      allow create: if isAdmin();
+      allow update: if false; // Logs are immutable
+      allow delete: if isAdmin();
+    }
+    
+    match /analytics/{analyticsId} {
+      allow read: if isAdmin() || 
+                     (isValidUser() && resource.data.user_id == request.auth.uid);
+      allow list: if isAdmin();
+      allow create: if isValidUser();
+      allow update: if isAdmin() || 
+                       (isValidUser() && resource.data.user_id == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+    
+    // Catch-all rule to deny access to any other documents
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

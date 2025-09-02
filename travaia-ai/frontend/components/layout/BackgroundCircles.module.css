@@ -1,0 +1,104 @@
+/* Centralized Background Circles System */
+
+.backgroundCircles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: var(--z-background);
+}
+
+.backgroundCircle {
+  position: absolute;
+  border-radius: 9999px;
+  z-index: var(--z-background);
+  
+  /* Use CSS custom properties for dynamic values */
+  width: var(--circle-size, 200px);
+  height: var(--circle-size, 200px);
+  background-color: var(--circle-bg, var(--circle-color-1));
+  top: var(--circle-top, 50%);
+  left: var(--circle-left, 50%);
+  
+  /* Animation */
+  animation: glass-float var(--circle-duration, 15s) ease-in-out infinite;
+  animation-delay: var(--circle-delay, 0s);
+  
+  /* Transform origin for better animation */
+  transform-origin: center center;
+  
+  /* Ensure circles don't interfere with content */
+  will-change: transform;
+}
+
+/* Variant Styles */
+.variant-default {
+  /* Default opacity and effects */
+}
+
+.variant-subtle {
+  opacity: 0.6;
+  filter: blur(1px);
+}
+
+.variant-vibrant {
+  opacity: 1.2;
+  filter: saturate(1.3);
+}
+
+/* Animation Keyframes */
+@keyframes glass-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translateY(-30px) rotate(2deg) scale(1.05);
+  }
+  50% {
+    transform: translateY(-15px) rotate(-1deg) scale(0.98);
+  }
+  75% {
+    transform: translateY(20px) rotate(1deg) scale(1.02);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .backgroundCircle {
+    /* Smaller circles on mobile for better performance */
+    width: calc(var(--circle-size, 200px) * 0.7);
+    height: calc(var(--circle-size, 200px) * 0.7);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .backgroundCircle {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* High Performance Mode - Disable blur effects on low-end devices */
+@media (max-width: 480px) {
+  .variant-subtle {
+    filter: none;
+  }
+  
+  .variant-vibrant {
+    filter: none;
+  }
+}
+
+/* Dark Mode Adjustments */
+.dark .backgroundCircle {
+  /* Slightly different blend mode for dark theme */
+  mix-blend-mode: screen;
+}
+
+/* Print Styles - Hide decorative elements */
+@media print {
+  .backgroundCircles {
+    display: none;
+  }
+}

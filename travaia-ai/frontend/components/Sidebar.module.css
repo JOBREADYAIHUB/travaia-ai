@@ -1,0 +1,228 @@
+/* Sidebar Component Styles - No Inline Styles */
+/* All styling moved to CSS classes for maintainability */
+
+/* Sidebar Component Styles - No Inline Styles */
+
+.navigationIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.3s var(--toddler-bounce);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.navigationIcon--active {
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.02);
+}
+
+.navigationIcon--dashboard {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.navigationIcon--dashboard.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.navigationIcon--jobTracker {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.navigationIcon--jobTracker.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(240, 147, 251, 0.3);
+}
+
+.navigationIcon--analytics {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.navigationIcon--analytics.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(79, 172, 254, 0.3);
+}
+
+.navigationIcon--mockInterview {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.navigationIcon--mockInterview.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(67, 233, 123, 0.3);
+}
+
+.navigationIcon--resumeBuilder {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.navigationIcon--resumeBuilder.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(250, 112, 154, 0.3);
+}
+
+.navigationIcon--documentManager {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.navigationIcon--documentManager.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(168, 237, 234, 0.3);
+}
+
+.navigationIcon--userProfile {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+.navigationIcon--userProfile.navigationIcon--active {
+  box-shadow: 0 4px 8px rgba(255, 154, 158, 0.3);
+}
+
+.iconContent {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.iconContent--active {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+}
+
+.iconBadge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: pulse 2s infinite;
+}
+
+/* Hover effects */
+.navigationIcon:hover {
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.navigationIcon--active:hover {
+  transform: scale(1.07);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Glass bounce effect */
+.glass-bounce {
+  animation: glassBounce 0.6s ease-out;
+}
+
+@keyframes glassBounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navigationIcon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .iconContent {
+    font-size: 14px;
+  }
+  
+  .iconBadge {
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+  }
+}
+
+/* Dark theme adjustments */
+:global(.dark) .navigationIcon {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark) .navigationIcon--active {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+:global(.dark) .navigationIcon:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Focus states for accessibility */
+.navigationIcon:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Decorative inner circle */
+.decorativeCircle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 15%;
+  right: 15%;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.decorativeCircle--active {
+  opacity: 0.9;
+}
+
+/* Active indicator dot */
+.activeIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+  animation: pulse 2s infinite;
+}
+
+/* User avatar container */
+.userAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: var(--toddler-blue);
+  flex-shrink: 0;
+}

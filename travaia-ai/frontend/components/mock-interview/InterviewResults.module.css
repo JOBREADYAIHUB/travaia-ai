@@ -1,0 +1,31 @@
+/* InterviewResults CSS Module */
+
+.scoreProgressContainer {
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 9999px;
+  height: 0.5rem;
+}
+
+.scoreProgressContainer.dark {
+  background-color: #374151;
+}
+
+.scoreProgressBar {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 0.5s ease;
+  width: var(--score-width, 0%);
+}
+
+.scoreProgressBar.excellent {
+  background-color: #10b981; /* green-500 */
+}
+
+.scoreProgressBar.good {
+  background-color: #f59e0b; /* yellow-500 */
+}
+
+.scoreProgressBar.needsImprovement {
+  background-color: #ef4444; /* red-500 */
+}

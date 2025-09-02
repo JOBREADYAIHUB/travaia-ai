@@ -1,0 +1,21 @@
+/* Additional glassmorphism styles for dropdown active state */
+.glass-dropdown-item-active {
+  background-color: var(--glass-highlight);
+  color: var(--glass-text);
+  position: relative;
+}
+
+.glass-dropdown-item-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(100, 100, 255, 0.7)
+  );
+  border-radius: 0 2px 2px 0;
+}

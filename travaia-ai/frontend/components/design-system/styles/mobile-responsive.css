@@ -1,0 +1,408 @@
+/* Mobile-First Responsive Design */
+
+/* Base mobile styles (320px+) */
+.responsive-container {
+  width: 100%;
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+/* Touch-friendly interactions */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.75rem;
+}
+
+.touch-button {
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  touch-action: manipulation;
+}
+
+/* Mobile navigation */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 60px;
+  left: -100%;
+  width: 280px;
+  height: calc(100vh - 60px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: left 0.3s ease;
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile forms */
+.mobile-form {
+  padding: 1rem;
+}
+
+.mobile-form .form-field {
+  margin-bottom: 1.5rem;
+}
+
+.mobile-form input,
+.mobile-form select,
+.mobile-form textarea {
+  font-size: 16px; /* Prevents zoom on iOS */
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+/* Mobile cards */
+.mobile-card {
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.mobile-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Mobile modals */
+.mobile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1050;
+  background: white;
+  overflow-y: auto;
+}
+
+.mobile-modal-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-modal-content {
+  padding: 1rem;
+}
+
+/* Mobile tables */
+.mobile-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-table {
+  min-width: 600px;
+}
+
+.mobile-table-card {
+  display: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Mobile charts */
+.mobile-chart {
+  height: 250px;
+  margin-bottom: 1rem;
+}
+
+.mobile-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Mobile interview interface */
+.mobile-interview {
+  padding: 1rem;
+}
+
+.mobile-interview-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mobile-interview-question {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* Mobile job tracker */
+.mobile-job-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.mobile-job-card {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Mobile analytics */
+.mobile-analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.mobile-stat-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 640px) {
+  /* Show mobile navigation */
+  .mobile-menu-toggle {
+    display: block;
+  }
+  
+  .desktop-nav {
+    display: none;
+  }
+  
+  /* Stack elements vertically */
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .responsive-flex {
+    flex-direction: column !important;
+  }
+  
+  /* Mobile-specific spacing */
+  .mobile-spacing {
+    padding: 0.5rem;
+  }
+  
+  /* Hide desktop-only elements */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  /* Show mobile-only elements */
+  .mobile-only {
+    display: block !important;
+  }
+  
+  /* Mobile table cards */
+  .mobile-table {
+    display: none;
+  }
+  
+  .mobile-table-card {
+    display: block;
+  }
+  
+  /* Mobile modal adjustments */
+  .glass-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+  }
+  
+  /* Mobile form adjustments */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Mobile button groups */
+  .button-group {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .button-group .glass-button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  /* Tablet styles */
+  .responsive-container {
+    padding: 0 1.5rem;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mobile-job-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mobile-analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  /* Desktop styles */
+  .mobile-only {
+    display: none !important;
+  }
+  
+  .desktop-only {
+    display: block !important;
+  }
+  
+  .mobile-menu {
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .mobile-job-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .mobile-analytics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .hover-effect:hover {
+    transform: none;
+  }
+  
+  .touch-feedback:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  
+  /* Larger touch targets */
+  .interactive-element {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .high-dpi-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Landscape mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-interview-controls {
+    position: relative;
+    padding: 0.5rem;
+  }
+  
+  .mobile-modal {
+    padding: 0.5rem;
+  }
+  
+  .mobile-nav {
+    height: 50px;
+  }
+}
+
+/* Dark mode mobile adjustments */
+@media (prefers-color-scheme: dark) {
+  .mobile-nav {
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .mobile-menu {
+    background: rgba(0, 0, 0, 0.95);
+  }
+  
+  .mobile-modal {
+    background: #1f2937;
+  }
+  
+  .mobile-modal-header {
+    background: #1f2937;
+    border-bottom-color: #374151;
+  }
+  
+  .mobile-job-card {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}

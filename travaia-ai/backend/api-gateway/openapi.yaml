@@ -1,0 +1,890 @@
+swagger: "2.0"
+info:
+  title: Travaia API Gateway
+  description: API Gateway for Travaia microservices
+  version: "1.0.0"
+
+host: travaia-managed-cggfdfie.uc.gateway.dev
+basePath: /
+schemes:
+  - https
+
+produces:
+  - application/json
+
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "key"
+    in: "query"
+  firebase:
+    authorizationUrl: ""
+    flow: "implicit"
+    type: "oauth2"
+    x-google-issuer: "https://securetoken.google.com/travaia-e1310"
+    x-google-jwks_uri: "https://www.googleapis.com/service_accounts/v1/metadata/x509/securetoken@system.gserviceaccount.com"
+    x-google-audiences: "travaia-e1310"
+
+# CORS configuration for cross-origin requests
+x-google-endpoints:
+  - name: travaia-managed-cggfdfie.uc.gateway.dev
+    allowCors: true
+
+# Global CORS configuration
+x-google-management:
+  metrics:
+    - name: "requestCount"
+      displayName: "Request Count"
+      valueType: INT64
+      metricKind: DELTA
+  quota:
+    limits:
+      - name: "RequestsPerMinutePerProject"
+        metric: "requestCount"
+        unit: "1/min/{project}"
+        values:
+          STANDARD: 1000
+
+paths:
+  /applications:
+    post:
+      summary: Proxy POST requests to Application & Job Service
+      operationId: applications_post
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    get:
+      summary: Proxy GET requests to Application & Job Service
+      operationId: applications_get
+      security:
+        - firebase: []
+      parameters:
+        - name: page
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+      x-google-backend:
+        path_translation: CONSTANT_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app/applications
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+            Access-Control-Allow-Methods:
+              type: string
+              default: "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers:
+              type: string
+              default: "Content-Type, Authorization"
+    options:
+      summary: CORS preflight for applications
+      operationId: applications_options_cors
+      responses:
+        '204':
+          description: CORS preflight response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+            Access-Control-Allow-Methods:
+              type: string
+              default: "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers:
+              type: string
+              default: "Authorization, Content-Type, x-api-key"
+            Access-Control-Max-Age:
+              type: string
+              default: "3600"
+  /applications/{applicationId}:
+    get:
+      summary: Get specific application
+      operationId: applications_get_by_id
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    put:
+      summary: Update application
+      operationId: applications_put
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Delete application
+      operationId: applications_delete
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/notes:
+    post:
+      summary: Add note to application
+      operationId: applications_notes_post
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/contacts:
+    post:
+      summary: Add contact to application
+      operationId: applications_contacts_post
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /enhanced/applications:
+    get:
+      summary: Proxy GET requests for enhanced job applications to Application & Job Service
+      operationId: enhanced_applications_get
+      security:
+        - firebase: []
+      parameters:
+        - name: page
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+            Access-Control-Allow-Methods:
+              type: string
+              default: "GET, POST, PUT, DELETE, OPTIONS"
+            Access-Control-Allow-Headers:
+              type: string
+              default: "Content-Type, Authorization"
+    options:
+      summary: CORS preflight for enhanced applications
+      operationId: enhanced_applications_options_cors
+      responses:
+        '204':
+          description: CORS preflight response
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+              default: "*"
+            Access-Control-Allow-Methods:
+              type: string
+              default: "GET, OPTIONS"
+            Access-Control-Allow-Headers:
+              type: string
+              default: "Authorization, Content-Type, x-api-key"
+            Access-Control-Max-Age:
+              type: string
+              default: "3600"
+  /favorite-jobs:
+    get:
+      summary: Get paginated favorite jobs
+      operationId: favorite_jobs_get
+      security:
+        - firebase: []
+      parameters:
+        - name: page
+          in: query
+          type: integer
+        - name: limit
+          in: query
+          type: integer
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create favorite job
+      operationId: favorite_jobs_post
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /favorite-jobs/{favoriteJobId}:
+    delete:
+      summary: Delete favorite job
+      operationId: favorite_jobs_delete
+      security:
+        - firebase: []
+      parameters:
+        - name: favoriteJobId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/analytics:
+    get:
+      summary: Get all job applications for analytics
+      operationId: applications_analytics_get
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/stats:
+    get:
+      summary: Get job application statistics
+      operationId: applications_stats_get
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/search:
+    get:
+      summary: Search job applications
+      operationId: applications_search_get
+      security:
+        - firebase: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/status:
+    patch:
+      summary: Update application status
+      operationId: applications_status_patch
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/notes:
+    get:
+      summary: Get all notes for an application
+      operationId: applications_notes_get
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/notes/{noteId}:
+    put:
+      summary: Update a specific note
+      operationId: applications_notes_put
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+        - name: noteId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Delete a specific note
+      operationId: applications_notes_delete
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+        - name: noteId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/contacts:
+    get:
+      summary: Get all contacts for an application
+      operationId: applications_contacts_get
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /applications/{applicationId}/contacts/{contactId}:
+    put:
+      summary: Update a specific contact
+      operationId: applications_contacts_put
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+        - name: contactId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Delete a specific contact
+      operationId: applications_contacts_delete
+      security:
+        - firebase: []
+      parameters:
+        - name: applicationId
+          in: path
+          required: true
+          type: string
+        - name: contactId
+          in: path
+          required: true
+          type: string
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /ai/analyze-job:
+    post:
+      summary: Get AI analysis for a job application
+      operationId: ai_analyze_job_post
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-ai-engine-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-ai-engine-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /health:
+    get:
+      summary: Application service health check
+      operationId: applications_health_get
+      security:
+        - firebase: []
+      x-google-backend:
+        path_translation: APPEND_PATH_TO_ADDRESS
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /auth/register:
+    post:
+      summary: Register new user
+      operationId: auth_register_post
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/register
+      responses:
+        '200':
+          description: Success
+  /auth/login:
+    post:
+      summary: User login
+      operationId: auth_login_post
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/login
+      responses:
+        '200':
+          description: Success
+  /auth/logout:
+    post:
+      summary: User logout
+      operationId: auth_logout_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/logout
+      responses:
+        '200':
+          description: Success
+  /auth/me:
+    get:
+      summary: Get current user profile
+      operationId: auth_me_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/me
+      responses:
+        '200':
+          description: Success
+  /auth/refresh-token:
+    post:
+      summary: Refresh user token
+      operationId: auth_refresh_token_post
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/refresh-token
+      responses:
+        '200':
+          description: Success
+  /auth/verify-email:
+    post:
+      summary: Send email verification
+      operationId: auth_verify_email_post
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/verify-email
+      responses:
+        '200':
+          description: Success
+  /auth/reset-password:
+    post:
+      summary: Reset password
+      operationId: auth_reset_password_post
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/reset-password
+      responses:
+        '200':
+          description: Success
+  /auth/sync:
+    post:
+      summary: Sync user data
+      operationId: auth_sync_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/auth/sync
+      responses:
+        '200':
+          description: Success
+  /profile:
+    get:
+      summary: Get user profile
+      operationId: profile_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile
+      responses:
+        '200':
+          description: Success
+    put:
+      summary: Update user profile
+      operationId: profile_put
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile
+      responses:
+        '200':
+          description: Success
+    delete:
+      summary: Delete user account
+      operationId: profile_delete
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile
+      responses:
+        '200':
+          description: Success
+  /profile/settings:
+    get:
+      summary: Get user settings
+      operationId: profile_settings_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile/settings
+      responses:
+        '200':
+          description: Success
+    put:
+      summary: Update user settings
+      operationId: profile_settings_put
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile/settings
+      responses:
+        '200':
+          description: Success
+  /profile/completion:
+    get:
+      summary: Get profile completion status
+      operationId: profile_completion_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile/completion
+      responses:
+        '200':
+          description: Success
+  /profile/language:
+    post:
+      summary: Update preferred language
+      operationId: profile_language_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/profile/language
+      responses:
+        '200':
+          description: Success
+  /gamification/stats:
+    get:
+      summary: Get gamification stats
+      operationId: gamification_stats_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/stats
+      responses:
+        '200':
+          description: Success
+  /gamification/level:
+    get:
+      summary: Get user level
+      operationId: gamification_level_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/level
+      responses:
+        '200':
+          description: Success
+  /gamification/achievements:
+    get:
+      summary: Get user achievements
+      operationId: gamification_achievements_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/achievements
+      responses:
+        '200':
+          description: Success
+  /gamification/achievements/unlocked:
+    get:
+      summary: Get unlocked achievements
+      operationId: gamification_achievements_unlocked_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/achievements/unlocked
+      responses:
+        '200':
+          description: Success
+  /gamification/streaks:
+    get:
+      summary: Get user streaks
+      operationId: gamification_streaks_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/streaks
+      responses:
+        '200':
+          description: Success
+  /gamification/activity:
+    post:
+      summary: Record activity
+      operationId: gamification_activity_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/activity
+      responses:
+        '200':
+          description: Success
+  /gamification/leaderboard:
+    get:
+      summary: Get leaderboard
+      operationId: gamification_leaderboard_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/leaderboard
+      responses:
+        '200':
+          description: Success
+  /gamification/daily-challenge:
+    get:
+      summary: Get daily challenge
+      operationId: gamification_daily_challenge_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/daily-challenge
+      responses:
+        '200':
+          description: Success
+  /gamification/daily-challenge/complete:
+    post:
+      summary: Complete daily challenge
+      operationId: gamification_daily_challenge_complete_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/daily-challenge/complete
+      responses:
+        '200':
+          description: Success
+  /gamification/progress:
+    get:
+      summary: Get user progress
+      operationId: gamification_progress_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/progress
+      responses:
+        '200':
+          description: Success
+  /gamification/goals:
+    post:
+      summary: Set user goals
+      operationId: gamification_goals_post
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/goals
+      responses:
+        '200':
+          description: Success
+  /gamification/badges:
+    get:
+      summary: Get available badges
+      operationId: gamification_badges_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/gamification/badges
+      responses:
+        '200':
+          description: Success
+  /api/users/profile:
+    put:
+      summary: Update user profile data
+      operationId: api_users_profile_put
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/api/users/profile
+      responses:
+        '200':
+          description: Success
+  /api/users/progress:
+    put:
+      summary: Update user progress data
+      operationId: api_users_progress_put
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/api/users/progress
+      responses:
+        '200':
+          description: Success
+  /api/users/settings:
+    put:
+      summary: Update user settings data
+      operationId: api_users_settings_put
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/api/users/settings
+      responses:
+        '200':
+          description: Success
+  /user-auth/health:
+    get:
+      summary: User auth service health check
+      operationId: user_auth_health_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-user-auth-service-976191766214.us-central1.run.app/health
+      responses:
+        '200':
+          description: Success
+  /coach:
+    post:
+      summary: Proxy POST requests to CareerGPT Coach Service
+      operationId: coach_post
+      x-google-backend:
+        address: https://travaia-careergpt-coach-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    get:
+      summary: Proxy GET requests to CareerGPT Coach Service
+      operationId: coach_get
+      x-google-backend:
+        address: https://travaia-careergpt-coach-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /coach/health:
+    get:
+      summary: Coach service health check
+      operationId: coach_health_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-careergpt-coach-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /ai-engine:
+    post:
+      summary: Proxy POST requests to AI Engine Service
+      operationId: ai_engine_post
+      x-google-backend:
+        address: https://travaia-ai-engine-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+    get:
+      summary: Proxy GET requests to AI Engine Service
+      operationId: ai_engine_get
+      x-google-backend:
+        address: https://travaia-ai-engine-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+  /ai-engine/health:
+    get:
+      summary: AI Engine service health check
+      operationId: ai_engine_health_get
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-ai-engine-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success

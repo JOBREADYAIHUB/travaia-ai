@@ -1,0 +1,869 @@
+/* 
+ * Toddler-like Glassmorphism Design System
+ * A comprehensive set of CSS variables and utility classes to implement
+ * highly colorful, vibrant, and playful glassmorphism UI elements with proper theming,
+ * accessibility, and RTL support
+ */
+
+:root {
+  /* Base glassmorphism variables with enhanced toddler aesthetics */
+  --glass-opacity: 0.8; /* Increased opacity for more vibrant appearance */
+  --glass-blur: 20px; /* Increased blur for more pronounced effect */
+  --glass-border-width: 3px; /* Thicker borders for playful look */
+  --glass-border-radius: 24px; /* Very rounded corners like children's toys */
+
+  /* Vibrant primary colors */
+  --toddler-red: rgba(255, 80, 80, 0.7);
+  --toddler-blue: rgba(80, 145, 255, 0.7);
+  --toddler-green: rgba(80, 220, 100, 0.7);
+  --toddler-yellow: rgba(255, 220, 80, 0.7);
+  --toddler-purple: rgba(180, 100, 255, 0.7);
+  --toddler-pink: rgba(255, 140, 220, 0.7);
+  --toddler-orange: rgba(255, 160, 50, 0.7);
+
+  /* Base glassy background with more color */
+  --glass-bg: var(--toddler-blue);
+  --glass-border: rgba(255, 255, 255, 0.4); /* Brighter border */
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+  --glass-shadow-spread: 6px; /* Increased for more visibility */
+  --glass-shadow-blur: 12px;
+
+  /* Fun gradient reflections */
+  --glass-reflection: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.4) 0%,
+    /* Brighter reflection */ rgba(255, 255, 255, 0) 70%
+  );
+
+  /* Vibrant text colors */
+  --glass-text: rgba(255, 255, 255, 1); /* Full white for better contrast */
+  --glass-text-secondary: rgba(255, 255, 255, 0.85);
+  --glass-highlight: rgba(255, 255, 255, 0.25); /* Brighter highlight */
+  --glass-active: rgba(255, 255, 255, 0.35);
+  --glass-focus-ring: rgba(255, 220, 80, 0.8); /* Bright yellow focus ring */
+
+  /* Animation timing - slightly slower for playful feel */
+  --glass-transition-time: 0.3s;
+
+  /* Minimal bounce effect - significantly reduced for subtlety */
+  --toddler-bounce: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode overrides using prefers-color-scheme media query - still colorful! */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: var(--toddler-purple);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.4);
+    --glass-text: rgba(255, 255, 255, 1);
+    --glass-text-secondary: rgba(255, 255, 255, 0.8);
+    --glass-highlight: rgba(255, 255, 255, 0.2);
+    --glass-active: rgba(255, 255, 255, 0.3);
+    --glass-focus-ring: rgba(255, 220, 80, 0.8);
+  }
+}
+
+/* High contrast overrides for accessibility - preserves the fun while ensuring accessibility */
+@media (forced-colors: active) {
+  :root {
+    --glass-bg: Canvas;
+    --glass-border: CanvasText;
+    --glass-shadow: transparent;
+    --glass-text: CanvasText;
+    --glass-text-secondary: GrayText;
+    --glass-highlight: Highlight;
+    --glass-active: ActiveText;
+    --glass-focus-ring: Highlight;
+  }
+
+  /* Override backdrop-filter in forced colors mode for better contrast */
+  .glass-card,
+  .glass-nav,
+  .glass-button,
+  .glass-input,
+  .glass-dropdown,
+  .glass-badge,
+  .glass-tooltip {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    /* Safari doesn't support forced-color-adjust */
+  }
+}
+
+/* Responsive breakpoints with slightly larger elements for touch-friendly UIs */
+:root {
+  --glass-card-min-width: 300px;
+  --glass-card-max-width: 500px;
+  --glass-card-padding: 24px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --glass-card-min-width: 340px;
+    --glass-card-max-width: 660px;
+    --glass-card-padding: 32px;
+  }
+}
+
+/* Enhanced Base glassmorphism classes */
+.glass-card {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: var(--glass-border-radius);
+  box-shadow: 0 var(--glass-shadow-spread) var(--glass-shadow-blur)
+    var(--glass-shadow);
+  color: var(--glass-text);
+  padding: var(--glass-card-padding);
+  position: relative;
+  transition: all var(--glass-transition-time) var(--toddler-bounce);
+  overflow: hidden;
+  min-width: var(--glass-card-min-width);
+  max-width: var(--glass-card-max-width);
+}
+
+.glass-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced reflection with a more playful look */
+.glass-card-reflection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%; /* Taller reflection */
+  background: var(--glass-reflection);
+  opacity: 0.7; /* Brighter reflection */
+  z-index: 0;
+  border-radius: var(--glass-border-radius) var(--glass-border-radius) 0 0;
+}
+
+/* Add colorful glow effect */
+.glass-card-glow {
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(
+    circle,
+    var(--toddler-yellow) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0.6;
+  border-radius: 50%;
+  z-index: 0;
+  filter: blur(10px);
+}
+
+/* Navbar with enhanced glassmorphism */
+.glass-nav {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border-bottom: var(--glass-border-width) solid var(--glass-border);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--glass-text);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Button with enhanced glassmorphism */
+.glass-button {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: calc(var(--glass-border-radius) / 1.5);
+  padding: 0.75rem 1.5rem;
+  color: var(--glass-text);
+  cursor: pointer;
+  transition: all var(--glass-transition-time) var(--toddler-bounce);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.glass-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.glass-button:active {
+  background: var(--glass-active);
+  transform: translateY(0) scale(0.98);
+}
+
+.glass-button:focus-visible {
+  outline: 3px solid var(--glass-focus-ring);
+  outline-offset: 3px;
+}
+
+/* Input field with enhanced glassmorphism */
+.glass-input {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: calc(var(--glass-border-radius) / 2);
+  padding: 0.75rem 1rem;
+  color: var(--glass-text);
+  transition: border-color var(--glass-transition-time) ease;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.glass-input:focus {
+  border-color: var(--glass-focus-ring);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 220, 80, 0.3);
+}
+
+.glass-input::placeholder {
+  color: var(--glass-text-secondary);
+}
+
+/* Dropdown with enhanced glassmorphism */
+.glass-dropdown {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: calc(var(--glass-border-radius) / 1.5);
+  padding: 0.75rem 0;
+  color: var(--glass-text);
+  max-height: 300px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.glass-dropdown-item {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all var(--glass-transition-time) ease;
+  font-size: 1.1rem;
+}
+
+.glass-dropdown-item:hover {
+  background-color: var(--glass-highlight);
+  transform: translateX(5px);
+}
+
+/* Active dropdown item with colorful left border */
+.glass-dropdown-item-active {
+  border-left: 4px solid var(--toddler-yellow);
+  background: linear-gradient(to right, var(--glass-highlight), transparent);
+}
+
+/* Badge with enhanced glassmorphism */
+.glass-badge {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem;
+  color: var(--glass-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip with enhanced glassmorphism */
+.glass-tooltip {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border-width) solid var(--glass-border);
+  border-radius: calc(var(--glass-border-radius) / 1.5);
+  padding: 0.75rem 1.25rem;
+  color: var(--glass-text);
+  position: absolute;
+  z-index: 1000;
+  font-size: 1rem;
+  box-shadow: 0 var(--glass-shadow-spread) var(--glass-shadow-blur)
+    var(--glass-shadow);
+  max-width: 300px;
+}
+
+/* Glassmorphism card variants with bright toddler colors */
+.glass-card-primary {
+  --glass-bg: var(--toddler-blue);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-secondary {
+  --glass-bg: var(--toddler-purple);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-success {
+  --glass-bg: var(--toddler-green);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-danger {
+  --glass-bg: var(--toddler-red);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card-warning {
+  --glass-bg: var(--toddler-yellow);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-text: rgba(
+    50,
+    50,
+    50,
+    0.9
+  ); /* Darker text for better contrast on yellow */
+}
+
+.glass-card-info {
+  --glass-bg: var(--toddler-blue);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+/* Glassmorphism elevations with enhanced shadows */
+.glass-elevation-flat {
+  --glass-shadow-spread: 0;
+  --glass-shadow-blur: 0;
+}
+
+.glass-elevation-low {
+  --glass-shadow-spread: 3px;
+  --glass-shadow-blur: 6px;
+}
+
+.glass-elevation-medium {
+  --glass-shadow-spread: 6px;
+  --glass-shadow-blur: 12px;
+}
+
+.glass-elevation-high {
+  --glass-shadow-spread: 12px;
+  --glass-shadow-blur: 24px;
+}
+
+/* Additional utility classes */
+.glass-no-border {
+  border: none;
+}
+
+.glass-card-interactive {
+  cursor: pointer;
+  transition:
+    transform var(--glass-transition-time) var(--toddler-bounce),
+    box-shadow var(--glass-transition-time) ease;
+}
+
+/* More pronounced hover effect for interactive cards */
+.glass-card-interactive:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 calc(var(--glass-shadow-spread) + 5px)
+    calc(var(--glass-shadow-blur) + 8px) var(--glass-shadow);
+}
+
+/* Fun decorative elements */
+.glass-decoration-circle {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--toddler-yellow) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0.15;
+  z-index: -1;
+  animation: float 8s ease-in-out infinite;
+}
+
+.glass-decoration-line {
+  position: absolute;
+  height: 3px; /* Thicker line */
+  width: 100%;
+  background: var(--glass-border);
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* RTL support */
+[dir='rtl'] .glass-card-reflection {
+  background: linear-gradient(
+    to bottom left,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
+[dir='rtl'] .glass-dropdown-item {
+  text-align: right;
+}
+
+[dir='rtl'] .glass-dropdown-item:hover {
+  transform: translateX(-5px); /* Correct direction for RTL */
+}
+
+[dir='rtl'] .glass-dropdown-item-active {
+  border-left: none;
+  border-right: 4px solid var(--toddler-yellow);
+  background: linear-gradient(to left, var(--glass-highlight), transparent);
+}
+
+/* Enhanced animation classes */
+@keyframes glass-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.glass-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: glass-ripple 0.8s linear;
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* Bounce animation for interactive elements */
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Wiggle animation for attention-grabbing elements */
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.glass-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.glass-bounce {
+  animation: bounce 2s ease infinite;
+}
+
+.glass-wiggle {
+  animation: wiggle 2s ease-in-out infinite;
+}
+
+/* Glassmorphism nav items with enhanced styles */
+.glass-nav-item {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1.25rem;
+  border-radius: calc(var(--glass-border-radius) / 2);
+  transition: all var(--glass-transition-time) ease;
+}
+
+.glass-nav-item:hover {
+  background-color: var(--glass-highlight);
+  transform: translateY(-2px);
+}
+
+.glass-nav-item[aria-current='page'] {
+  background-color: var(--glass-highlight);
+  font-weight: 700;
+  border-bottom: 3px solid var(--toddler-yellow);
+}
+
+/* Glass dropdown menu positioning */
+.glass-dropdown-menu {
+  width: 100%;
+  max-height: 350px; /* Slightly taller */
+  overflow-y: auto;
+  border-radius: var(--glass-border-radius);
+}
+
+/* Rounded images for profile pics, etc. */
+.glass-img-rounded {
+  border-radius: var(--glass-border-radius);
+  border: var(--glass-border-width) solid var(--glass-border);
+  overflow: hidden;
+}
+
+/* Playful progress bar */
+.glass-progress {
+  height: 1rem;
+  background-color: var(--glass-bg);
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.glass-progress-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--toddler-blue) 0%,
+    var(--toddler-purple) 100%
+  );
+  border-radius: 9999px;
+  transition: width var(--glass-transition-time) ease;
+}
+
+/* Fun confetti overlay for celebrations */
+.glass-confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--toddler-yellow);
+  opacity: 0.8;
+  animation: confetti-fall 3s ease-in-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(200px) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+/* Playful loader */
+.glass-loader {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--toddler-blue);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fun skewed glass elements */
+.glass-skew {
+  transform: skew(-5deg);
+}
+
+/* Fun rounded avatar with border */
+.glass-avatar {
+  border-radius: 50%;
+  border: 4px solid var(--glass-border);
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ToddlerGlassModal Component Styles */
+
+/* Modal animation */
+.toddler-modal-animation {
+  animation: modalZoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Modal overlay animation */
+.toddler-modal-overlay-animation {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Glowing border effect */
+.toddler-modal-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 3px;
+  animation: rotate 60s linear infinite;
+}
+
+.toddler-modal-border-primary {
+  background: linear-gradient(45deg, var(--toddler-blue), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-secondary {
+  background: linear-gradient(45deg, var(--toddler-purple), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-success {
+  background: linear-gradient(45deg, var(--toddler-green), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-danger {
+  background: linear-gradient(45deg, var(--toddler-red), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-warning {
+  background: linear-gradient(45deg, var(--toddler-yellow), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-info {
+  background: linear-gradient(45deg, var(--toddler-blue), rgba(255, 255, 255, 0.6));
+}
+
+.toddler-modal-border-default {
+  background: linear-gradient(45deg, var(--toddler-blue), rgba(255, 255, 255, 0.6));
+}
+
+/* Modal container styles */
+.toddler-modal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.toddler-modal-container-primary {
+  background: var(--toddler-blue);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-secondary {
+  background: var(--toddler-purple);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-success {
+  background: var(--toddler-green);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-danger {
+  background: var(--toddler-red);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-warning {
+  background: var(--toddler-yellow);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-info {
+  background: var(--toddler-blue);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.toddler-modal-container-default {
+  background: var(--toddler-blue);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Confetti element */
+.toddler-modal-confetti {
+  position: absolute;
+  border-radius: 4px;
+  top: -20px;
+  width: var(--confetti-size, 10px);
+  height: var(--confetti-size, 10px);
+  left: var(--confetti-left, 50%);
+  animation: confetti 3s ease-in-out forwards;
+  animation-delay: var(--animation-delay, 0s);
+}
+
+/* ToddlerGlassInput specific styles */
+.glass-input-label {
+  color: var(--glass-text);
+}
+
+.glass-input-label-error {
+  color: var(--toddler-red);
+}
+
+.glass-helper-text {
+  color: var(--glass-text-secondary);
+}
+
+.glass-helper-text-error {
+  color: var(--toddler-red);
+}
+
+/* Input states */
+.glass-input-error {
+  background: rgba(255, 80, 80, 0.2);
+  border-color: var(--toddler-red);
+}
+
+.glass-input-error:focus {
+  box-shadow: 0 0 0 3px rgba(255, 80, 80, 0.3);
+}
+
+.glass-input-focused {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(80, 145, 255, 0.3);
+}
+
+.glass-input-default {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: none;
+}
+
+/* Variant-specific border colors */
+.glass-input-variant-default {
+  border-color: var(--toddler-blue);
+}
+
+.glass-input-variant-primary {
+  border-color: var(--toddler-blue);
+}
+
+.glass-input-variant-secondary {
+  border-color: var(--toddler-purple);
+}
+
+.glass-input-variant-success {
+  border-color: var(--toddler-green);
+}
+
+.glass-input-variant-danger {
+  border-color: var(--toddler-red);
+}
+
+.glass-input-variant-warning {
+  border-color: var(--toddler-yellow);
+}
+
+.glass-input-variant-info {
+  border-color: var(--toddler-blue);
+}
+
+/* Focus animation border */
+.glass-input-focus-animation {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  height: 1px;
+  width: 60%;
+  transform: translateX(-50%);
+  background: linear-gradient(to right, var(--toddler-pink), var(--toddler-blue), var(--toddler-purple));
+  border-radius: 9999px;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Input style defaults */
+.glass-input-base {
+  font-size: 1rem;
+  border-width: 3px;
+  border-style: solid;
+}
+
+/* Pulse animation for focus effect */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.toddler-modal-confetti-red {
+  background-color: var(--toddler-red);
+}
+
+.toddler-modal-confetti-blue {
+  background-color: var(--toddler-blue);
+}
+
+.toddler-modal-confetti-green {
+  background-color: var(--toddler-green);
+}
+
+.toddler-modal-confetti-yellow {
+  background-color: var(--toddler-yellow);
+}
+
+.toddler-modal-confetti-purple {
+  background-color: var(--toddler-purple);
+}
+
+.toddler-modal-confetti-pink {
+  background-color: var(--toddler-pink);
+}
+
+/* Decorative bubble */
+.toddler-modal-bubble {
+  position: absolute;
+  border-radius: 50%;
+  width: var(--bubble-size, 50px);
+  height: var(--bubble-size, 50px);
+  left: var(--bubble-left, 50%);
+  top: var(--bubble-top, 50%);
+  opacity: var(--bubble-opacity, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  z-index: 0;
+  animation: float 15s infinite alternate ease-in-out;
+  animation-delay: var(--animation-delay, 0s);
+}

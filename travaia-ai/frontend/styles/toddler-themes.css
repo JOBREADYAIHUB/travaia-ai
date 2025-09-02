@@ -1,0 +1,508 @@
+/* 
+ * Toddler Themes System
+ * Vibrant color themes designed for toddler glassmorphism components
+ * Supports: Toddler Blue, Toddler Yellow/Orange, and Toddler Pink themes
+ */
+
+/* ================ TODDLER BLUE THEME ================ */
+.theme-toddler-blue {
+  /* Primary blue palette */
+  --toddler-primary: #3b82f6;
+  --toddler-primary-light: #60a5fa;
+  --toddler-primary-dark: #1e40af;
+  --toddler-primary-bg: rgba(59, 130, 246, 0.1);
+  --toddler-primary-border: rgba(59, 130, 246, 0.3);
+
+  /* Secondary colors (complementary aqua/cyan) */
+  --toddler-secondary: #06b6d4;
+  --toddler-secondary-light: #22d3ee;
+  --toddler-secondary-dark: #0891b2;
+
+  /* Accent colors */
+  --toddler-accent: #8b5cf6;
+  --toddler-accent-light: #a78bfa;
+  --toddler-accent-warm: #f59e0b;
+
+  /* Background and surfaces */
+  --toddler-bg-primary: linear-gradient(
+    135deg,
+    #ebf8ff 0%,
+    #dbeafe 50%,
+    #bfdbfe 100%
+  );
+  --toddler-bg-secondary: rgba(239, 246, 255, 0.8);
+  --toddler-bg-card: rgba(255, 255, 255, 0.9);
+  --toddler-bg-glass: rgba(59, 130, 246, 0.15);
+
+  /* Text colors */
+  --toddler-text-primary: #1e3a8a;
+  --toddler-text-secondary: #3730a3;
+  --toddler-text-muted: #6b7280;
+  --toddler-text-white: #ffffff;
+
+  /* Interactive states */
+  --toddler-hover: rgba(59, 130, 246, 0.2);
+  --toddler-active: rgba(59, 130, 246, 0.3);
+  --toddler-focus: rgba(59, 130, 246, 0.4);
+
+  /* Shadows and effects */
+  --toddler-shadow: rgba(59, 130, 246, 0.25);
+  --toddler-glow: rgba(59, 130, 246, 0.6);
+  --toddler-reflection: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.8),
+    rgba(59, 130, 246, 0.2)
+  );
+}
+
+/* ================ TODDLER YELLOW/ORANGE THEME ================ */
+.theme-toddler-yellow {
+  /* Primary yellow/orange palette */
+  --toddler-primary: #f59e0b;
+  --toddler-primary-light: #fcd34d;
+  --toddler-primary-dark: #d97706;
+  --toddler-primary-bg: rgba(245, 158, 11, 0.1);
+  --toddler-primary-border: rgba(245, 158, 11, 0.3);
+
+  /* Secondary colors (complementary orange-red) */
+  --toddler-secondary: #ef4444;
+  --toddler-secondary-light: #f87171;
+  --toddler-secondary-dark: #dc2626;
+
+  /* Accent colors */
+  --toddler-accent: #ec4899;
+  --toddler-accent-light: #f472b6;
+  --toddler-accent-warm: #10b981;
+
+  /* Background and surfaces */
+  --toddler-bg-primary: linear-gradient(
+    135deg,
+    #fef3c7 0%,
+    #fde68a 50%,
+    #fcd34d 100%
+  );
+  --toddler-bg-secondary: rgba(254, 243, 199, 0.8);
+  --toddler-bg-card: rgba(255, 255, 255, 0.9);
+  --toddler-bg-glass: rgba(245, 158, 11, 0.15);
+
+  /* Text colors */
+  --toddler-text-primary: #92400e;
+  --toddler-text-secondary: #b45309;
+  --toddler-text-muted: #6b7280;
+  --toddler-text-white: #ffffff;
+
+  /* Interactive states */
+  --toddler-hover: rgba(245, 158, 11, 0.2);
+  --toddler-active: rgba(245, 158, 11, 0.3);
+  --toddler-focus: rgba(245, 158, 11, 0.4);
+
+  /* Shadows and effects */
+  --toddler-shadow: rgba(245, 158, 11, 0.25);
+  --toddler-glow: rgba(245, 158, 11, 0.6);
+  --toddler-reflection: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.8),
+    rgba(245, 158, 11, 0.2)
+  );
+}
+
+/* ================ TODDLER PINK THEME ================ */
+.theme-toddler-pink {
+  /* Primary pink palette */
+  --toddler-primary: #ec4899;
+  --toddler-primary-light: #f472b6;
+  --toddler-primary-dark: #be185d;
+  --toddler-primary-bg: rgba(236, 72, 153, 0.1);
+  --toddler-primary-border: rgba(236, 72, 153, 0.3);
+
+  /* Secondary colors (complementary purple) */
+  --toddler-secondary: #8b5cf6;
+  --toddler-secondary-light: #a78bfa;
+  --toddler-secondary-dark: #7c3aed;
+
+  /* Accent colors */
+  --toddler-accent: #06b6d4;
+  --toddler-accent-light: #22d3ee;
+  --toddler-accent-warm: #f59e0b;
+
+  /* Background and surfaces */
+  --toddler-bg-primary: linear-gradient(
+    135deg,
+    #fdf2f8 0%,
+    #fce7f3 50%,
+    #fbcfe8 100%
+  );
+  --toddler-bg-secondary: rgba(253, 242, 248, 0.8);
+  --toddler-bg-card: rgba(255, 255, 255, 0.9);
+  --toddler-bg-glass: rgba(236, 72, 153, 0.15);
+
+  /* Text colors */
+  --toddler-text-primary: #9d174d;
+  --toddler-text-secondary: #be185d;
+  --toddler-text-muted: #6b7280;
+  --toddler-text-white: #ffffff;
+
+  /* Interactive states */
+  --toddler-hover: rgba(236, 72, 153, 0.2);
+  --toddler-active: rgba(236, 72, 153, 0.3);
+  --toddler-focus: rgba(236, 72, 153, 0.4);
+
+  /* Shadows and effects */
+  --toddler-shadow: rgba(236, 72, 153, 0.25);
+  --toddler-glow: rgba(236, 72, 153, 0.6);
+  --toddler-reflection: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.8),
+    rgba(236, 72, 153, 0.2)
+  );
+}
+
+/* ================ GLOBAL THEME APPLICATION ================ */
+/* Apply toddler themes to the main application layout */
+
+/* Blue Theme Global Styling */
+html.theme-toddler-blue,
+html.theme-toddler-blue body {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+  color: var(--toddler-text-primary);
+}
+
+html.theme-toddler-blue #root {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+}
+
+html.theme-toddler-blue .sidebar,
+html.theme-toddler-blue .main-content,
+html.theme-toddler-blue .app-container {
+  background: var(--toddler-bg-secondary) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+html.theme-toddler-blue .card,
+html.theme-toddler-blue .panel {
+  background: var(--toddler-bg-card) !important;
+  border: 1px solid var(--toddler-primary-border);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+/* Yellow Theme Global Styling */
+html.theme-toddler-yellow,
+html.theme-toddler-yellow body {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+  color: var(--toddler-text-primary);
+}
+
+html.theme-toddler-yellow #root {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+}
+
+html.theme-toddler-yellow .sidebar,
+html.theme-toddler-yellow .main-content,
+html.theme-toddler-yellow .app-container {
+  background: var(--toddler-bg-secondary) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+html.theme-toddler-yellow .card,
+html.theme-toddler-yellow .panel {
+  background: var(--toddler-bg-card) !important;
+  border: 1px solid var(--toddler-primary-border);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+/* Pink Theme Global Styling */
+html.theme-toddler-pink,
+html.theme-toddler-pink body {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+  color: var(--toddler-text-primary);
+}
+
+html.theme-toddler-pink #root {
+  background: var(--toddler-bg-primary);
+  min-height: 100vh;
+}
+
+html.theme-toddler-pink .sidebar,
+html.theme-toddler-pink .main-content,
+html.theme-toddler-pink .app-container {
+  background: var(--toddler-bg-secondary) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+html.theme-toddler-pink .card,
+html.theme-toddler-pink .panel {
+  background: var(--toddler-bg-card) !important;
+  border: 1px solid var(--toddler-primary-border);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+/* Universal toddler theme enhancements */
+.theme-toddler-blue,
+.theme-toddler-yellow,
+.theme-toddler-pink {
+  /* Add floating animation circles like in demo */
+  position: relative;
+}
+
+.theme-toddler-blue::before,
+.theme-toddler-yellow::before,
+.theme-toddler-pink::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    radial-gradient(
+      circle at 20% 30%,
+      var(--toddler-primary-bg) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      var(--toddler-secondary, var(--toddler-primary-bg)) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 60% 80%,
+      var(--toddler-accent, var(--toddler-primary-bg)) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 30% 70%,
+      var(--toddler-primary-bg) 0%,
+      transparent 50%
+    );
+  animation: toddler-bg-float 20s ease-in-out infinite;
+}
+
+@keyframes toddler-bg-float {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+/* ================ GLOBAL THEME APPLICATION ================ */
+
+/* Base application styling for toddler themes */
+.theme-toddler-blue,
+.theme-toddler-yellow,
+.theme-toddler-pink {
+  /* Override base application colors */
+  --bg-primary: var(--toddler-bg-primary);
+  --bg-secondary: var(--toddler-bg-secondary);
+  --text-primary: var(--toddler-text-primary);
+  --text-secondary: var(--toddler-text-secondary);
+
+  /* Application background */
+  background: var(--toddler-bg-primary);
+  color: var(--toddler-text-primary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ================ COMPONENT-SPECIFIC OVERRIDES ================ */
+
+/* Sidebar and navigation styling */
+.theme-toddler-blue .sidebar,
+.theme-toddler-yellow .sidebar,
+.theme-toddler-pink .sidebar {
+  background: var(--toddler-bg-secondary);
+  border-right: 1px solid var(--toddler-primary-border);
+}
+
+/* Header styling */
+.theme-toddler-blue .header,
+.theme-toddler-yellow .header,
+.theme-toddler-pink .header {
+  background: var(--toddler-bg-card);
+  border-bottom: 1px solid var(--toddler-primary-border);
+  backdrop-filter: blur(10px);
+}
+
+/* Button overrides */
+.theme-toddler-blue .btn-primary,
+.theme-toddler-yellow .btn-primary,
+.theme-toddler-pink .btn-primary {
+  background: var(--toddler-primary);
+  color: var(--toddler-text-white);
+  border: 1px solid var(--toddler-primary-border);
+}
+
+.theme-toddler-blue .btn-primary:hover,
+.theme-toddler-yellow .btn-primary:hover,
+.theme-toddler-pink .btn-primary:hover {
+  background: var(--toddler-primary-light);
+  box-shadow: 0 4px 12px var(--toddler-shadow);
+}
+
+/* Card and surface overrides */
+.theme-toddler-blue .glass-card,
+.theme-toddler-yellow .glass-card,
+.theme-toddler-pink .glass-card {
+  background: var(--toddler-bg-glass);
+  border: 1px solid var(--toddler-primary-border);
+  backdrop-filter: blur(12px);
+}
+
+/* Input field overrides */
+.theme-toddler-blue .form-input,
+.theme-toddler-yellow .form-input,
+.theme-toddler-pink .form-input {
+  background: var(--toddler-bg-card);
+  border: 1px solid var(--toddler-primary-border);
+  color: var(--toddler-text-primary);
+}
+
+.theme-toddler-blue .form-input:focus,
+.theme-toddler-yellow .form-input:focus,
+.theme-toddler-pink .form-input:focus {
+  border-color: var(--toddler-primary);
+  box-shadow: 0 0 0 3px var(--toddler-focus);
+}
+
+/* ================ TODDLER GLASSMORPHISM COMPONENT INTEGRATION ================ */
+
+/* ToddlerGlassCard theme integration */
+.theme-toddler-blue .toddler-glass-card,
+.theme-toddler-yellow .toddler-glass-card,
+.theme-toddler-pink .toddler-glass-card {
+  background: var(--toddler-bg-glass);
+  border: 1px solid var(--toddler-primary-border);
+  box-shadow: 0 8px 32px var(--toddler-shadow);
+}
+
+/* ToddlerGlassButton theme integration */
+.theme-toddler-blue .toddler-glass-btn,
+.theme-toddler-yellow .toddler-glass-btn,
+.theme-toddler-pink .toddler-glass-btn {
+  background: var(--toddler-primary);
+  color: var(--toddler-text-white);
+  box-shadow: 0 4px 12px var(--toddler-shadow);
+}
+
+.theme-toddler-blue .toddler-glass-btn:hover,
+.theme-toddler-yellow .toddler-glass-btn:hover,
+.theme-toddler-pink .toddler-glass-btn:hover {
+  background: var(--toddler-primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--toddler-glow);
+}
+
+/* ToddlerGlassInput theme integration */
+.theme-toddler-blue .toddler-glass-input,
+.theme-toddler-yellow .toddler-glass-input,
+.theme-toddler-pink .toddler-glass-input {
+  background: var(--toddler-bg-card);
+  border: 2px solid var(--toddler-primary-border);
+  color: var(--toddler-text-primary);
+}
+
+.theme-toddler-blue .toddler-glass-input:focus,
+.theme-toddler-yellow .toddler-glass-input:focus,
+.theme-toddler-pink .toddler-glass-input:focus {
+  border-color: var(--toddler-primary);
+  box-shadow: 0 0 0 4px var(--toddler-focus);
+}
+
+/* ToddlerGlassBadge theme integration */
+.theme-toddler-blue .toddler-glass-badge,
+.theme-toddler-yellow .toddler-glass-badge,
+.theme-toddler-pink .toddler-glass-badge {
+  background: var(--toddler-primary);
+  color: var(--toddler-text-white);
+  box-shadow: 0 2px 8px var(--toddler-shadow);
+}
+
+/* ToddlerGlassModal theme integration */
+.theme-toddler-blue .toddler-glass-modal,
+.theme-toddler-yellow .toddler-glass-modal,
+.theme-toddler-pink .toddler-glass-modal {
+  background: var(--toddler-bg-card);
+  border: 1px solid var(--toddler-primary-border);
+  box-shadow: 0 20px 64px var(--toddler-shadow);
+}
+
+/* ================ RESPONSIVE DESIGN ================ */
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toddler-blue,
+  .theme-toddler-yellow,
+  .theme-toddler-pink {
+    /* Lighter background for mobile */
+    --toddler-bg-glass: rgba(255, 255, 255, 0.8);
+  }
+
+  .theme-toddler-blue .toddler-glass-card,
+  .theme-toddler-yellow .toddler-glass-card,
+  .theme-toddler-pink .toddler-glass-card {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .theme-toddler-blue,
+  .theme-toddler-yellow,
+  .theme-toddler-pink {
+    --toddler-bg-glass: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Desktop enhancements */
+@media (min-width: 1025px) {
+  .theme-toddler-blue .toddler-glass-card:hover,
+  .theme-toddler-yellow .toddler-glass-card:hover,
+  .theme-toddler-pink .toddler-glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px var(--toddler-glow);
+  }
+}
+
+/* ================ ACCESSIBILITY AND HIGH CONTRAST ================ */
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .theme-toddler-blue,
+  .theme-toddler-yellow,
+  .theme-toddler-pink {
+    --toddler-primary-border: rgba(0, 0, 0, 0.6);
+    --toddler-text-primary: #000000;
+    --toddler-bg-card: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toddler-blue *,
+  .theme-toddler-yellow *,
+  .theme-toddler-pink *,
+  .theme-toddler-blue *::before,
+  .theme-toddler-yellow *::before,
+  .theme-toddler-pink *::before,
+  .theme-toddler-blue *::after,
+  .theme-toddler-yellow *::after,
+  .theme-toddler-pink *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

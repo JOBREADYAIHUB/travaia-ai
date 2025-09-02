@@ -1,0 +1,3 @@
+Starting deployment at 2025-08-15 19:16:34.88 
+SUCCESS: Pub/Sub Setup 
+FAILED: User Auth Service 

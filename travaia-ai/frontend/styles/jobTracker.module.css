@@ -1,0 +1,44 @@
+/* Job Tracker CSS Module */
+
+.progressBarContainer {
+  position: relative;
+  height: 0.5rem; /* h-2 */
+  background-color: var(--bg-gray-200, #e5e7eb);
+}
+
+:global(.dark) .progressBarContainer {
+  background-color: var(--bg-gray-700, #374151);
+}
+
+.progressBarFill {
+  position: absolute;
+  height: 0.5rem; /* h-2 */
+  background-color: var(--bg-blue-500, #3b82f6);
+  border-radius: 9999px; /* rounded-full */
+  transition: width 300ms ease-in-out; /* transition-all duration-300 ease-in-out */
+  width: 0%;
+}
+
+/* Step-specific progress classes */
+.step1 { width: 16.67%; }
+.step2 { width: 33.33%; }
+.step3 { width: 50%; }
+.step4 { width: 66.67%; }
+.step5 { width: 83.33%; }
+.step6 { width: 100%; }
+
+.progressText {
+  margin-left: 1rem; /* ml-4 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+}
+
+.progressContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progressTrack {
+  flex: 1;
+}

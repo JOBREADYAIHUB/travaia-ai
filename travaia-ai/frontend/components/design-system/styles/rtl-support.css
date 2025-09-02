@@ -1,0 +1,259 @@
+/* RTL Support for Arabic Language */
+
+/* Global RTL styles */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] body {
+  direction: rtl;
+}
+
+/* Layout adjustments */
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+/* Icon positioning */
+[dir="rtl"] .icon-left {
+  order: 2;
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+[dir="rtl"] .icon-right {
+  order: -1;
+  margin-right: 0.5rem;
+  margin-left: 0;
+}
+
+/* Navigation adjustments */
+[dir="rtl"] .nav-item {
+  text-align: right;
+}
+
+[dir="rtl"] .sidebar {
+  right: 0;
+  left: auto;
+}
+
+[dir="rtl"] .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Form elements */
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="password"],
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+[dir="rtl"] .form-field label {
+  text-align: right;
+}
+
+/* Button adjustments */
+[dir="rtl"] .btn-with-icon {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .btn-with-icon .icon {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+/* Modal positioning */
+[dir="rtl"] .modal {
+  text-align: right;
+}
+
+[dir="rtl"] .modal-header {
+  text-align: right;
+}
+
+[dir="rtl"] .modal-close {
+  right: auto;
+  left: 1rem;
+}
+
+/* Progress bar adjustments */
+[dir="rtl"] .progress-bar {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .progress-bar .progress-fill {
+  transform: scaleX(-1);
+}
+
+/* Chart adjustments */
+[dir="rtl"] .chart-legend {
+  text-align: right;
+}
+
+[dir="rtl"] .chart-labels {
+  text-align: right;
+}
+
+/* Table adjustments */
+[dir="rtl"] table {
+  direction: rtl;
+}
+
+[dir="rtl"] th,
+[dir="rtl"] td {
+  text-align: right;
+}
+
+[dir="rtl"] .table-actions {
+  text-align: left;
+}
+
+/* Glassmorphism components RTL */
+[dir="rtl"] .glass-card {
+  text-align: right;
+}
+
+[dir="rtl"] .glass-button {
+  text-align: center;
+}
+
+/* Specific component adjustments */
+[dir="rtl"] .dashboard-stats {
+  text-align: right;
+}
+
+[dir="rtl"] .job-card {
+  text-align: right;
+}
+
+[dir="rtl"] .interview-session {
+  text-align: right;
+}
+
+[dir="rtl"] .analytics-chart {
+  direction: ltr; /* Keep charts LTR for data visualization */
+}
+
+[dir="rtl"] .analytics-chart .chart-title {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Animation adjustments for RTL */
+[dir="rtl"] .slide-in-left {
+  animation: slideInRight 0.3s ease-out;
+}
+
+[dir="rtl"] .slide-in-right {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Tooltip adjustments */
+[dir="rtl"] .tooltip {
+  text-align: right;
+}
+
+[dir="rtl"] .tooltip-arrow-left {
+  right: -5px;
+  left: auto;
+  border-left-color: transparent;
+  border-right-color: rgba(0, 0, 0, 0.8);
+}
+
+[dir="rtl"] .tooltip-arrow-right {
+  left: -5px;
+  right: auto;
+  border-right-color: transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Breadcrumb adjustments */
+[dir="rtl"] .breadcrumb {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .breadcrumb-separator {
+  transform: scaleX(-1);
+}
+
+/* Pagination adjustments */
+[dir="rtl"] .pagination {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .pagination-prev {
+  order: 2;
+}
+
+[dir="rtl"] .pagination-next {
+  order: -1;
+}
+
+/* Search and filter adjustments */
+[dir="rtl"] .search-input {
+  text-align: right;
+  padding-left: 2.5rem;
+  padding-right: 0.75rem;
+}
+
+[dir="rtl"] .search-icon {
+  right: auto;
+  left: 0.75rem;
+}
+
+[dir="rtl"] .filter-dropdown {
+  right: 0;
+  left: auto;
+}
+
+/* Mobile responsive RTL */
+@media (max-width: 768px) {
+  [dir="rtl"] .mobile-menu {
+    right: 0;
+    left: auto;
+  }
+  
+  [dir="rtl"] .mobile-nav-toggle {
+    right: 1rem;
+    left: auto;
+  }
+}
