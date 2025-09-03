@@ -287,6 +287,7 @@ interface ChatMessagesViewProps {
   scrollAreaRef: React.RefObject<HTMLDivElement | null>;
   onSubmit: (query: string) => void;
   onCancel: () => void;
+  onLogout: () => void;
   displayData: string | null;
   messageEvents: Map<string, ProcessedEvent[]>;
   websiteCount: number;
@@ -298,6 +299,7 @@ export function ChatMessagesView({
   scrollAreaRef,
   onSubmit,
   onCancel,
+  onLogout,
   messageEvents,
   websiteCount,
 }: ChatMessagesViewProps) {
@@ -327,13 +329,22 @@ export function ChatMessagesView({
       <div className="border-b border-neutral-700 p-4 bg-neutral-800">
         <div className="max-w-4xl mx-auto flex justify-between items-center">
           <h1 className="text-lg font-semibold text-neutral-100">Chat</h1>
-          <Button
-            onClick={handleNewChat}
-            variant="outline"
-            className="bg-neutral-700 hover:bg-neutral-600 text-neutral-100 border-neutral-600 hover:border-neutral-500"
-          >
-            New Chat
-          </Button>
+          <div>
+            <Button
+              onClick={handleNewChat}
+              variant="outline"
+              className="bg-neutral-700 hover:bg-neutral-600 text-neutral-100 border-neutral-600 hover:border-neutral-500 mr-2"
+            >
+              New Chat
+            </Button>
+            <Button
+              onClick={onLogout}
+              variant="outline"
+              className="bg-red-700 hover:bg-red-600 text-neutral-100 border-red-600 hover:border-red-500"
+            >
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
       <div className="flex-1 flex flex-col w-full">

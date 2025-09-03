@@ -2,6 +2,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { WelcomeScreen } from "@/components/WelcomeScreen";
 import { ChatMessagesView } from "@/components/ChatMessagesView";
+import { LoginPage } from './components/LoginPage';
+import { auth } from './firebase';
+import type { User } from 'firebase/auth';
 
 // Update DisplayData to be a string type
 type DisplayData = string | null;
@@ -40,6 +43,7 @@ interface ProcessedEvent {
 }
 
 export default function App() {
+  const [user, setUser] = useState<User | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [appName, setAppName] = useState<string | null>(null);
@@ -53,6 +57,17 @@ export default function App() {
   const currentAgentRef = useRef('');
   const accumulatedTextRef = useRef("");
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await auth.signOut();
+  };
 
   const retryWithBackoff = async (
     fn: () => Promise<any>,
@@ -81,7 +96,10 @@ export default function App() {
   };
 
   const createSession = async (): Promise<{userId: string, sessionId: string, appName: string}> => {
-    const response = await fetch(`/api/apps/app/users/user/sessions`, {
+    if (!user) {
+      throw new Error("User not authenticated");
+    }
+    const response = await fetch(`/api/apps/app/users/${user.uid}/sessions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -218,7 +236,7 @@ export default function App() {
     }
   };
 
-  const processSseEventData = (jsonData: string, aiMessageId: string) => {
+  const processSseEventData = useCallback((jsonData: string, aiMessageId: string) => {
     const { textParts, agent, finalReportWithCitations, functionCall, functionResponse, sourceCount, sources } = extractDataFromSSE(jsonData);
 
     if (sourceCount > 0) {
@@ -279,9 +297,13 @@ export default function App() {
       setMessages(prev => [...prev, { type: "ai", content: finalReportWithCitations as string, id: finalReportMessageId, agent: currentAgentRef.current, finalReportWithCitations: true }]);
       setDisplayData(finalReportWithCitations as string);
     }
-  };
+  }, []);
 
   const handleSubmit = useCallback(async (query: string, model: string, effort: string) => {
+    if (!user) {
+      console.error("User not authenticated, cannot submit.");
+      return;
+    }
     if (!query.trim()) return;
 
     setIsLoading(true);
@@ -417,7 +439,7 @@ export default function App() {
       }]);
       setIsLoading(false);
     }
-  }, [processSseEventData]);
+  }, [processSseEventData, user, userId, sessionId, appName]);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -518,6 +540,13 @@ export default function App() {
     </div>
   );
 
+  if (!user) {
+    return <LoginPage onLoginSuccess={() => {
+      const currentUser = auth.currentUser;
+      setUser(currentUser);
+    }} />;
+  }
+
   return (
     <div className="flex h-screen bg-neutral-800 text-neutral-100 font-sans antialiased">
       <main className="flex-1 flex flex-col overflow-hidden w-full">
@@ -552,6 +581,7 @@ export default function App() {
               scrollAreaRef={scrollAreaRef}
               onSubmit={handleSubmit}
               onCancel={handleCancel}
+              onLogout={handleLogout}
               displayData={displayData}
               messageEvents={messageEvents}
               websiteCount={websiteCount}
