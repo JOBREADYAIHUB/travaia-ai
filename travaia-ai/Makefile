@@ -26,13 +26,14 @@ lint:
 .PHONY: backend
 
 backend:
-	PROJECT_ID=$$(gcloud config get-value project) && \
+	PROJECT_ID=$(gcloud config get-value project) && \
 	gcloud beta run deploy travaia-ai \
 		--source backend/ai-service \
 		--memory "4Gi" \
-		--project $$PROJECT_ID \
+		--project $PROJECT_ID \
 		--region "us-central1" \
 		--allow-unauthenticated \
+		--service-account "firebase-app-hosting-compute@travaia-e1310.iam.gserviceaccount.com" \
 		--no-cpu-throttling \
 		--labels "created-by=adk" \
 		--set-env-vars \

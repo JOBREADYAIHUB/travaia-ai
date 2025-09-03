@@ -46,7 +46,7 @@ trace.set_tracer_provider(provider)
 AGENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Agent Engine session configuration
 # Use environment variable for agent name, default to project name
-agent_name = os.environ.get("AGENT_ENGINE_SESSION_NAME", "travaia-ai")
+agent_name = os.environ.get("AGENT_ENGINE_SESSION_NAME", "app")
 
 # Check if an agent with this name already exists
 existing_agents = list(agent_engines.list(filter=f"display_name={agent_name}"))
