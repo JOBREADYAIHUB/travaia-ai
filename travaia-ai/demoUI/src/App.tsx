@@ -99,10 +99,15 @@ export default function App() {
     if (!user) {
       throw new Error("User not authenticated");
     }
+    
+    // Get Firebase ID token
+    const idToken = await user.getIdToken();
+    
     const response = await fetch(`/api/apps/app/users/${user.uid}/sessions`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${idToken}`
       }
     });
     
@@ -344,10 +349,14 @@ export default function App() {
 
       // Send the message with retry logic
       const sendMessage = async () => {
+        // Get Firebase ID token
+        const idToken = await user.getIdToken();
+        
         const response = await fetch("/api/run_sse", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${idToken}`
           },
           body: JSON.stringify({
             appName: currentAppName,

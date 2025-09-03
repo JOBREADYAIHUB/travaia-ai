@@ -19,18 +19,18 @@ export default defineConfig({
     proxy: {
       // Proxy API requests to the backend server
       "/api": {
-        target: "https://travaia-managed-cggfdfie.uc.gateway.dev/", // Default backend address
+        target: process.env.VITE_API_GATEWAY_URL || "https://travaia-managed-cggfdfie.uc.gateway.dev/",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),
-        configure: (proxy, options) => {
-          proxy.on('error', (err, req, res) => {
+        configure: (proxy) => {
+          proxy.on('error', (err) => {
             console.log('proxy error', err);
           });
-          proxy.on('proxyReq', (proxyReq, req, res) => {
+          proxy.on('proxyReq', (_, req) => {
             console.log('Sending Request to the Target:', req.method, req.url);
           });
-          proxy.on('proxyRes', (proxyRes, req, res) => {
+          proxy.on('proxyRes', (proxyRes, req) => {
             console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
           });
         },

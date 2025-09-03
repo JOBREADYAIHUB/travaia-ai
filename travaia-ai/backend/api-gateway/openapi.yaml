@@ -757,4 +757,14 @@ paths:
         - firebase: []
       x-google-backend:
         path_translation: APPEND_PATH_TO_ADDRESS
-        address: https://travaia-application-job-service-97619176
+        address: https://travaia-application-job-service-976191766214.us-central1.run.app
+        jwt_audience: https://travaia-application-job-service-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error

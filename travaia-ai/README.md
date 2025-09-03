@@ -1,6 +1,6 @@
-# Gemini Fullstack Agent Development Kit (ADK) Quickstart
+# TRAVAIA - AI-Powered Job Application Tracking Platform
 
-The **Gemini Fullstack Agent Development Kit (ADK) Quickstart** is a production-ready blueprint for building a sophisticated, fullstack research agent with Gemini. It's built to demonstrate how the ADK helps structure complex agentic workflows, build modular agents, and incorporate critical Human-in-the-Loop (HITL) steps.
+**TRAVAIA** is a comprehensive, full-stack job application tracking platform that combines modern web technologies with AI-powered insights to help users manage their job search effectively. Built with React, FastAPI microservices, and Google Cloud infrastructure.
 
 <table>
   <thead>
@@ -10,27 +10,51 @@ The **Gemini Fullstack Agent Development Kit (ADK) Quickstart** is a production-
   </thead>
   <tbody>
     <tr>
-      <td>🏗️</td>
-      <td><strong>Fullstack & Production-Ready:</strong> A complete React frontend and ADK-powered FastAPI backend, with deployment options for <a href="https://cloud.google.com/run">Google Cloud Run</a> and <a href="https://cloud.google.com/vertex-ai/generative-ai/docs/agent-engine/overview">Vertex AI Agent Engine</a>.</td>
+      <td>🎯</td>
+      <td><strong>Job Application Management:</strong> Complete CRUD operations for job applications with status tracking, notes, and contact management.</td>
     </tr>
     <tr>
-      <td>🧠</td>
-      <td><strong>Advanced Agentic Workflow:</strong> The agent uses Gemini to <strong>strategize</strong> a multi-step plan, <strong>reflect</strong> on findings to identify gaps, and <strong>synthesize</strong> a final, comprehensive report.</td>
+      <td>🤖</td>
+      <td><strong>AI-Powered Insights:</strong> Centralized AI service using Google's Agent Development Kit (ADK) for job analysis and recommendations.</td>
     </tr>
     <tr>
-      <td>🔄</td>
-      <td><strong>Iterative & Human-in-the-Loop Research:</strong> Involves the user for plan approval, then autonomously loops through searching (via Gemini function calling) and refining its results until it has gathered sufficient information.</td>
+      <td>🔐</td>
+      <td><strong>Secure Authentication:</strong> Firebase-based user authentication with JWT token validation across all microservices.</td>
+    </tr>
+    <tr>
+      <td>☁️</td>
+      <td><strong>Cloud-Native Architecture:</strong> Microservices deployed on Google Cloud Run with API Gateway routing and Pub/Sub messaging.</td>
+    </tr>
+    <tr>
+      <td>📊</td>
+      <td><strong>Analytics & Gamification:</strong> User progress tracking, achievements, and comprehensive application analytics.</td>
     </tr>
   </tbody>
 </table>
 
-Here is the agent in action:
+## 🏗️ Architecture Overview
 
-<img src="https://github.com/GoogleCloudPlatform/agent-starter-pack/blob/main/docs/images/adk_gemini_fullstack.gif?raw=true" width="80%" alt="Gemini Fullstack ADK Preview">
+TRAVAIA follows a modern microservices architecture with clear separation of concerns:
 
-This project adapts concepts from the [Gemini FullStack LangGraph Quickstart](https://github.com/google-gemini/gemini-fullstack-langgraph-quickstart) for the frontend app. 
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────────┐
+│   Frontend      │    │   API Gateway    │    │   Microservices     │
+│                 │    │                  │    │                     │
+│ • React/Vite    │───▶│ • Google Cloud   │───▶│ • ai-service        │
+│ • Firebase Auth │    │   API Gateway    │    │ • application-job   │
+│ • Tailwind CSS  │    │ • JWT Validation │    │ • user-auth         │
+│                 │    │ • Rate Limiting  │    │ • analytics-growth  │
+└─────────────────┘    └──────────────────┘    └─────────────────────┘
+```
 
-## 🚀 Getting Started: From Zero to Running Agent in 1 Minute
+### Core Services
+
+- **AI Service**: Centralized AI orchestration using Google ADK for job analysis and recommendations
+- **Application Job Service**: CRUD operations for job applications, notes, contacts, and favorites
+- **User Auth Service**: Authentication, user profiles, gamification, and progress tracking
+- **Analytics Growth Service**: User analytics, growth metrics, and reporting
+
+## 🚀 Getting Started
 **Prerequisites:** **[Python 3.10+](https://www.python.org/downloads/)**, **[Node.js](https://nodejs.org/)**, **[uv](https://github.com/astral-sh/uv)**
 
 You have two options to get started. Choose the one that best fits your setup:

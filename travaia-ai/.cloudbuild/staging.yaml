@@ -127,8 +127,11 @@ steps:
         echo "_________________________________________________________________________"
 
 substitutions:
-  _STAGING_PROJECT_ID: YOUR_STAGING_PROJECT_ID
+  _STAGING_PROJECT_ID: YOUR_STAGING_PROJECT_ID  # Replace with actual staging project ID
   _REGION: us-central1
+  _ARTIFACT_REGISTRY_REPO_NAME: travaia-repo
+  _CONTAINER_NAME: travaia-ai
+  _BUCKET_NAME_LOAD_TEST_RESULTS: ${PROJECT_ID}-travaia-load-test-results
 
 logsBucket: gs://${PROJECT_ID}-travaia-ai-logs-data/build-logs
 options:

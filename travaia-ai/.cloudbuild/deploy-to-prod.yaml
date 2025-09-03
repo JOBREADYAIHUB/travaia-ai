@@ -29,8 +29,10 @@ steps:
       - $_PROD_PROJECT_ID
 
 substitutions:
-  _PROD_PROJECT_ID: YOUR_PROD_PROJECT_ID
+  _PROD_PROJECT_ID: YOUR_PROD_PROJECT_ID  # Replace with actual production project ID
   _REGION: us-central1
+  _ARTIFACT_REGISTRY_REPO_NAME: travaia-repo
+  _CONTAINER_NAME: travaia-ai
 
 logsBucket: gs://${PROJECT_ID}-travaia-ai-logs-data/build-logs
 options:
