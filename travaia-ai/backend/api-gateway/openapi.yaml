@@ -362,8 +362,8 @@ paths:
           description: Success
   /run_sse:
     post:
-      summary: Agent Run Sse
-      operationId: agent_run_sse
+      summary: Run SSE
+      operationId: run_sse
       security:
         - firebase: []
       x-google-backend:
@@ -373,6 +373,72 @@ paths:
       responses:
         '200':
           description: Success
+  /health:
+    get:
+      summary: Health check endpoint
+      operationId: health_check
+      x-google-backend:
+        address: https://travaia-ai-976191766214.us-central1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+        jwt_audience: https://travaia-ai-976191766214.us-central1.run.app
+      responses:
+        '200':
+          description: Service health status
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+              service:
+                type: string
+  /feedback:
+    post:
+      summary: Collect user feedback
+      operationId: collect_feedback
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-ai-976191766214.us-central1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+        jwt_audience: https://travaia-ai-976191766214.us-central1.run.app
+      parameters:
+        - name: feedback
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '200':
+          description: Feedback collected successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+  /chatbot/feedback:
+    post:
+      summary: Collect chatbot-specific feedback
+      operationId: collect_chatbot_feedback
+      security:
+        - firebase: []
+      x-google-backend:
+        address: https://travaia-ai-976191766214.us-central1.run.app
+        path_translation: APPEND_PATH_TO_ADDRESS
+        jwt_audience: https://travaia-ai-976191766214.us-central1.run.app
+      parameters:
+        - name: feedback
+          in: body
+          required: true
+          schema:
+            type: object
+      responses:
+        '200':
+          description: Chatbot feedback collected successfully
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
   /:
     get:
       summary: Redirect Root To Dev Ui

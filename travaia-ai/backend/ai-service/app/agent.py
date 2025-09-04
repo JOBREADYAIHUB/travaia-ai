@@ -28,7 +28,7 @@ from google.adk.tools.agent_tool import AgentTool
 from google.genai import types as genai_types
 from pydantic import BaseModel, Field
 
-from .config import config
+from config import research_config as config
 
 
 # --- Structured Output Models ---

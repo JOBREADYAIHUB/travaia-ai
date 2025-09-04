@@ -20,4 +20,5 @@ COPY . .
 EXPOSE 8080
 
 # Run the application
-CMD ["uv", "run", "uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run the application. The host must be 0.0.0.0 to be accessible from outside the container.
+CMD ["uv", "run", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8080"]
