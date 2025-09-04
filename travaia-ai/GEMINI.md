@@ -1,10 +1,210 @@
-Coding Agent guidance:
-# Google Agent Development Kit (ADK) Python Cheatsheet
+# TRAVAIA AI Architecture Guide
 
-This document serves as a long-form, comprehensive reference for building, orchestrating, and deploying AI agents using the Python Agent Development Kit (ADK). It aims to cover every significant aspect with greater detail, more code examples, and in-depth best practices.
+This document provides a comprehensive overview of the AI/ML architecture powering TRAVAIA, with a focus on the chatbot integration and model orchestration.
 
 ## Table of Contents
+1. [AI Architecture Overview](#1-ai-architecture-overview)
+2. [Chatbot Integration](#2-chatbot-integration)
+3. [Model Management](#3-model-management)
+4. [Data Flow](#4-data-flow)
+5. [Security & Compliance](#5-security--compliance)
+6. [Monitoring & Logging](#6-monitoring--logging)
+7. [Deployment](#7-deployment)
 
+## 1. AI Architecture Overview
+
+TRAVAIA's AI architecture is built around a central AI service that orchestrates multiple AI models and tools:
+
+```mermaid
+graph TD
+    A[Frontend] -->|HTTP/SSE| B[API Gateway]
+    B --> C[AI Service]
+    C --> D[LLM Orchestrator]
+    D --> E[Gemini Pro]
+    D --> F[Gemini Flash]
+    C --> G[Tool Manager]
+    G --> H[Web Search]
+    G --> I[Document Processing]
+    G --> J[Skill Analysis]
+```
+
+### Key Components
+
+- **AI Service**: Central service handling all AI-related requests
+- **LLM Orchestrator**: Manages routing and fallback between different LLM providers
+- **Tool Manager**: Handles tool execution and integration
+- **Vector Store**: For semantic search and retrieval-augmented generation (RAG)
+
+## 2. Chatbot Integration
+
+The AI chatbot is integrated into the frontend using a dedicated service:
+
+### Authentication Flow
+
+```typescript
+// Frontend authentication with Firebase
+const auth = getAuth();
+const token = await auth.currentUser?.getIdToken();
+
+// Initialize chat session
+const sessionId = await chatbotService.initializeSession(userId, token);
+```
+
+### Message Flow
+
+1. **User sends message**
+   ```typescript
+   await chatbotService.sendMessage(
+     message,
+     userId,
+     onMessageUpdate,  // Handle streaming updates
+     onComplete,      // Handle completion
+     onError,         // Handle errors
+     authToken,       // Firebase ID token
+     sessionId        // Active session ID
+   );
+   ```
+
+2. **Backend Processing**
+   - Validate authentication token
+   - Route to appropriate agent based on context
+   - Stream response back to client
+
+## 3. Model Management
+
+### Model Configuration
+
+```yaml
+# Example model configuration
+models:
+  default: "gemini-pro"
+  fallback: "gemini-flash"
+  max_tokens: 2048
+  temperature: 0.7
+```
+
+### Available Models
+
+| Model | Purpose | Max Tokens | Notes |
+|-------|---------|------------|-------|
+| gemini-pro | General purpose | 32k | Primary model for most tasks |
+| gemini-flash | Fast responses | 1M | Used for high-throughput tasks |
+| text-embedding-004 | Embeddings | 8k | For semantic search |
+
+## 4. Data Flow
+
+### Chat Processing Pipeline
+
+1. **Input Validation**
+   - Sanitize user input
+   - Check for inappropriate content
+   - Enforce rate limits
+
+2. **Context Assembly**
+   - Retrieve conversation history
+   - Add system prompts
+   - Include relevant context from knowledge base
+
+3. **Model Execution**
+   - Route to appropriate model
+   - Apply guardrails
+   - Generate response
+
+4. **Post-Processing**
+   - Format response
+   - Add citations
+   - Apply content filters
+
+## 5. Security & Compliance
+
+### Data Protection
+
+- All data encrypted in transit (TLS 1.3+)
+- At-rest encryption for stored data
+- PII redaction
+- Audit logging
+
+### Compliance
+
+- GDPR compliant data handling
+- Right to be forgotten
+- Data retention policies
+
+## 6. Monitoring & Logging
+
+### Key Metrics
+
+- Latency per request
+- Token usage
+- Error rates
+- User feedback
+
+### Logging
+
+Structured logging with correlation IDs for tracing:
+
+```json
+{
+  "timestamp": "2025-09-04T12:00:00Z",
+  "level": "INFO",
+  "message": "Chat message processed",
+  "session_id": "session_123",
+  "user_id": "user_456",
+  "model": "gemini-pro",
+  "latency_ms": 1245,
+  "tokens_used": 342
+}
+```
+
+## 7. Deployment
+
+### Environment Variables
+
+```env
+# Required
+GOOGLE_APPLICATION_CREDENTIALS=service-account.json
+FIREBASE_PROJECT_ID=your-project-id
+
+# Optional
+LOG_LEVEL=INFO
+MAX_CONCURRENT_REQUESTS=100
+```
+
+### Health Checks
+
+```bash
+# Liveness probe
+GET /healthz
+
+# Readiness probe
+GET /readyz
+
+# Metrics endpoint
+GET /metrics
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Authentication Failures**
+   - Verify Firebase project configuration
+   - Check token expiration
+   - Validate service account permissions
+
+2. **High Latency**
+   - Check model selection
+   - Review context window size
+   - Monitor backend resources
+
+3. **Rate Limiting**
+   - Implement exponential backoff
+   - Consider model fallbacks
+   - Review quota limits
+
+## Support
+
+For issues not covered in this guide, please contact the AI Platform team at [ai-support@travaia.ai](mailto:ai-support@travaia.ai)
 1.  [Core Concepts & Project Structure](#1-core-concepts--project-structure)
     *   1.1 ADK's Foundational Principles
     *   1.2 Essential Primitives

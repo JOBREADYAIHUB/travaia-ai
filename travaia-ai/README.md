@@ -1,6 +1,174 @@
-# TRAVAIA - AI-Powered Job Application Tracking Platform
+# TRAVAIA - AI-Powered Career Platform
 
-**TRAVAIA** is a comprehensive, full-stack job application tracking platform that combines modern web technologies with AI-powered insights to help users manage their job search effectively. Built with React, FastAPI microservices, and Google Cloud infrastructure.
+**TRAVAIA** is a comprehensive career development platform that combines AI-powered coaching, job application tracking, and skill development. Built with React, FastAPI microservices, and Google Cloud infrastructure, TRAVAIA helps job seekers navigate their career journey with personalized AI assistance.
+
+## 🚀 Key Features
+
+- **AI Career Coach**: Get personalized career guidance and interview preparation
+- **Job Application Tracker**: Manage job applications and track progress
+- **Skill Development**: Identify and develop in-demand skills
+- **Interview Practice**: Practice with AI-powered mock interviews
+- **Analytics Dashboard**: Track your job search metrics and progress
+
+## 🏗️ Architecture Overview
+
+TRAVAIA follows a modern microservices architecture with centralized AI orchestration:
+
+```mermaid
+graph TD
+    A[Frontend] -->|HTTPS| B[API Gateway]
+    B --> C[AI Service]
+    B --> D[User Auth Service]
+    B --> E[Job Application Service]
+    B --> F[Analytics Service]
+    C --> G[LLM Providers]
+    C --> H[Vector Database]
+    D --> I[Firebase Auth]
+    E --> J[PostgreSQL]
+    F --> K[BigQuery]
+```
+
+### Core Services
+
+- **AI Service**: Centralized AI orchestration using Google's Agent Development Kit (ADK)
+- **User Auth Service**: Authentication, user profiles, and access control
+- **Job Application Service**: Manage job applications, interviews, and follow-ups
+- **Analytics Service**: Track and visualize job search metrics
+
+## 🔧 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- Python 3.10+
+- Google Cloud SDK
+- Docker and Docker Compose
+- Firebase CLI
+
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-org/travaia-ai.git
+   cd travaia-ai
+   ```
+
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Update the .env file with your configuration
+   ```
+
+3. **Start the development environment**
+   ```bash
+   # Start backend services
+   docker-compose up -d
+   
+   # Install frontend dependencies
+   cd frontend
+   npm install
+   
+   # Start the development server
+   npm run dev
+   ```
+
+4. **Access the application**
+   - Frontend: http://localhost:3000
+   - API Documentation: http://localhost:8000/docs
+
+## 🤖 AI Chatbot Integration
+
+The platform features an AI-powered chatbot that assists users with:
+- Career advice and guidance
+- Interview preparation
+- Resume review and optimization
+- Job search strategies
+
+### Chatbot Data Flow
+
+1. **User Authentication**
+   - Frontend authenticates with Firebase Auth
+   - JWT token is obtained and included in API requests
+
+2. **Session Initialization**
+   ```typescript
+   // Example: Initializing a chat session
+   const sessionId = await chatbotService.initializeSession(
+     userId, 
+     authToken
+   );
+   ```
+
+3. **Message Exchange**
+   ```typescript
+   // Example: Sending a message
+   await chatbotService.sendMessage(
+     messageText,
+     userId,
+     (messageId, content) => {
+       // Handle streaming updates
+     },
+     () => {
+       // Handle completion
+     },
+     (error) => {
+       // Handle errors
+     },
+     authToken,
+     sessionId
+   );
+   ```
+
+4. **Response Processing**
+   - AI Service processes the message using the configured LLM
+   - Response is streamed back to the frontend in real-time
+   - Frontend updates the chat interface with the response
+
+## 🌐 API Documentation
+
+API documentation is available at `/docs` when running the backend service. The API follows the OpenAPI 3.0 specification.
+
+## 🛠️ Development
+
+### Project Structure
+
+```
+travaia-ai/
+├── backend/                  # Backend services
+│   ├── ai-service/           # AI orchestration and processing
+│   ├── api-gateway/          # API Gateway and routing
+│   ├── user-auth-service/    # Authentication and user management
+│   └── ...                   # Other microservices
+├── frontend/                 # React frontend application
+├── demoUI/                   # Demo implementation
+├── .github/                  # GitHub workflows
+└── docs/                     # Documentation
+```
+
+### Testing
+
+```bash
+# Run unit tests
+npm test
+
+# Run integration tests
+npm run test:integration
+
+# Run end-to-end tests
+npm run test:e2e
+```
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) to get started.
+
+## 📧 Contact
+
+For questions or support, please contact [support@travaia.ai](mailto:support@travaia.ai)
 
 <table>
   <thead>
