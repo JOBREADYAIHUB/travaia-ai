@@ -44,16 +44,45 @@ class ChatbotService {
   }
 
   /**
-   * Initialize a new chat session
+   * Get authentication token for API requests
    */
-  async initializeSession(userId: string): Promise<string> {
+  private async getAuthToken(): Promise<string> {
+    // This will be handled by the UI components passing the token
+    // For now, return empty string as auth may be handled by proxy
+    return '';
+  }
+
+  /**
+   * Initialize a new chat session with the chatbot agent
+   */
+  async initializeSession(userId: string, authToken?: string): Promise<string> {
     try {
-      // For now, generate a simple session ID
-      // In production, this would create a session with the backend
-      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      return sessionId;
+      if (!userId) {
+        throw new Error('User ID is required');
+      }
+
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+
+      if (authToken) {
+        headers['Authorization'] = `Bearer ${authToken}`;
+      }
+      
+      // Create session with chatbot agent specifically
+      const response = await fetch(`/api/apps/chatbot/users/${userId}/sessions`, {
+        method: 'POST',
+        headers,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to create chatbot session: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.id;
     } catch (error) {
-      console.error('Failed to initialize chat session:', error);
+      console.error('Failed to initialize chatbot session:', error);
       throw error;
     }
   }
@@ -66,7 +95,9 @@ class ChatbotService {
     userId: string,
     onMessage: (messageId: string, content: string, agent?: string) => void,
     onComplete: () => void,
-    onError: (error: string) => void
+    onError: (error: string) => void,
+    authToken?: string,
+    sessionId?: string
   ): Promise<void> {
     try {
       // Add user message to internal state
@@ -78,7 +109,7 @@ class ChatbotService {
       };
       this.currentMessages.push(userMessage);
 
-      // Try to connect to careergpt-coach-service
+      // Connect to ai-service chatbot agent
       const messageId = `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
       // Create AI response message
@@ -87,50 +118,111 @@ class ChatbotService {
         sender: 'assistant',
         content: '',
         timestamp: new Date(),
-        agent: 'CareerGPT Coach',
+        agent: 'Alera AI Coach',
         isStreaming: true
       };
       this.currentMessages.push(aiMessage);
       
       try {
-        // Attempt to call careergpt-coach-service via proxy
-        const response = await fetch('/api/coach/api/coaching/chat', {
+        if (!userId) {
+          throw new Error('User ID is required');
+        }
+
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+
+        if (authToken) {
+          headers['Authorization'] = `Bearer ${authToken}`;
+        }
+        
+        // Call ai-service run_sse endpoint (same as demoUI)
+        const response = await fetch('/api/run_sse', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers,
           body: JSON.stringify({
-            user_id: userId,
-            message: message,
-            context_type: 'general',
-            include_voice: false
+            appName: 'chatbot',
+            userId: userId,
+            sessionId: sessionId || `session_${userId}_${Date.now()}`,
+            newMessage: {
+              parts: [{ text: message }],
+              role: "user",
+            },
+            streaming: false,
           })
         });
 
         if (response.ok) {
-          const data = await response.json();
-          const coachResponse = data.response || 'I received your message but couldn\'t generate a proper response.';
-          
+          const reader = response.body?.getReader();
+          if (!reader) {
+            throw new Error('No response body reader available');
+          }
+
+          const decoder = new TextDecoder();
+          let fullResponse = '';
+
+          try {
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+
+              const chunk = decoder.decode(value, { stream: true });
+              const lines = chunk.split('\n');
+
+              for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                  const data = line.slice(6);
+                  if (data === '[DONE]') {
+                    break;
+                  }
+                  try {
+                    const parsed = JSON.parse(data);
+                    console.log('[CHATBOT SSE PARSED EVENT]:', JSON.stringify(parsed, null, 2));
+                    
+                    // Extract text content like demoUI
+                    if (parsed.content && parsed.content.parts) {
+                      const textParts = parsed.content.parts
+                        .filter((part: any) => part.text)
+                        .map((part: any) => part.text);
+                      
+                      if (textParts.length > 0) {
+                        fullResponse += textParts.join('');
+                        onMessage(messageId, fullResponse, 'Alera AI Coach');
+                      }
+                    } else if (parsed.content && typeof parsed.content === 'string') {
+                      // Fallback for simple string content
+                      fullResponse += parsed.content;
+                      onMessage(messageId, fullResponse, 'Alera AI Coach');
+                    }
+                  } catch (e) {
+                    console.error('Error parsing SSE data:', e, 'Raw data:', data);
+                  }
+                }
+              }
+            }
+          } finally {
+            reader.releaseLock();
+          }
+
           // Update the AI message in internal state
           const messageIndex = this.currentMessages.findIndex(msg => msg.id === messageId);
           if (messageIndex !== -1) {
             this.currentMessages[messageIndex] = {
               ...this.currentMessages[messageIndex],
-              content: coachResponse,
+              content: fullResponse,
               isStreaming: false
             };
           }
           
-          onMessage(messageId, coachResponse, 'CareerGPT Coach');
           onComplete();
         } else {
-          throw new Error(`Coach service responded with status: ${response.status}`);
+          throw new Error(`AI service responded with status: ${response.status}`);
         }
       } catch (serviceError) {
-        console.warn('CareerGPT Coach service unavailable, using fallback:', serviceError);
+        console.warn('AI service unavailable, using fallback:', serviceError);
         
         // Fallback response when service is unavailable
-        const fallbackResponse = `Hello! I'm CareerGPT, your AI career coach. I'm currently running in limited mode as the full coaching service is unavailable. I can still help with basic career questions, but for comprehensive coaching including personalized insights based on your profile, interview performance, and job applications, please try again later when the service is fully available.`;
+        const fallbackResponse = `Hello! I'm Alera, your AI career coach. I'm currently running in limited mode as the AI service is unavailable. I can still help with basic career questions, but for comprehensive coaching including personalized insights, please try again later when the service is fully available.`;
         
         // Update the AI message in internal state
         const messageIndex = this.currentMessages.findIndex(msg => msg.id === messageId);
@@ -142,7 +234,7 @@ class ChatbotService {
           };
         }
         
-        onMessage(messageId, fallbackResponse, 'CareerGPT (Limited)');
+        onMessage(messageId, fallbackResponse, 'Alera (Limited)');
         onComplete();
       }
 
@@ -173,6 +265,10 @@ class ChatbotService {
    */
   async getCurrentSession(userId: string): Promise<ChatSession> {
     try {
+      if (!userId) {
+        throw new Error('User ID is required');
+      }
+
       // In production, this would fetch the current session from the backend
       // For now, create a default session structure
       const sessionId = `session_${userId}_${Date.now()}`;
@@ -231,11 +327,11 @@ class ChatbotService {
     }
     
     try {
-      // Check careergpt-coach-service health
+      // Check ai-service health (same as demoUI)
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
       
-      const response = await fetch('/api/coach/health', {
+      const response = await fetch('/api/docs', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -254,11 +350,11 @@ class ChatbotService {
       
       // Silently handle connection errors to avoid console spam
       if (error instanceof Error && error.name === 'AbortError') {
-        console.warn('ChatbotService: CareerGPT Coach service health check timed out - using fallback mode');
+        console.warn('ChatbotService: AI service health check timed out - using fallback mode');
       } else if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        console.warn('ChatbotService: CareerGPT Coach service not available - using fallback mode');
+        console.warn('ChatbotService: AI service not available - using fallback mode');
       } else {
-        console.error('ChatbotService: CareerGPT Coach service health check failed:', error);
+        console.error('ChatbotService: AI service health check failed:', error);
       }
       
       // Return true to allow chatbot to function in fallback mode

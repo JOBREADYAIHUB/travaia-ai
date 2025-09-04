@@ -17,7 +17,7 @@ type ChatMode = 'text' | 'voice';
 
 const FloatingChatbot: React.FC<FloatingChatbotProps> = ({ className = '' }) => {
   const { t } = useTranslation();
-  const { currentUser } = useAuth();
+  const { currentUser, firebaseUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -115,7 +115,7 @@ const FloatingChatbot: React.FC<FloatingChatbotProps> = ({ className = '' }) => 
           sender: 'assistant',
           content: t('chatbot.welcomeMessage'),
           timestamp: new Date(),
-          agent: 'Alera Voice'
+          agent: 'Alera AI Coach'
         };
         setMessages([welcomeMessage]);
       }
@@ -148,6 +148,9 @@ const FloatingChatbot: React.FC<FloatingChatbotProps> = ({ className = '' }) => 
         setMessages(prev => [...prev, userMessage]);
         setIsLoading(false);
       } else {
+        // Get auth token from Firebase user
+        const authToken = firebaseUser ? await firebaseUser.getIdToken() : undefined;
+        
         // Use traditional text-based chatbot service
         await chatbotService.sendMessage(
           messageText,
@@ -173,7 +176,8 @@ const FloatingChatbot: React.FC<FloatingChatbotProps> = ({ className = '' }) => 
           (error: string) => {
             setIsLoading(false);
             setConnectionError(error);
-          }
+          },
+          authToken
         );
 
         // Update messages from service

@@ -14,7 +14,7 @@ interface SimpleChatbotProps {
 const SimpleChatbot: React.FC<SimpleChatbotProps> = ({ className = '' }) => {
   const { t } = useTranslation();
   const { language } = useLocalization();
-  const { currentUser } = useAuth();
+  const { currentUser, firebaseUser } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputMessage, setInputMessage] = useState('');
@@ -61,8 +61,15 @@ const SimpleChatbot: React.FC<SimpleChatbotProps> = ({ className = '' }) => {
     if (!currentUser) return;
 
     try {
+      // Get Firebase auth token like demoUI
+      if (!firebaseUser) {
+        throw new Error('Firebase user not available');
+      }
+      
+      const idToken = await firebaseUser.getIdToken();
+      
       // Initialize a new session
-      const newSessionId = await chatbotService.initializeSession(currentUser.uid);
+      const newSessionId = await chatbotService.initializeSession(currentUser.uid, idToken);
       setSessionId(newSessionId);
       
       // Get existing chat history
@@ -76,7 +83,7 @@ const SimpleChatbot: React.FC<SimpleChatbotProps> = ({ className = '' }) => {
           sender: 'assistant',
           content: t('chatbot.welcomeMessage'),
           timestamp: new Date(),
-          agent: 'CareerGPT'
+          agent: 'Alera AI Coach'
         };
         setMessages([welcomeMessage]);
       }
@@ -104,6 +111,9 @@ const SimpleChatbot: React.FC<SimpleChatbotProps> = ({ className = '' }) => {
     setMessages(prev => [...prev, userMessage]);
 
     try {
+      // Get Firebase auth token for sending message
+      const authToken = firebaseUser ? await firebaseUser.getIdToken() : undefined;
+      
       await chatbotService.sendMessage(
         messageText,
         currentUser.uid,
@@ -137,7 +147,9 @@ const SimpleChatbot: React.FC<SimpleChatbotProps> = ({ className = '' }) => {
         (error: string) => {
           setIsLoading(false);
           setConnectionError(error);
-        }
+        },
+        authToken,
+        sessionId || undefined
       );
 
     } catch (error) {
